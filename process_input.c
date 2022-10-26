@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/26 19:52:52 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/26 20:47:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	process_input(char *input, char **env)
 	i = 0;
 	add_history(input);
 	args = ft_split(input, 32);
+	commands(args, env);
+}
+
+	/* printf("INPUT: %s\n", input);
 	while (args[i])
 	{
 		printf("%s\n", args[i]);
 		i++;
 	} 
-	commands(args, env);
-}
-
-	/* printf("INPUT: %s\n", input);
 	*/
 	//print_header(env);
