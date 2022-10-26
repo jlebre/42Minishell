@@ -12,20 +12,20 @@
 
 #include "minishell.h"
 
-int	main (int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
-	(void)ac;
-	(void)av;
 	char *input;
 
+	(void)ac;
+	(void)av;
 	init_shell(env);
-	clear();
+	ft_clear();
 	while (1)
 	{
-		input = take_input();
+		input = readline(print_info());
 		if (!input)
 			exit(0);
-		process_input(input);
+		process_input(input, env);
 	}
 	return (0);
 }

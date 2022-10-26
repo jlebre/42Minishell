@@ -18,8 +18,8 @@ NAME = minishell
 
 INCLUDE = .
 
-SRC = main.c init_shell.c print_dir.c take_input.c \
-	process_input.c play_sound.c utils.c colors.c
+SRC = main.c init_shell.c print_dir.c ft_error.c shell_split.c commands.c \
+	process_input.c play_sound.c utils.c colors.c print_header.c 
 
 OBJ = $(SRC:.c=.o)
 
