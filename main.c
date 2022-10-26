@@ -25,7 +25,7 @@ int	main (int ac, char **av, char **env)
 		input = take_input();
 		if (!input)
 			exit(0);
-		process_input();
+		process_input(input);
 	}
 	return (0);
 }

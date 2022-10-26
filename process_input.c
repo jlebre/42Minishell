@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   process_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2022/10/25 18:01:09 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/10/26 04:22:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	process_input(void)
+void	process_input(char *input)
 {
-	printf("Processed\n");
-	//sleep(3);
+	add_history(input);
+	printf("INPUT: %s\n", input);
 }

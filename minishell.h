@@ -42,7 +42,7 @@ char		*print_dir(void);
 char		*take_input(void);
 
 //PROCESS INPUT
-void		process_input(void);
+void		process_input(char *input);
 
 //UTILS
 char        *ft_strjoin(char const *s1, char const *s2);
