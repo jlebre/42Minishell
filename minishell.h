@@ -36,9 +36,21 @@ typedef struct s_command
 	char	**args;
 }   t_command;
 
+typedef struct s_env_lst
+{
+	char				*name;
+	char				*value;
+	struct s_env_lst	*next;
+}	t_env_lst;
 
 //INIT SHELL
 void		init_shell(char **env);
+
+//ENV TO LST
+t_env_lst	*env_to_lst(char **env);
+int			ft_strchr(const char *s, int c);
+void		lst_add_back(t_env_lst **lst, t_env_lst *new);
+t_env_lst	*new_node(char *env);
 
 //SOUND
 void		play_sound(char **env, char *sound);
@@ -54,7 +66,7 @@ int			get_col(char **env);
 int			get_lines(char **env);
 
 //PROCESS INPUT
-void		process_input(char *input, char **env);
+void		process_input(char *input, char **env, t_env_lst *env_lst);
 void		commands(char **input, char **env);
 void		change_dir(char **input, char **env);
 
