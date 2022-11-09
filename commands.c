@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/05 13:03:08 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/09 18:27:21 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,76 @@
 
 void	commands(char **input, char **env)
 {
-	if (!ft_strcmp(input[0], "cd"))
-		change_dir(input, env);
-	else if (!ft_strcmp(input[0], "pwd"))
-		printf("%s\n", print_dir());
-	else if (!ft_strcmp(input[0], "echo"))
-		printf("%s\n", input[1]);
-	else if (!ft_strcmp(input[0], "clear"))
-		printf("\033c");
+	if (input[0])
+	{
+		if (!ft_strncmp(input[0], "cd", 3))
+			change_dir(input, env);
+		else if (!ft_strncmp(input[0], "pwd", 4))
+			printf("%s\n", print_dir());
+		else if (!ft_strncmp(input[0], "echo", 5))
+			printf("%s\n", input[1]);
+		else 
+			env_commands(input, env);
+	}
+	
+}
+
+void	env_commands(char **input, char **env)
+{
+	char	*arr[2];
+	int		cenas;
+
+	arr[0] = find_path(input[0], env);
+	if (!arr[0])
+	{
+		printf("\033[0;31mcommand not found: %s\033[0m\n", input[0]);
+		return ;
+	}
+	arr[1] = input[1];
+	arr[2] = 0;
+	cenas = fork();
+	if (!cenas)
+	{
+		if (execve(arr[0], arr, env) == -1)
+		{
+			ft_error("Failed", env);
+		}
+	}
+	wait(NULL);
+}
+
+char	*find_path(char *cmd, char **env)
+{
+	int		j;
+	char	*path;
+	char	*ret_path;
+
+	j = 0;
+	while (env[j] && ft_strncmp(env[j], "PATH=", 5))
+		j++;
+	path = env[j];
+	while (path[j] && ft_strichr(path, j, ':') > -1)
+	{
+		ret_path = join_strings(path, j, cmd);
+		if (!access(ret_path, F_OK))
+			return (ret_path);
+		free(ret_path);
+		j += ft_strichr(path, j, ':') - j + 1;
+	}
+	if (path[j] && ft_strichr(path, j, ':') < 0)
+	{
+		ret_path = join_strings(path, j, cmd);
+		if (!access(ret_path, F_OK))
+			return (ret_path);
+		free(ret_path);
+	}
+	return (0);
 }
 
 void	change_dir(char **input, char **env)
 {
-	if (!opendir(input[1]))
-		ft_error("Directory not found!\n", env);
+	if (input[1])
+		chdir(input[1]);
+	else
+		chdir(ft_strjoin("/nfs/homes/", getenv("USER")));
 }

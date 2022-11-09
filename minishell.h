@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <signal.h>
 
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -66,9 +67,16 @@ int			get_col(char **env);
 int			get_lines(char **env);
 
 //PROCESS INPUT
-void		process_input(char *input, char **env, t_env_lst *env_lst);
+void		process_input(char *input, char **env);
 void		commands(char **input, char **env);
+
 void		change_dir(char **input, char **env);
+void		env_commands(char **input, char **env);
+char		*find_path(char *cmd, char **env);
+int	ft_strichr(const char *s, int start, int c);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_substring(char const *s, unsigned int start, size_t len);
+char	*join_strings(char *path, int j, char *cmd);
 
 //UTILS
 void		ft_error(char *err, char **env);
