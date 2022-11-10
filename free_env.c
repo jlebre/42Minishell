@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   play_sound.c                                       :+:      :+:    :+:   */
+/*   free_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 18:44:55 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/09 15:39:27 by nvideira         ###   ########.fr       */
+/*   Created: 2022/11/09 17:18:35 by nvideira          #+#    #+#             */
+/*   Updated: 2022/11/09 17:28:33 by nvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void  play_sound(char **env, char *sound)
+void	free_env(t_env_lst **env)
 {
-	char	*arr[3];
-	int		cenas;
-
-	arr[0] = ft_strdup("/bin/paplay");
-	arr[1] = ft_strdup(sound);
-	arr[2] = 0;
-	cenas = fork();
-	if (!cenas)
-	{	
-		if (execve(arr[0], arr, env) == -1)
-		{
-			play_sound(env, "error.ogg");
-			printf("ERROR!\n");
-		}
+	while ((*env)->next)
+	{
+		free((*env)->name);
+		free((*env)->value);
+		free(env);
+		*env = (*env)->next;
 	}
-	// else
-	//   wait(0);
-	free(arr[0]);
-	free(arr[1]);
 }

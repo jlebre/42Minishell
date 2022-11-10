@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <signal.h>
+# include <errno.h>
 
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -67,8 +67,8 @@ int			get_col(char **env);
 int			get_lines(char **env);
 
 //PROCESS INPUT
-void		process_input(char *input, char **env);
-void		commands(char **input, char **env);
+void		process_input(char *input, char **env, t_env_lst *env_lst);
+void		change_dir(char **input, char **env);
 
 void		change_dir(char **input, char **env);
 void		env_commands(char **input, char **env);
@@ -77,6 +77,10 @@ int	ft_strichr(const char *s, int start, int c);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substring(char const *s, unsigned int start, size_t len);
 char	*join_strings(char *path, int j, char *cmd);
+
+
+//COMMANDS
+void		commands(char **input, char **env);
 
 //UTILS
 void		ft_error(char *err, char **env);
@@ -90,6 +94,10 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strdup(const char *s1);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 int			ft_strcmp(char *s1, char *s2);
+int			strict_cmp(char *s1, char *s2);
+
+//FREE ENV
+void		free_env(t_env_lst **env);
 
 //NORMAL COLORS
 int			black(char *str);
