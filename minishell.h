@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <errno.h>
+# include <signal.h>
 
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -67,10 +67,10 @@ int			get_col(char **env);
 int			get_lines(char **env);
 
 //PROCESS INPUT
-void		process_input(char *input, char **env, t_env_lst *env_lst);
-void		change_dir(char **input, char **env);
+void		process_input(char *input, char **env);
+void		commands(char **input, char **env);
 
-void		change_dir(char **input, char **env);
+void		change_dir(char **input);
 void		env_commands(char **input, char **env);
 char		*find_path(char *cmd, char **env);
 int	ft_strichr(const char *s, int start, int c);
@@ -78,13 +78,21 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substring(char const *s, unsigned int start, size_t len);
 char	*join_strings(char *path, int j, char *cmd);
 
-
-//COMMANDS
-void		commands(char **input, char **env);
-
 //UTILS
 void		ft_error(char *err, char **env);
 void		ft_clear(void);
+int strict_cmp(char *s1, char *s2);
+
+//ENV_TO_LIST
+int	ft_strchr(const char *s, int c);
+t_env_lst	*ft_lstlast(t_env_lst *lst);
+void	lst_add_back(t_env_lst **lst, t_env_lst *new);
+t_env_lst   *new_node(char *env);
+t_env_lst   *env_to_lst(char **env);
+
+
+//FREE ENV
+void	free_env(t_env_lst **env);
 
 //LIBFT
 char		*ft_strjoin(char const *s1, char const *s2);
@@ -94,10 +102,6 @@ char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strdup(const char *s1);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 int			ft_strcmp(char *s1, char *s2);
-int			strict_cmp(char *s1, char *s2);
-
-//FREE ENV
-void		free_env(t_env_lst **env);
 
 //NORMAL COLORS
 int			black(char *str);

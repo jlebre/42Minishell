@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:58:53 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/09 17:59:09 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/11 16:44:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ char	*ft_substring(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (!s)
 		return (NULL);
-	if (!len || ft_strlen(s) < start)
+	if (!len || (unsigned int)ft_strlen(s) < start)
 		return (ft_strdup(""));
-	if (len > ft_strlen(s))
+	if (len > (size_t)ft_strlen(s))
 	{
 		len = ft_strlen(s);
 		return (ft_substr(s, start, len));

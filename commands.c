@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/09 18:27:21 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/11 16:42:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	commands(char **input, char **env)
 	if (input[0])
 	{
 		if (!ft_strncmp(input[0], "cd", 3))
-			change_dir(input, env);
+			change_dir(input);
 		else if (!ft_strncmp(input[0], "pwd", 4))
 			printf("%s\n", print_dir());
 		else if (!ft_strncmp(input[0], "echo", 5))
@@ -80,7 +80,7 @@ char	*find_path(char *cmd, char **env)
 	return (0);
 }
 
-void	change_dir(char **input, char **env)
+void	change_dir(char **input)
 {
 	if (input[1])
 		chdir(input[1]);
