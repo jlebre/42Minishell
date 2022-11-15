@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/11 16:42:47 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/14 15:25:36 by nvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	env_commands(char **input, char **env)
 			ft_error("Failed", env);
 		}
 	}
-	wait(NULL);
+	waitpid(cenas, NULL, 0);
 }
 
 char	*find_path(char *cmd, char **env)

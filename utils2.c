@@ -50,3 +50,42 @@ void	ft_clear(void)
 {
 	printf("\033c");
 }
+
+int	ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != (char )c && s[i] != '\0')
+		i++;
+	if (s[i] == (char )c)
+		return (i);
+	return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	val;
+	int	sinal;
+
+	i = 0;
+	val = 0;
+	sinal = 1;
+	while ((str[i] == '\n') || (str[i] == '\r') || (str[i] == '\t')
+		|| (str[i] == '\v') || (str[i] == '\f') || (str[i] == ' '))
+		i++;
+	if ((str[i] == '-') || (str[i] == '+'))
+	{
+		if (str[i] == '-')
+			sinal *= -1;
+		i++;
+	}
+	while ((str[i] >= 48) && (str[i] <= 57))
+	{	
+		val *= 10;
+		val += str[i] - 48;
+		i++;
+	}
+	return (sinal * val);
+}

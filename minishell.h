@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
+# include <stdarg.h>
 /////////////////////////////////////////////////
 # include <signal.h>
 /////////////////////////////////////////////////
@@ -27,6 +28,8 @@
 /////////////////////////////////////////////////
 # include <readline/readline.h>
 # include <readline/history.h>
+/////////////////////////////////////////////////
+
 
 typedef struct s_command
 {
@@ -48,8 +51,9 @@ typedef struct s_env_lst
 //INIT SHELL
 void					init_shell(char **env);
 
+void					recieve();
+
 //ENV_TO_LIST
-int						ft_strchr(const char *s, int c);
 void					lst_add_back(t_env_lst **lst, t_env_lst *new);
 t_env_lst				*env_to_lst(char **env);
 t_env_lst				*new_node(char *env);
@@ -57,8 +61,10 @@ t_env_lst				*ft_lstlast(t_env_lst *lst);
 //FREE ENV
 void					free_env(t_env_lst **env);
 
+/*
 //SOUND
 void					play_sound(char **env, char *sound);
+*/
 
 //PRINT DIR
 char					*print_info(void);
@@ -102,6 +108,9 @@ char					**ft_split(const char *s, char c);
 int						ft_strcmp(char *s1, char *s2);
 int 					strict_cmp(char *s1, char *s2);
 void					ft_clear(void);
+int						ft_strchr(const char *s, int c);
+int						ft_atoi(const char *str);
+
 
 //NORMAL COLORS
 int						black(char *str);
