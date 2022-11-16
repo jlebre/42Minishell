@@ -22,6 +22,7 @@
 # include <signal.h>
 /////////////////////////////////////////////////
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 /////////////////////////////////////////////////
 # include <dirent.h>
@@ -50,8 +51,7 @@ typedef struct s_env_lst
 
 //INIT SHELL
 void					init_shell(char **env);
-
-void					recieve();
+void					recieve(int sig);
 
 //ENV_TO_LIST
 void					lst_add_back(t_env_lst **lst, t_env_lst *new);

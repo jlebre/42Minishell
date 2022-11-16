@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/14 15:25:36 by nvideira         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:25:38 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ void	commands(char **input, char **env)
 			printf("%s\n", print_dir());
 		else if (!ft_strncmp(input[0], "echo", 5))
 			printf("%s\n", input[1]);
-		else 
+		else
 			env_commands(input, env);
 	}
-	
 }
 
 void	env_commands(char **input, char **env)
