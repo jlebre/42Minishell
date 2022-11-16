@@ -31,7 +31,6 @@
 # include <readline/history.h>
 /////////////////////////////////////////////////
 
-
 typedef struct s_command
 {
 	int					fd[2];
@@ -60,11 +59,6 @@ t_env_lst				*new_node(char *env);
 t_env_lst				*ft_lstlast(t_env_lst *lst);
 //FREE ENV
 void					free_env(t_env_lst **env);
-
-/*
-//SOUND
-void					play_sound(char **env, char *sound);
-*/
 
 //PRINT DIR
 char					*print_info(void);

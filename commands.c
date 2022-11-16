@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/16 15:25:38 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/16 15:56:31 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,73 +16,21 @@ void	commands(char **input, char **env)
 {
 	if (input[0])
 	{
-		if (!ft_strncmp(input[0], "cd", 3))
-			change_dir(input);
-		else if (!ft_strncmp(input[0], "pwd", 4))
-			printf("%s\n", print_dir());
-		else if (!ft_strncmp(input[0], "echo", 5))
+		if (!ft_strncmp(input[0], "echo", 5))
 			printf("%s\n", input[1]);
+		else if (!ft_strncmp(input[0], "cd", 3)) //WORKING
+			change_dir(input);
+		else if (!ft_strncmp(input[0], "pwd", 4)) //WORKING
+			printf("%s\n", print_dir());
+		else if (!ft_strncmp(input[0], "export", 7))
+			printf("EXPORT: %s\n", input[1]);
+		else if (!ft_strncmp(input[0], "unset", 6))
+			printf("UNSET: %s\n", input[1]);
+		else if (!ft_strncmp(input[0], "env", 4))
+			printf("ENV: %s\n", input[0]);
+		else if (!ft_strncmp(input[0], "exit", 5))
+			printf("EXIT: %s\n", input[0]);
 		else
-			env_commands(input, env);
+			env_commands(input, env); //WORKING
 	}
-}
-
-void	env_commands(char **input, char **env)
-{
-	char	*arr[2];
-	int		cenas;
-
-	arr[0] = find_path(input[0], env);
-	if (!arr[0])
-	{
-		printf("\033[0;31mcommand not found: %s\033[0m\n", input[0]);
-		return ;
-	}
-	arr[1] = input[1];
-	arr[2] = 0;
-	cenas = fork();
-	if (!cenas)
-	{
-		if (execve(arr[0], arr, env) == -1)
-		{
-			ft_error("Failed", env);
-		}
-	}
-	waitpid(cenas, NULL, 0);
-}
-
-char	*find_path(char *cmd, char **env)
-{
-	int		j;
-	char	*path;
-	char	*ret_path;
-
-	j = 0;
-	while (env[j] && ft_strncmp(env[j], "PATH=", 5))
-		j++;
-	path = env[j];
-	while (path[j] && ft_strichr(path, j, ':') > -1)
-	{
-		ret_path = join_strings(path, j, cmd);
-		if (!access(ret_path, F_OK))
-			return (ret_path);
-		free(ret_path);
-		j += ft_strichr(path, j, ':') - j + 1;
-	}
-	if (path[j] && ft_strichr(path, j, ':') < 0)
-	{
-		ret_path = join_strings(path, j, cmd);
-		if (!access(ret_path, F_OK))
-			return (ret_path);
-		free(ret_path);
-	}
-	return (0);
-}
-
-void	change_dir(char **input)
-{
-	if (input[1])
-		chdir(input[1]);
-	else
-		chdir(ft_strjoin("/nfs/homes/", getenv("USER")));
 }

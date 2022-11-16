@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:44:55 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/16 15:26:00 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/16 15:44:09 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,9 @@ void	play_sound(char **env, char *sound)
 
 //ADD TO INIT.SHELL.c
 //play_sound(env, "init.ogg");
+
+//ADD TO MINISHELL.H
+/*
+//SOUND
+void	play_sound(char **env, char *sound);
+*/
