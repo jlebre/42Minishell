@@ -39,6 +39,7 @@ typedef struct s_command
 	char				*cmd;
 	char 				*path;
 	char				**args;
+	int					exit_value;
 }   t_command;
 
 typedef struct s_env_lst
@@ -47,6 +48,9 @@ typedef struct s_env_lst
 	char				*value;
 	struct s_env_lst	*next;
 }	t_env_lst;
+
+//COMMAND INFO
+t_command				*com_info(void);
 
 //INIT SHELL
 void					init_shell(char **env);
@@ -57,6 +61,7 @@ void					lst_add_back(t_env_lst **lst, t_env_lst *new);
 t_env_lst				*env_to_lst(char **env);
 t_env_lst				*new_node(char *env);
 t_env_lst				*ft_lstlast(t_env_lst *lst);
+
 //FREE ENV
 void					free_env(t_env_lst **env);
 
@@ -69,6 +74,7 @@ int						get_lines(char **env);
 
 //PROCESS INPUT
 void					process_input(char *input, char **env);
+void					print_matrix(char **matrix);
 
 //COMMANDS
 void					commands(char **input, char **env);
@@ -89,7 +95,6 @@ int						ft_strncmp(const char *s1, const char *s2, size_t n);
 char					*join_strings(char *path, int j, char *cmd);
 char					*ft_substring(char const *s, unsigned int start, size_t len);
 
-
 //UTILS
 char					*ft_strjoin(char const *s1, char const *s2);
 int						ft_strlen(const char *str);
@@ -104,7 +109,6 @@ int 					strict_cmp(char *s1, char *s2);
 void					ft_clear(void);
 int						ft_strchr(const char *s, int c);
 int						ft_atoi(const char *str);
-
 
 //NORMAL COLORS
 int						black(char *str);

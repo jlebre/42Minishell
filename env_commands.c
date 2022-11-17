@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/16 15:56:00 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/17 22:28:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	env_commands(char **input, char **env)
 	arr[0] = find_path(input[0], env);
 	if (!arr[0])
 	{
-		printf("\033[0;31mcommand not found: %s\033[0m\n", input[0]);
+		printf("\033[0;31mCommand not found: %s\033[0m\n", input[0]);
+		com_info()->exit_value = 127;
 		return ;
 	}
 	arr[1] = input[1];
@@ -29,11 +30,10 @@ void	env_commands(char **input, char **env)
 	if (!cenas)
 	{
 		if (execve(arr[0], arr, env) == -1)
-		{
 			ft_error("Failed", env);
-		}
 	}
 	waitpid(cenas, NULL, 0);
+	com_info()->exit_value = 0;
 }
 
 char	*find_path(char *cmd, char **env)

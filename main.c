@@ -12,17 +12,22 @@
 
 #include "minishell.h"
 
+t_command	*com_info(void)
+{
+	static t_command	a;
+
+	return (&a);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char		*input;
 	t_env_lst	*env_lst;
-	//char		*info;
 
 	(void)ac;
 	(void)av;
 	init_shell(env);
 	env_lst = env_to_lst(env);
-	//info = print_info();
 	while (env_lst)
 	{
 		printf("name: %s, value: %s\n", env_lst->name, env_lst->value);
@@ -36,10 +41,10 @@ int	main(int ac, char **av, char **env)
 		{
 			rl_clear_history();
 			free (input);
-			exit(0);
+			exit(com_info()->exit_value);
 		}
 		process_input(input, env);
 	}
 	free (input);
-	return (0);
+	return (com_info()->exit_value);
 }
