@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:59:18 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/16 15:24:37 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/18 12:31:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_shell(char **env)
 	signal(SIGINT, recieve);
 	username = getenv("USER");
 	printf("\n\nUSER is: @%s", username);
+	ft_clear();
 }
 
 void	recieve(int sig)

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/18 01:16:46 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/18 12:32:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	commands(char **input, char **env)
 			printf("EXPORT: %s\n", input[1]);
 		else if (!ft_strncmp(input[0], "unset", 6))
 			printf("UNSET: %s\n", input[1]);
-		else if (!ft_strncmp(input[0], "env", 4))
-			printf("ENV: %s\n", input[0]);
+		else if (!ft_strncmp(input[0], "env", 4)) //WORKING
+			ft_env(env);
 		else if (!ft_strncmp(input[0], "exit", 5)) //WORKING
 			{
 			rl_clear_history();

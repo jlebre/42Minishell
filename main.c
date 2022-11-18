@@ -22,18 +22,10 @@ t_command	*com_info(void)
 int	main(int argc, char **argv, char **env)
 {
 	char		*input;
-	t_env_lst	*env_lst;
 
 	(void)argc;
 	(void)argv;
 	init_shell(env);
-	env_lst = env_to_lst(env);
-	while (env_lst)
-	{
-		printf("name: %s, value: %s\n", env_lst->name, env_lst->value);
-		env_lst = env_lst->next;
-	} 
-	ft_clear();
 	while (1)
 	{
 		input = readline(print_info());

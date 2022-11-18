@@ -88,6 +88,9 @@ void					ft_echo(char **input);
 //CD
 void					change_dir(char **input);
 
+//ENV
+void					ft_env(char **env);
+
 //FT_ERROR
 void					ft_error(char *err, char **env);
 
