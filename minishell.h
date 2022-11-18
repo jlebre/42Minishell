@@ -40,6 +40,7 @@ typedef struct s_command
 	char 				*path;
 	char				**args;
 	int					exit_value;
+	int					nb_args;
 }   t_command;
 
 typedef struct s_env_lst
@@ -74,12 +75,17 @@ int						get_lines(char **env);
 
 //PROCESS INPUT
 void					process_input(char *input, char **env);
-void					print_matrix(char **matrix);
+int						count_args(char **matrix);
 
 //COMMANDS
 void					commands(char **input, char **env);
 void					env_commands(char **input, char **env);
 char					*find_path(char *cmd, char **env);
+
+//ECHO
+void					ft_echo(char **input);
+
+//CD
 void					change_dir(char **input);
 
 //FT_ERROR

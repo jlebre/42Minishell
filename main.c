@@ -19,13 +19,13 @@ t_command	*com_info(void)
 	return (&a);
 }
 
-int	main(int ac, char **av, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	char		*input;
 	t_env_lst	*env_lst;
 
-	(void)ac;
-	(void)av;
+	(void)argc;
+	(void)argv;
 	init_shell(env);
 	env_lst = env_to_lst(env);
 	while (env_lst)
