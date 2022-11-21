@@ -29,7 +29,19 @@
 /////////////////////////////////////////////////
 # include <readline/readline.h>
 # include <readline/history.h>
-/////////////////////////////////////////////////
+///////////////////////////////////////////////// PIPEX
+# include <fcntl.h>
+# include <errno.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+typedef struct s_env_lst
+{
+	char				*name;
+	char				*value;
+	struct s_env_lst	*next;
+}	t_env_lst;
 
 typedef struct s_command
 {
@@ -40,15 +52,9 @@ typedef struct s_command
 	char 				*path;
 	char				**args;
 	int					exit_value;
+	t_env_lst			*env_lst;
 	int					nb_args;
 }   t_command;
-
-typedef struct s_env_lst
-{
-	char				*name;
-	char				*value;
-	struct s_env_lst	*next;
-}	t_env_lst;
 
 //COMMAND INFO
 t_command				*com_info(void);
@@ -69,18 +75,14 @@ void					free_env(t_env_lst **env);
 //PRINT DIR
 char					*print_info(void);
 char					*print_dir(void);
-void					print_header(char **env);
-int						get_col(char **env);
-int						get_lines(char **env);
-
 //PROCESS INPUT
-void					process_input(char *input, char **env);
+void					process_input(char *input, t_env_lst *env_lst);
 int						count_args(char **matrix);
 
 //COMMANDS
-void					commands(char **input, char **env);
-void					env_commands(char **input, char **env);
-char					*find_path(char *cmd, char **env);
+void					commands(char **input, t_env_lst *env_lst);
+void					env_commands(char **input, t_env_lst *env_lst);
+char					*find_path(char *cmd, t_env_lst *env_lst);
 
 //ECHO
 void					ft_echo(char **input);
@@ -89,10 +91,11 @@ void					ft_echo(char **input);
 void					change_dir(char **input);
 
 //ENV
-void					ft_env(char **env);
+void					ft_env();
+void					ft_unset();
 
 //FT_ERROR
-void					ft_error(char *err, char **env);
+void					ft_error(char *err, t_env_lst *env_lst);
 
 //SHELL_SPLIT_UTILS
 int						find_quotes(const char *str, int i, int type);

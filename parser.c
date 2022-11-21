@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:50 by nvideira          #+#    #+#             */
-/*   Updated: 2022/11/14 15:45:06 by nvideira         ###   ########.fr       */
+/*   Updated: 2022/11/21 16:20:21 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char    *find_command(char *input, int start)
+char	*find_command(char *input, int start)
 {
-    int i;
-    char *command;
+	int		i;
+	char	*command;
 
-    i = start;
-    while (input[i] != ' ' && input[i] != '\0')
-        i++;
-    command = ft_substr(input, start, i - start);
-    return (command);
+	i = start;
+	while (input[i] != ' ' && input[i] != '\0')
+		i++;
+	command = ft_substr(input, start, i - start);
+	return (command);
 }
 
 int	find_pipes(char *input)
 {
-	int i;
-	int pipe_no;
+	int	i;
+	int	pipe_no;
 
 	i = 0;
 	pipe_no = 0;
@@ -70,15 +70,14 @@ int	heredoc(char *limiter)
 
 void	parser(char *input)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	if (ft_strncmp(input, "<<", 2))
 		heredoc();
 	find_pipes(input);
-    while (input[i])
-    {
-        if ()
-    }
-   
+	while (input[i])
+	{
+		if ()
+	}
 }

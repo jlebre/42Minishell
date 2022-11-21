@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   env_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/18 01:30:48 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/21 18:01:01 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env_commands(char **input, char **env)
+void	env_commands(char **input, t_env_lst *env_lst)
 {
 	char	*arr[2];
 	int		cenas;
+	int		temp;
 
-	arr[0] = find_path(input[0], env);
+	arr[0] = find_path(input[0], env_lst);
 	if (!arr[0])
 	{
 		printf("\033[0;31mCommand not found: %s\033[0m\n", input[0]);
@@ -29,23 +30,30 @@ void	env_commands(char **input, char **env)
 	cenas = fork();
 	if (!cenas)
 	{
-		if (execve(arr[0], arr, env) == -1)
-			ft_error("Failed", env);
+		if (execve(arr[0], arr, env_lst) == -1)
+		{
+			com_info()->exit_value = 126;
+			ft_error("Failed", env_lst);
+		}
 	}
-	waitpid(cenas, NULL, 0);
-	com_info()->exit_value = 0;
+	waitpid(cenas, &temp, 0);
+	com_info()->exit_value = temp / 256;
 }
 
-char	*find_path(char *cmd, char **env)
+char	*find_path(char *cmd, t_env_lst *env_lst)
 {
-	int		j;
-	char	*path;
-	char	*ret_path;
+	int			j;
+	t_env_lst	*temp;
+	char		*path;
+	char		*ret_path;
 
 	j = 0;
-	while (env[j] && ft_strncmp(env[j], "PATH=", 5))
-		j++;
-	path = env[j];
+	temp = env_lst;
+	while (temp && ft_strncmp(temp->name, "PATH=", 5))
+	{
+		temp = temp->next;
+	}
+	path = temp->value;
 	while (path[j] && ft_strichr(path, j, ':') > -1)
 	{
 		ret_path = join_strings(path, j, cmd);

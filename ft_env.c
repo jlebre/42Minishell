@@ -12,15 +12,25 @@
 
 #include "minishell.h"
 
-void	ft_env(char **env)
+void	ft_env()
 {
-	t_env_lst	*env_lst;
-	
-	env_lst = env_to_lst(env);
-	while (env_lst)
+	while (com_info()->env_lst)
 	{
-		printf("name: %s, value: %s\n", env_lst->name, env_lst->value);
-		env_lst = env_lst->next;
+		printf("%s%s\n", com_info()->env_lst->name, com_info()->env_lst->value);
+		com_info()->env_lst = com_info()->env_lst->next;
+	}
+	com_info()->exit_value = 0;
+}
+
+void	ft_unset()
+{
+	while (com_info()->env_lst)
+	{
+		free(com_info()->env_lst->value);
+		free(com_info()->env_lst->name);
+		com_info()->env_lst->value = NULL;
+		com_info()->env_lst->name = NULL;
+		com_info()->env_lst = com_info()->env_lst->next;
 	}
 	com_info()->exit_value = 0;
 }

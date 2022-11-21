@@ -28,7 +28,7 @@ void	ft_echo(char **input)
 	else
 	{
 		i = 1;
-		while (i < com_info()->nb_args + 1)
+		while (i < com_info()->nb_args)
 		{
 			printf("%s", input[i]);
 			i++;
