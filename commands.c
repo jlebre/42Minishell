@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/21 17:53:29 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:38:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	commands(char **input, t_env_lst *env_lst)
+void	commands(char **input)
 {
 	if (input[0])
 	{
-		if (!ft_strncmp(input[0], "echo", 5)) //-n ALMOST WORKING; PENDENT ON " "
+		if (!ft_strncmp(input[0], "echo", 5))
 			ft_echo(input);
 		else if (!ft_strncmp(input[0], "cd", 3))
 			change_dir(input);
@@ -38,6 +38,6 @@ void	commands(char **input, t_env_lst *env_lst)
 			exit(com_info()->exit_value);
 			}
 		else
-			env_commands(input, env_lst);
+			env_commands(input);
 	}
 }

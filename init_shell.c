@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:59:18 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/21 17:28:33 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:53:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_shell(char **env)
 {
 	char		*username;
-	(void)env;
+	//(void)env;
 	
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, recieve);

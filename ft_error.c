@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:15:16 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/21 17:51:44 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/22 17:55:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_error(char *err, t_env_lst *env_lst)
+void	ft_error(char *err)
 {
-	(void)env_lst;
 	red("Error!\n");
 	red(err);
+	red("\n");
 	//play_sound(env, "error.ogg");
 }

@@ -24,13 +24,6 @@ void	ft_env()
 
 void	ft_unset()
 {
-	while (com_info()->env_lst)
-	{
-		free(com_info()->env_lst->value);
-		free(com_info()->env_lst->name);
-		com_info()->env_lst->value = NULL;
-		com_info()->env_lst->name = NULL;
-		com_info()->env_lst = com_info()->env_lst->next;
-	}
+	free_env(&com_info()->env_lst);
 	com_info()->exit_value = 0;
 }

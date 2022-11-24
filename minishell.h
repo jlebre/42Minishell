@@ -64,10 +64,10 @@ void					init_shell(char **env);
 void					recieve(int sig);
 
 //ENV_TO_LIST
-void					lst_add_back(t_env_lst **lst, t_env_lst *new);
 t_env_lst				*env_to_lst(char **env);
 t_env_lst				*new_node(char *env);
 t_env_lst				*ft_lstlast(t_env_lst *lst);
+void					lst_add_back(t_env_lst **lst, t_env_lst *new);
 
 //FREE ENV
 void					free_env(t_env_lst **env);
@@ -76,12 +76,12 @@ void					free_env(t_env_lst **env);
 char					*print_info(void);
 char					*print_dir(void);
 //PROCESS INPUT
-void					process_input(char *input, t_env_lst *env_lst);
+void					process_input(char *input);
 int						count_args(char **matrix);
 
 //COMMANDS
-void					commands(char **input, t_env_lst *env_lst);
-void					env_commands(char **input, t_env_lst *env_lst);
+void					commands(char **input);
+void					env_commands(char **input);
 char					*find_path(char *cmd, t_env_lst *env_lst);
 
 //ECHO
@@ -95,7 +95,7 @@ void					ft_env();
 void					ft_unset();
 
 //FT_ERROR
-void					ft_error(char *err, t_env_lst *env_lst);
+void					ft_error(char *err);
 
 //SHELL_SPLIT_UTILS
 int						find_quotes(const char *str, int i, int type);
