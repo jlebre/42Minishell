@@ -68,6 +68,7 @@ t_env_lst				*env_to_lst(char **env);
 t_env_lst				*new_node(char *env);
 t_env_lst				*ft_lstlast(t_env_lst *lst);
 void					lst_add_back(t_env_lst **lst, t_env_lst *new);
+char					**lst_to_env(t_env_lst *lst);
 
 //FREE ENV
 void					free_env(t_env_lst **env);
@@ -93,9 +94,6 @@ void					change_dir(char **input);
 //ENV
 void					ft_env();
 void					ft_unset();
-
-//FT_ERROR
-void					ft_error(char *err);
 
 //SHELL_SPLIT_UTILS
 int						find_quotes(const char *str, int i, int type);

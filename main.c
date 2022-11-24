@@ -21,7 +21,7 @@ t_command	*com_info(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	char		*input;
+	char	*input;
 
 	(void)argc;
 	(void)argv;

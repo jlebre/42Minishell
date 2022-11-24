@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/22 17:55:55 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:56:45 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	env_commands(char **input)
 	cenas = fork();
 	if (!cenas)
 	{
-		if (execve(arr[0], arr, (char *const*)com_info()->env_lst) == -1)
+		if (execve(arr[0], arr, com_info()->args) == -1)
 		{
 			com_info()->exit_value = 126;
-			ft_error("Deu Merda");
+			red("Deu Merda\n");
 		}
 	}
 	waitpid(cenas, &temp, 0);

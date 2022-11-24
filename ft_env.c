@@ -25,5 +25,6 @@ void	ft_env()
 void	ft_unset()
 {
 	free_env(&com_info()->env_lst);
+	com_info()->args = lst_to_env(com_info()->env_lst);
 	com_info()->exit_value = 0;
 }

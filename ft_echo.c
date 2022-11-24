@@ -12,14 +12,15 @@
 
 #include "minishell.h"
 
-//Se não tiveres " " e tiveres mais de 1 argumento tem de imprimir todos
-
 void	ft_echo(char **input)
 {
 	int	i;
 
 	if (!ft_strncmp(input[1], "$?", 3))
+	{
 		printf("%d\n", com_info()->exit_value);
+		com_info()->exit_value = 0;
+	}
 	else if (!ft_strncmp(input[1], "-n", 3))
 	{
 		printf("%s", input[2]);

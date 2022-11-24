@@ -1,9 +1,5 @@
 {
     "files.associations": {
-        "readline.h": "c",
-        "history.h": "c",
-        "types.h": "c",
-        "unistd.h": "c",
-        "stdio.h": "c"
+        "type_traits": "c"
     }
 }
