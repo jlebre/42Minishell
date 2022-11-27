@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/24 15:56:45 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/26 15:21:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env_commands(char **input)
+void	env_commands(char **input, char **env)
 {
 	char	*arr[2];
 	int		cenas;
@@ -30,10 +30,10 @@ void	env_commands(char **input)
 	cenas = fork();
 	if (!cenas)
 	{
-		if (execve(arr[0], arr, com_info()->args) == -1)
+		if (execve(arr[0], arr, env) == -1)
 		{
 			com_info()->exit_value = 126;
-			red("Deu Merda\n");
+			ft_error("Deu Merda");
 		}
 	}
 	waitpid(cenas, &temp, 0);

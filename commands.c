@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/22 17:38:03 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/26 15:21:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	commands(char **input)
+void	commands(char **input, char **env)
 {
 	if (input[0])
 	{
@@ -38,6 +38,6 @@ void	commands(char **input)
 			exit(com_info()->exit_value);
 			}
 		else
-			env_commands(input);
+			env_commands(input, env);
 	}
 }

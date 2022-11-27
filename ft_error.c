@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_input.c                                    :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/26 15:21:02 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/26 17:15:16 by jlebre            #+#    #+#             */
+/*   Updated: 2022/11/22 17:55:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	process_input(char *input, char **env)
+void	ft_error(char *err)
 {
-	char	**args;
-	
-	if (input[0] == '\0')
-		return ;
-	add_history(input);
-	args = ft_split(input, 32);
-	com_info()->nb_args = count_args(args);
-	commands(args, env);
-}
-
-int	count_args(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-		i++;
-	return (i);
+	red("Error!\n");
+	red(err);
+	red("\n");
+	//play_sound(env, "error.ogg");
 }
