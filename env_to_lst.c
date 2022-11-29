@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 17:25:45 by nvideira          #+#    #+#             */
-/*   Updated: 2022/11/29 16:46:18 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/29 19:56:59 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	lst_add_back(t_env_lst **lst, t_env_lst *new)
     }
 	last = ft_lstlast(*lst);
 	last->next = new;
+    new->prev = last;
 }
 
 t_env_lst   *new_node(char *env)
@@ -49,9 +50,10 @@ t_env_lst   *new_node(char *env)
 		return (NULL);
     env_node->name = ft_substr(env, 0, ft_strchr(env, '=') + 1);
     env_node->value = ft_substr(env, ft_strchr(env, '=') + 1, ft_strlen(env));
-	printf("%s", env_node->name);
-	printf("%s\n", env_node->value);
+	//printf("%s", env_node->name);
+	//printf("%s\n", env_node->value);
     env_node->next = NULL;
+    env_node->prev = NULL;
 	return (env_node);
 }
 
@@ -69,16 +71,3 @@ t_env_lst   *env_to_lst(char **env)
     }
     return (env_lst);
 }
-
-/* char    **lst_to_env()
-{
-    int i;
-    int size;
-    char    *name;
-    t_env_lst   *temp;
-    char    **new_env;
-    
-    i = 0;
-    size = 0;
-    tmp = com_info()->
-} */

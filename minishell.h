@@ -41,6 +41,7 @@ typedef struct s_env_lst
 	char				*name;
 	char				*value;
 	struct s_env_lst	*next;
+	struct s_env_lst	*prev;
 }	t_env_lst;
 
 typedef struct s_command
@@ -92,8 +93,11 @@ void					ft_echo(char **input);
 void					change_dir(char **input);
 
 //ENV
-void					ft_env();
-void					ft_unset();
+void					ft_env(void);
+void					ft_unset(char **input);
+void					*export(char **env);
+void					ft_pwd(void);
+
 
 //FT_ERROR
 void					ft_error(char *err);

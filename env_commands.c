@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/29 17:30:10 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/29 19:18:07 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	env_commands(char **input, char **env)
 	int		i;
 	int		cenas;
 	int		temp;
+	t_env_lst	*temp_lst;
 
 	i = 0;
-	arr[0] = find_path(input[0], com_info()->env_lst);
-	printf("%s\n", arr[0]);
+	temp_lst = com_info()->env_lst;
+	arr[0] = find_path(input[0], temp_lst);
+	//printf("%s\n", arr[0]);
 	if (!arr[0])
 	{
 		printf("\033[0;31mCommand not found: %s\033[0m\n", input[0]);
@@ -33,26 +35,23 @@ void	env_commands(char **input, char **env)
 	cenas = fork();
 	if (!cenas)
 	{
-		while (com_info()->env_lst->next)
+		while (temp_lst->next)
 		{
 			while (env[i])
 			{
-				if (ft_strcmp(com_info()->env_lst->value, env[i]))
+				//printf("%s\n%s\n", ft_strjoin(temp_lst->name, temp_lst->value), env[i]);
+				if (ft_strcmp(ft_strjoin(temp_lst->name, temp_lst->value), env[i]))
 				{
 					if (execve(arr[0], arr, env) == -1)
 					{
 						com_info()->exit_value = 126;
 						ft_error("Deu Merda");
 					}
-					else
-					{
-						printf("Ola\n");	
-					}
 				}
 				i++;
 			}
 			i = 0;
-			com_info()->env_lst = com_info()->env_lst->next;
+			temp_lst = temp_lst->next;
 		}
 		
 	}
@@ -73,6 +72,8 @@ char	*find_path(char *cmd, t_env_lst *env_lst)
 	{
 		temp = temp->next;
 	}
+	if (temp == NULL)
+		return (0);
 	path = temp->value;
 	while (path[j] && ft_strichr(path, j, ':') > -1)
 	{

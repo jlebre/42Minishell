@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/26 15:21:11 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/29 19:07:34 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,19 @@ void	commands(char **input, char **env)
 		else if (!ft_strncmp(input[0], "cd", 3))
 			change_dir(input);
 		else if (!ft_strncmp(input[0], "pwd", 4))
-		{
-			printf("%s\n", print_dir());
-			com_info()->exit_value = 0;
-		}
+			ft_pwd();
 		else if (!ft_strncmp(input[0], "export", 7))
-			printf("EXPORT: %s\n", input[1]);
+			export(input);
 		else if (!ft_strncmp(input[0], "unset", 6))
-			ft_unset();
+			ft_unset(input);
 		else if (!ft_strncmp(input[0], "env", 4))
 			ft_env();
 		else if (!ft_strncmp(input[0], "exit", 5))
-			{
+		{
 			rl_clear_history();
 			free (input);
 			exit(com_info()->exit_value);
-			}
+		}
 		else
 			env_commands(input, env);
 	}
