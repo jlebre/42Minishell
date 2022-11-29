@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 17:25:45 by nvideira          #+#    #+#             */
-/*   Updated: 2022/11/28 19:39:24 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:46:18 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ t_env_lst   *new_node(char *env)
 	if (!env_node)
 		return (NULL);
     env_node->name = ft_substr(env, 0, ft_strchr(env, '=') + 1);
-    env_node->value = ft_substr(env, ft_strchr(env, '=') + 2, ft_strlen(env));
-	printf("NAME: %s\n", env_node->name);
-	printf("VALUE: %s\n", env_node->value);
+    env_node->value = ft_substr(env, ft_strchr(env, '=') + 1, ft_strlen(env));
+	printf("%s", env_node->name);
+	printf("%s\n", env_node->value);
     env_node->next = NULL;
 	return (env_node);
 }
@@ -70,7 +70,7 @@ t_env_lst   *env_to_lst(char **env)
     return (env_lst);
 }
 
-char    **lst_to_env()
+/* char    **lst_to_env()
 {
     int i;
     int size;
@@ -81,4 +81,4 @@ char    **lst_to_env()
     i = 0;
     size = 0;
     tmp = com_info()->
-}
+} */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:18:35 by nvideira          #+#    #+#             */
-/*   Updated: 2022/11/09 17:28:33 by nvideira         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:31:38 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	free_env(t_env_lst **env)
 		free((*env)->name);
 		free((*env)->value);
 		free(env);
+		(*env)->name = NULL;
+		(*env)->value = NULL;
 		*env = (*env)->next;
 	}
 }
