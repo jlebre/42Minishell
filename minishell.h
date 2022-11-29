@@ -68,6 +68,7 @@ t_env_lst				*env_to_lst(char **env);
 t_env_lst				*new_node(char *env);
 t_env_lst				*ft_lstlast(t_env_lst *lst);
 void					lst_add_back(t_env_lst **lst, t_env_lst *new);
+char    				**lst_to_env();
 
 //FREE ENV
 void					free_env(t_env_lst **env);

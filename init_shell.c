@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:59:18 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/22 17:53:55 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/28 19:23:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_shell(char **env)
 	com_info()->env_lst = env_to_lst(env);
 	username = getenv("USER");
 	printf("\n\nUSER is: @%s", username);
-	ft_clear();
+	//ft_clear();
 }
 
 void	recieve(int sig)
