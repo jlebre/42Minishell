@@ -93,7 +93,7 @@ void					ft_echo(char **input);
 void					change_dir(char **input);
 
 //ENV
-void					ft_env(void);
+void					ft_env(char **input);
 void					ft_unset(char **input);
 void					*export(char **env);
 void					ft_pwd(void);

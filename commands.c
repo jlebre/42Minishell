@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/29 19:07:34 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/29 22:14:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	commands(char **input, char **env)
 		else if (!ft_strncmp(input[0], "unset", 6))
 			ft_unset(input);
 		else if (!ft_strncmp(input[0], "env", 4))
-			ft_env();
+			ft_env(input);
 		else if (!ft_strncmp(input[0], "exit", 5))
 		{
 			rl_clear_history();

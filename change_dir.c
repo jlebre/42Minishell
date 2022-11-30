@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:56:17 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/17 22:25:23 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/29 22:21:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	change_dir(char **input)
 	}
 	else
 	{
-		chdir(ft_strjoin("/nfs/homes/", getenv("USER")));
+		chdir(ft_strjoin("/home/", getenv("USER")));
 		com_info()->exit_value = 0;
 	}
 }

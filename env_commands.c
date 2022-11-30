@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/29 19:18:07 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/11/29 22:28:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	env_commands(char **input, char **env)
 	i = 0;
 	temp_lst = com_info()->env_lst;
 	arr[0] = find_path(input[0], temp_lst);
-	//printf("%s\n", arr[0]);
 	if (!arr[0])
 	{
 		printf("\033[0;31mCommand not found: %s\033[0m\n", input[0]);
@@ -38,9 +37,7 @@ void	env_commands(char **input, char **env)
 		while (temp_lst->next)
 		{
 			while (env[i])
-			{
-				//printf("%s\n%s\n", ft_strjoin(temp_lst->name, temp_lst->value), env[i]);
-				if (ft_strcmp(ft_strjoin(temp_lst->name, temp_lst->value), env[i]))
+			{if (ft_strcmp(ft_strjoin(temp_lst->name, temp_lst->value), env[i]))
 				{
 					if (execve(arr[0], arr, env) == -1)
 					{

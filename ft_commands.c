@@ -18,13 +18,19 @@ void	ft_pwd(void)
 	com_info()->exit_value = 0;
 }
 
-void	ft_env(void)
+void	ft_env(char **input)
 {
 	t_env_lst	*temp;
 
 	if (!find_path("env", com_info()->env_lst))
 	{
 		printf("\033[0;31mCommand not found: env\033[0m\n");
+		com_info()->exit_value = 127;
+		return ;
+	}
+	if (input[1])
+	{
+		printf("\033[0;31mEnv: '%s': No such file or directory\033[0m\n", input[1]);
 		com_info()->exit_value = 127;
 		return ;
 	}
@@ -47,29 +53,28 @@ void	ft_unset(char **input)
 		printf("unset: not enough arguments\n");
 		return ;
 	}
+	i = 1;
 	head = com_info()->env_lst;
-	while (com_info()->env_lst)
+	while (input[i])
 	{
-		i = 1;
-		while (input[i])
+		while (com_info()->env_lst)
 		{
 			if (!ft_strncmp(input[i], com_info()->env_lst->name,
-			(ft_strlen(com_info()->env_lst->name) - 1)))
+				(ft_strlen(com_info()->env_lst->name) - 1)))
 			{
-				//printf("NAME: %s\n", com_info()->env_lst->name);
-				//printf("VALUE: %s\n", com_info()->env_lst->value);
-				free(com_info()->env_lst->name);
-				free(com_info()->env_lst->value);
+				printf("INPUT: %s\n", input[i]);
+				printf("NAME: %s\n", com_info()->env_lst->name);
+				printf("VALUE: %s\n", com_info()->env_lst->value);
 				com_info()->env_lst->name = NULL;
 				com_info()->env_lst->value = NULL;
-				if (com_info()->env_lst->next == NULL)
-					com_info()->env_lst->prev->next = NULL;
-				else
-					com_info()->env_lst->prev->next = com_info()->env_lst->next;
+				free(com_info()->env_lst->name);
+				free(com_info()->env_lst->value);
+				com_info()->env_lst->prev->next = com_info()->env_lst->next;
 			}
-			i++;
+			com_info()->env_lst = com_info()->env_lst->next;
 		}
-		com_info()->env_lst = com_info()->env_lst->next;
+		com_info()->env_lst = head;
+		i++;
 	}
 	com_info()->exit_value = 0;
 	com_info()->env_lst = head;
@@ -81,9 +86,7 @@ void   *export(char **input)
 
     i = 1;
 	if (!input[i])
-	{
-		ft_env();
-	}
+		ft_env(input);
     while (input[i])
     {
 		if(ft_strchr(input[i], '='))
