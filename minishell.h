@@ -97,7 +97,8 @@ void					ft_env(char **input);
 void					ft_unset(char **input);
 void					*export(char **env);
 void					ft_pwd(void);
-
+void					ft_exit(char **input);
+int						ft_isdigit(char *str);
 
 //FT_ERROR
 void					ft_error(char *err);

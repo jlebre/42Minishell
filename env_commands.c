@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/29 22:28:15 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/06 15:24:15 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	env_commands(char **input, char **env)
 		while (temp_lst->next)
 		{
 			while (env[i])
-			{if (ft_strcmp(ft_strjoin(temp_lst->name, temp_lst->value), env[i]))
+			{
+				if (ft_strcmp(ft_strjoin(temp_lst->name, temp_lst->value), env[i]))
 				{
 					if (execve(arr[0], arr, env) == -1)
 					{
@@ -68,6 +69,7 @@ char	*find_path(char *cmd, t_env_lst *env_lst)
 	while (temp && ft_strncmp(temp->name, "PATH=", 5))
 	{
 		temp = temp->next;
+		j++;
 	}
 	if (temp == NULL)
 		return (0);

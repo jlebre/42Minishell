@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/29 22:14:43 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/06 15:57:31 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ void	commands(char **input, char **env)
 		else if (!ft_strncmp(input[0], "env", 4))
 			ft_env(input);
 		else if (!ft_strncmp(input[0], "exit", 5))
-		{
-			rl_clear_history();
-			free (input);
-			exit(com_info()->exit_value);
-		}
+			ft_exit(input);
 		else
 			env_commands(input, env);
 	}
