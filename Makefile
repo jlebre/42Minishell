@@ -18,9 +18,11 @@ NAME = minishell
 
 INCLUDE = .
 
-SRC = main.c init_shell.c print_dir.c ft_error.c shell_split.c commands.c \
-	process_input.c utils.c utils2.c colors.c ft_echo.c \
-	utils_pipe.c env_to_lst.c free_env.c change_dir.c env_commands.c ft_commands.c 
+SRC = main.c init_shell.c print_dir.c ft_error.c shell_split.c \
+	process_input.c utils.c utils2.c colors.c \
+	utils_pipe.c env_to_lst.c free_env.c commands/ft_cd.c \
+	commands/commands.c commands/env_commands.c commands/ft_exit.c commands/ft_echo.c \
+	commands/ft_unset.c commands/ft_export.c commands/ft_env.c commands/ft_pwd.c
 	
 OBJ = $(SRC:.c=.o)
 

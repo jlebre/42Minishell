@@ -6,18 +6,18 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/06 15:24:15 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/12/09 17:53:27 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	env_commands(char **input, char **env)
 {
-	char	*arr[2];
-	int		i;
-	int		cenas;
-	int		temp;
+	char		*arr[2];
+	int			i;
+	int			cenas;
+	int			temp;
 	t_env_lst	*temp_lst;
 
 	i = 0;

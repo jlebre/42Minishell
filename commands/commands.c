@@ -6,11 +6,11 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/06 15:57:31 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/12/09 20:25:43 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	commands(char **input, char **env)
 {
@@ -19,11 +19,11 @@ void	commands(char **input, char **env)
 		if (!ft_strncmp(input[0], "echo", 5))
 			ft_echo(input);
 		else if (!ft_strncmp(input[0], "cd", 3))
-			change_dir(input);
+			ft_cd(input, env);
 		else if (!ft_strncmp(input[0], "pwd", 4))
 			ft_pwd();
 		else if (!ft_strncmp(input[0], "export", 7))
-			export(input);
+			ft_export(input);
 		else if (!ft_strncmp(input[0], "unset", 6))
 			ft_unset(input);
 		else if (!ft_strncmp(input[0], "env", 4))

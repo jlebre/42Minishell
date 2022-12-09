@@ -70,6 +70,8 @@ t_env_lst				*new_node(char *env);
 t_env_lst				*ft_lstlast(t_env_lst *lst);
 void					lst_add_back(t_env_lst **lst, t_env_lst *new);
 char    				**lst_to_env();
+void					change_value(char *str);
+
 
 //FREE ENV
 void					free_env(t_env_lst **env);
@@ -90,12 +92,12 @@ char					*find_path(char *cmd, t_env_lst *env_lst);
 void					ft_echo(char **input);
 
 //CD
-void					change_dir(char **input);
+void					ft_cd(char **input, char **env);
 
 //ENV
 void					ft_env(char **input);
 void					ft_unset(char **input);
-void					*export(char **env);
+void					*ft_export(char **input);
 void					ft_pwd(void);
 void					ft_exit(char **input);
 int						ft_isdigit(char *str);

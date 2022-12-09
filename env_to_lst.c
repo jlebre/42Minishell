@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 17:25:45 by nvideira          #+#    #+#             */
-/*   Updated: 2022/11/29 19:56:59 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/12/09 16:54:37 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ t_env_lst   *new_node(char *env)
 		return (NULL);
     env_node->name = ft_substr(env, 0, ft_strchr(env, '=') + 1);
     env_node->value = ft_substr(env, ft_strchr(env, '=') + 1, ft_strlen(env));
-	//printf("%s", env_node->name);
-	//printf("%s\n", env_node->value);
     env_node->next = NULL;
     env_node->prev = NULL;
 	return (env_node);

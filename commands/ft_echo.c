@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 //Se não tiveres " " e tiveres mais de 1 argumento tem de imprimir todos
 
