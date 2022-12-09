@@ -132,17 +132,114 @@ void	ft_unset(char **input)
 	com_info()->env_lst = head;
 }
 
+int	check_if_exists(char *str)
+{
+	t_env_lst	*temp;
+	char		*name;
+	int			len;
+	int			i;
+
+	len = 0;
+	i = 0;
+	temp = com_info()->env_lst;
+	while (str[len] != '=')
+		len++;
+	name = malloc(sizeof(char) * (len + 1));
+	if (!name)
+		return (0);
+	while (i < len)
+	{
+		name[i] = str[i];
+		i++;
+	}
+	name[i] = '\0';
+	while (temp)
+	{
+		if (!ft_strncmp(name, temp->name, len))
+		{
+			free(name);
+			return (1);
+		}
+		temp = temp->next;
+	}
+	free(name);
+	return (0);
+}
+
+void	change_value(char *str)
+{
+	t_env_lst	*temp;
+	char		*name;
+	char		*value;
+	int			len;
+	int			len_val;
+	int			i;
+	int			j;
+
+	len = 0;
+	i = 0;
+	j = 0;
+	temp = com_info()->env_lst;
+	while (str[len] != '=')
+		len++;
+	name = malloc(sizeof(char) * (len + 2));
+	if (!name)
+		return ;
+	len_val = (ft_strlen(str) - (len + 1));
+	value = malloc(sizeof(char) * (len_val + 1));
+	if (!value)
+		return ;
+	while (i < len && str[i])
+	{
+		name[i] = str[i];
+		i++;
+	}
+	name[i] = '=';
+	i++;
+	name[i] = '\0';
+	while (str[i])
+	{
+		value[j] = str[i];
+		i++;
+		j++;
+	}
+	while (temp)
+	{
+		printf("NAME: %s\nLSTNAME: %s\n", name,  temp->name);
+		//printf("VALUE: %s\nLSTVALUE: %s\n", value,  com_info()->env_lst->value);
+		if (!ft_strncmp(name, temp->name, (len + 1)))
+		{
+			printf("VALUE: %s\nLSTVALUE: %s\n", value,  temp->value);
+			temp->value = value;
+			printf("NEWVALUE: %s\n", temp->value);
+			free(name);
+			free(value);
+			//com_info()->env_lst = temp;
+			return ;
+		}
+		temp = temp->next;
+	}
+	//com_info()->env_lst = temp;
+	free(name);
+	free(value);
+}
+
 void   *export(char **input)
 {
-    int			i;
+    int	i;
 
     i = 1;
 	if (!input[i])
 		ft_env(input);
     while (input[i])
     {
-		if(ft_strchr(input[i], '='))
-			lst_add_back(&com_info()->env_lst, new_node(input[i]));
+		if (ft_strchr(input[i], '='))
+		{
+			if (check_if_exists(input[i]))
+				change_value(input[i]);
+			else
+				lst_add_back(&com_info()->env_lst, new_node(input[i]));
+		}
 		else
 			break;
 		i++;

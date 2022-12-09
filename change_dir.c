@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:56:17 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/29 22:21:51 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/07 17:58:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,16 @@ void	change_dir(char **input)
 {
 	if (input[1])
 	{
-		chdir(input[1]);
-		com_info()->exit_value = 0;
+		if (!ft_strncmp(input[1], "-", 2))
+		{
+			chdir(getenv("OLDPWD"));
+			com_info()->exit_value = 0;
+		}
+		else
+		{
+			chdir(input[1]);
+			com_info()->exit_value = 0;
+		}
 	}
 	else
 	{
@@ -25,3 +33,6 @@ void	change_dir(char **input)
 		com_info()->exit_value = 0;
 	}
 }
+
+//Working with "cd -"
+//		export(ft_strjoin("OLDPWD=", getenv("PWD")));
