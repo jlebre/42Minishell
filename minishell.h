@@ -54,6 +54,7 @@ typedef struct s_command
 	char				**args;
 	int					exit_value;
 	t_env_lst			*env_lst;
+	t_env_lst			*vars;
 	int					nb_args;
 }   t_command;
 
@@ -71,7 +72,6 @@ t_env_lst				*ft_lstlast(t_env_lst *lst);
 void					lst_add_back(t_env_lst **lst, t_env_lst *new);
 char    				**lst_to_env();
 void					change_value(char *str);
-
 
 //FREE ENV
 void					free_env(t_env_lst **env);
@@ -98,6 +98,9 @@ void					ft_cd(char **input, char **env);
 void					ft_env(char **input);
 void					ft_unset(char **input);
 void					*ft_export(char **input);
+void					print_exported(char **input);
+int						check_if_exists(char *str);
+void					change_value(char *str);
 void					ft_pwd(void);
 void					ft_exit(char **input);
 int						ft_isdigit(char *str);

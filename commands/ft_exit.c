@@ -63,5 +63,3 @@ void	ft_exit(char **input)
 		exit(com_info()->exit_value);
 	}	
 }
-
-//(export aaa bbb=) (cria aaa= e bbb=)

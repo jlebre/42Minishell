@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   process_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/09 17:51:17 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/12/10 20:22:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-void	vars(char **input)
+void   exported_vars(char **input)
 {
 	int	i;
 
@@ -23,10 +22,21 @@ void	vars(char **input)
 		printf("%s not found\n", input[1]);
 		return ;
 	}
-	while ()
-		
+	while (input[i])
+	{
+		if (ft_strchr(input[i], '='))
+		{
+			if (check_if_exists(input[i]))
+				change_value(input[i]);
+			else
+				lst_add_back(&com_info()->vars, new_node(input[i]));
+		}
+		else
+			break ;
+		i++;
+	}
+	return ;
 }
-*/
 
 //Find Equal Sign
 int	find_es(char *str)
@@ -54,8 +64,7 @@ void	process_input(char *input, char **env)
 	com_info()->nb_args = count_args(args);
 	if (find_es(args[0]) == 1)
 	{
-		printf("VARS\n");
-		//vars(input);
+		exported_vars(args);
 	}
 	else
 		commands(args, env);

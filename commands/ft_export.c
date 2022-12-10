@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:45:11 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/09 20:14:20 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/12/10 20:16:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+t_env_lst	*sort_list()
+{
+	t_env_lst	*temp;
+
+	temp = com_info()->env_lst;
+	return (temp);
+}
+
+//Ordenar por ordem alfabética
+void	print_exported(char **input)
+{
+	t_env_lst	*temp;
+	(void)input;
+
+	temp = sort_list();
+	while (temp)
+	{
+		printf("declare -x %s\"%s\"\n", temp->name, temp->value);
+		temp = temp->next;
+	}
+	com_info()->exit_value = 0;
+}
 
 int	check_if_exists(char *str)
 {
@@ -101,7 +124,7 @@ void   *ft_export(char **input)
 
     i = 1;
 	if (!input[i])
-		ft_env(input);
+		print_exported(input);
     while (input[i])
     {
 		if (ft_strchr(input[i], '='))
@@ -117,3 +140,5 @@ void   *ft_export(char **input)
     }
 	return (0);
 }
+
+//(export aaa bbb=) (cria aaa= e bbb=)

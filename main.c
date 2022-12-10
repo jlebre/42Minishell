@@ -19,13 +19,6 @@ t_command	*com_info(void)
 	return (&a);
 }
 
-t_command	*vars(void)
-{
-	static t_command	b;
-
-	return (&b);
-}
-
 int	main(int argc, char **argv, char **env)
 {
 	char		*input;
