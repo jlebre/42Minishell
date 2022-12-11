@@ -55,6 +55,8 @@ void	ft_echo(char **input)
 		while (i < com_info()->nb_args)
 		{
 			printf("%s", input[i]);
+			if ((com_info()->nb_args - i) != 1)
+				printf(" ");
 			i++;
 		}
 		printf("\n");
