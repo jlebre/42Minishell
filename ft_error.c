@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:15:16 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/22 17:55:32 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/12 00:36:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,4 @@ void	ft_error(char *err)
 	red("Error!\n");
 	red(err);
 	red("\n");
-	//play_sound(env, "error.ogg");
 }
