@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/09 20:25:43 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/12/13 01:42:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	commands(char **input, char **env)
 			ft_env(input);
 		else if (!ft_strncmp(input[0], "exit", 5))
 			ft_exit(input);
+		else if (!ft_strncmp(input[0], "change_color", 13))
+			change_color(input);
 		else
 			env_commands(input, env);
 	}

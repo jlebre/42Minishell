@@ -6,11 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/11 17:03:43 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/13 01:29:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//Se já existir na lista ENV, tem de alterar o valor lá
 
 int	check_if_exists_vars(char *str)
 {
@@ -109,7 +111,12 @@ void	exported_vars(char **input)
 	{
 		if (ft_strchr(input[i], '='))
 		{
-			if (check_if_exists_vars(input[i]))
+			if (check_if_exists(input[i]) && !check_if_exists_vars(input[i]))
+			{
+				change_value(input[i]);
+				lst_add_back(&com_info()->vars, new_node(input[i]));
+			}
+			else if (check_if_exists_vars(input[i]))
 				change_value_vars(input[i]);
 			else
 				lst_add_back(&com_info()->vars, new_node(input[i]));

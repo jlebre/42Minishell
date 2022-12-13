@@ -56,6 +56,7 @@ typedef struct s_command
 	t_env_lst			*env_lst;
 	t_env_lst			*vars;
 	int					nb_args;
+	char				*color;
 }   t_command;
 
 //COMMAND INFO
@@ -72,6 +73,7 @@ t_env_lst				*ft_lstlast(t_env_lst *lst);
 void					lst_add_back(t_env_lst **lst, t_env_lst *new);
 char    				**lst_to_env();
 void					change_value(char *str);
+void					change_color(char **input);
 
 //FREE ENV
 void					free_env(t_env_lst **env);
