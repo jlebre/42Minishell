@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:44:22 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/13 01:37:12 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:16:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,3 @@ void	ft_unset(char **input)
 	com_info()->exit_value = 0;
 	com_info()->env_lst = head;
 }
-
-/*
-
-
-*/

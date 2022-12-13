@@ -12,12 +12,12 @@
 
 #include "../minishell.h"
 
-t_env_lst   *sort_list()
+t_env_lst	*sort_list(void)
 {
-	char        *temp;
+	char		*temp;
 	char		*value;
-	t_env_lst   *curr;
-	t_env_lst   *head;
+	t_env_lst	*curr;
+	t_env_lst	*head;
 
 	curr = com_info()->env_lst;
 	head = curr;
