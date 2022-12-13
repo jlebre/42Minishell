@@ -6,19 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:45:11 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/13 01:25:41 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/13 02:39:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-t_env_lst	*sort_list()
-{
-	t_env_lst	*temp;
-
-	temp = com_info()->env_lst;
-	return (temp);
-}
 
 //Ordenar por ordem alfabética
 void	print_exported(char **input)

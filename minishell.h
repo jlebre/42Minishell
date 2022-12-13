@@ -61,6 +61,7 @@ typedef struct s_command
 
 //COMMAND INFO
 t_command				*com_info(void);
+t_env_lst   *sort_list();
 
 //INIT SHELL
 void					init_shell(char **env);
