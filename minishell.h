@@ -108,6 +108,8 @@ void					free_env(t_env_lst **env);
 //PROCESS INPUT
 void					process_input(char *input, char **env);
 int						count_args(char **matrix);
+void					exported_vars(char **input);
+int						find_es(char *str);
 
 //PARSER 2
 void					parser(char *input);
@@ -162,7 +164,7 @@ void					*ft_export(char **input);
 void					change_value(char *str);
 int						check_if_exists(char *str);
 void					print_exported(char **input);
-t_env_lst				*sort_list(void);
+t_env_lst				*sort_list(t_env_lst	*curr);
 
 //PWD
 void					ft_pwd(void);
