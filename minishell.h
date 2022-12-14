@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdarg.h>
+# include <fcntl.h>
 /////////////////////////////////////////////////
 # include <signal.h>
 /////////////////////////////////////////////////
@@ -43,6 +44,12 @@ typedef struct s_env_lst
 	struct s_env_lst	*next;
 	struct s_env_lst	*prev;
 }	t_env_lst;
+
+typedef struct s_args
+{
+	char				**arg;
+	struct s_args		*next;
+}	t_args;
 
 typedef struct s_command
 {
@@ -215,9 +222,9 @@ t_args					*add_mat_node(char *args);
 
 //GET_NEXT_LINE
 char					*get_next_line(int fd);
-static char				*reading(int fd, char **storage);
-static char				*update_stored(char **storage, char *string);
-static char				*add_leftover(char **storage);
+//static char				*reading(int fd, char **storage);
+//static char				*update_stored(char **storage, char *string);
+//static char				*add_leftover(char **storage);
 
 /* ___ ___  _    ___  ___  ___ 
   / __/ _ \| |  / _ \| _ \/ __|

@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 17:55:59 by nvideira          #+#    #+#             */
-/*   Updated: 2022/12/12 18:05:17 by nvideira         ###   ########.fr       */
+/*   Updated: 2022/12/14 02:39:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_command	*com_info(void)
-{
-	static t_command	a;
-
-	return (&a);
-}
 
 void	print_matrix(char **matrix)
 {
@@ -262,7 +255,7 @@ void	parser(char *input)
 	
 }
 
-
+/*
 int main(int ac, char **av)
 {
 	//char	**parsed;
@@ -275,3 +268,4 @@ int main(int ac, char **av)
 	// 	print_matrix(parsed);
 	return (0);
 }
+*/

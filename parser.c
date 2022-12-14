@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:50 by nvideira          #+#    #+#             */
-/*   Updated: 2022/12/05 16:33:23 by nvideira         ###   ########.fr       */
+/*   Updated: 2022/12/14 02:40:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	find_redir(char *input)
 {
@@ -245,6 +244,7 @@ void	print_matrix(char **matrix)
 	}
 }
 
+/*
 int main(int ac, char **av)
 {
 	char	**parsed;
@@ -257,3 +257,4 @@ int main(int ac, char **av)
 		print_matrix(parsed);
 	return (0);
 }
+*/
