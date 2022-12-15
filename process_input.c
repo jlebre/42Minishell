@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/14 17:04:55 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/12/15 16:39:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,15 @@
 
 //Se já existir na lista ENV, tem de alterar o valor lá
 
-void	process_input(char *input, char **env)
+void	process_input(char **env)
 {
-	char	**args;
-	
-	if (input[0] == '\0')
-		return ;
-	add_history(input);
-	args = ft_split(input, 32);
-	com_info()->nb_args = count_args(args);
-	if (find_es(args[0]) == 1)
+	while (com_info()->commands)
 	{
-		exported_vars(args);
+		com_info()->commands->nb_args = count_args(com_info()->commands->arg);
+		if (find_es(com_info()->commands->arg[0]) == 1)
+			exported_vars(com_info()->commands->arg);
+		else
+			commands(com_info()->commands->arg, env);
+		com_info()->commands = com_info()->commands->next;
 	}
-	else
-		commands(args, env);
 }

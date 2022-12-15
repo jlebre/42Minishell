@@ -48,12 +48,13 @@ typedef struct s_env_lst
 typedef struct s_args
 {
 	char				**arg;
+	int					nb_args;
 	struct s_args		*next;
 }	t_args;
 
 typedef struct s_command
 {
-	int					fd[2];
+	int					pipe[2];
 	pid_t				pid;
 	int					status;
 	char				*cmd;
@@ -65,6 +66,7 @@ typedef struct s_command
 	t_env_lst			*vars;
 	int					nb_args;
 	char				*color;
+	int					pipe_no;
 }   t_command;
 
 /*__  __ ___ _  _ ___ ___ _  _ ___ _    _    
@@ -106,13 +108,13 @@ void					free_env(t_env_lst **env);
  |_|/_/ \_\_|_\|___/___|_|_\*/
 
 //PROCESS INPUT
-void					process_input(char *input, char **env);
+void					process_input(char **env);
 int						count_args(char **matrix);
 void					exported_vars(char **input);
 int						find_es(char *str);
 
-//PARSER 2
-void					parser(char *input);
+//PARSER
+void					parser(char *input, char **env);
 int						count_pipes(char *input);
 int						skip_quotes(char *input, int i, char quote);
 char					***split_split(char **matrix);

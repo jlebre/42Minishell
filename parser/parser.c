@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:45:00 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/14 17:07:14 by jlebre           ###   ########.fr       */
+/*   Updated: 2022/12/15 16:43:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	parser(char *input)
+void	parser(char *input, char **env)
 {
 	char		**tmp;
 	char		*tmp2;
@@ -50,9 +50,10 @@ void	parser(char *input)
 		pipe_no--;
 	}
 	free_matrix(tmp);	
-	while (com_info()->commands)
-	{
-		print_matrix(com_info()->commands->arg);
-		com_info()->commands = com_info()->commands->next;
-	}
+	process_input(env);
+	// while (com_info()->commands)
+	// {
+	// 	print_matrix(com_info()->commands->arg);
+	// 	com_info()->commands = com_info()->commands->next;
+	// }
 }
