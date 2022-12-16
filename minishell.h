@@ -54,7 +54,8 @@ typedef struct s_args
 
 typedef struct s_command
 {
-	int					pipe[2];
+	int					pipe1[2];
+	int					pipe2[2];
 	pid_t				pid;
 	int					status;
 	char				*cmd;
@@ -112,6 +113,11 @@ void					process_input(char **env);
 int						count_args(char **matrix);
 void					exported_vars(char **input);
 int						find_es(char *str);
+
+//QUOTES
+int						find_quote(char *str);
+char					*remove_quotes(char *input);
+
 
 //PARSER
 void					parser(char *input, char **env);

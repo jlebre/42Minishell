@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:44:22 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/15 23:37:24 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/16 17:48:38 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	ft_unset(char **input)
 				if (!com_info()->env_lst->next)
 					com_info()->env_lst->prev->next = NULL;
 				else
+				{
 					com_info()->env_lst->prev->next = com_info()->env_lst->next;
-				//com_info()->env_lst = head;
+					com_info()->env_lst->next->prev = com_info()->env_lst->prev;
+				}
 				break ;
 			}
 			com_info()->env_lst = com_info()->env_lst->next;
@@ -52,11 +54,10 @@ void	ft_unset(char **input)
 		com_info()->env_lst = head;
 		i++;
 	}
+	//com_info()->env_lst = head;
 	com_info()->exit_value = 0;
-	com_info()->env_lst = head;
 }
 
 /*
 export a=3 b=5 c=7
-&& ft_strncmp(com_info()->env_lst->name, "_=", 2)
 */
