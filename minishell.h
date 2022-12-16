@@ -156,6 +156,9 @@ int						cd_errors(char **input);
 void					ft_echo(char **input);
 void					print_vars(char **input);
 void					print_vars2(char **input);
+void					do_print(char **input, int start, int type);
+void					check_flag(char c);
+void					process_flags(char **input, int start);
 
 //ENV
 void					ft_env(char **input);

@@ -50,3 +50,63 @@ void	print_vars(char **input)
 	}
 	print_vars2(input);
 }
+
+void	do_print(char **input, int start, int type)
+{
+	while (start < com_info()->commands->nb_args)
+	{
+		printf("%s", input[start]);
+		if ((com_info()->commands->nb_args - start) != 1)
+			printf(" ");
+		start++;
+	}
+	if (type != 2)
+		printf("\n");
+	com_info()->exit_value = 0;
+}
+
+void	check_flag(char c)
+{
+	if (c == 'a')
+		printf("\a");
+	else if (c == 'b')
+		printf("\b");
+	else if (c == 't')
+		printf("\t");
+	else if (c == 'n')
+		printf("\n");
+	else if (c == 'v')
+		printf("\v");
+	else if (c == 'f')
+		printf("\f");
+	else if (c == 'r')
+		printf("\r");
+	return ;
+}
+
+void	process_flags(char **input, int start)
+{
+	int	i;
+
+	i = 0;
+	while (start < com_info()->commands->nb_args)
+	{
+		while (input[start][i])
+		{
+			if (input[start][i] == '\\')
+			{
+				i++;
+				if (ft_strchr("abtnvfr", input[start][i]))
+					check_flag(input[start][i]);
+			}
+			else
+				printf("%c", input[start][i]);
+			i++;
+		}
+		if ((com_info()->commands->nb_args - start) != 1)
+			printf(" ");
+		start++;
+	}
+	printf("\n");
+	com_info()->exit_value = 0;
+}

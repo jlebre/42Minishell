@@ -12,25 +12,6 @@
 
 #include "../minishell.h"
 
-//Se não tiveres " " e tiveres mais de 1 argumento tem de imprimir todos
-//O que faz o -e ?
-
-void	do_print(char **input, int start, int type)
-{
-	while (start < com_info()->commands->nb_args)
-	{
-		printf("%s", input[start]);
-		if ((com_info()->commands->nb_args - start) != 1 && type == 3)
-			printf("\n");
-		else if ((com_info()->commands->nb_args - start) != 1 && type != 3)
-			printf(" ");
-		start++;
-	}
-	if (type != 2)
-		printf("\n");
-	com_info()->exit_value = 0;
-}
-
 void	ft_echo(char **input)
 {
 	if (!ft_strncmp(input[1], "$?", 3))
@@ -42,7 +23,7 @@ void	ft_echo(char **input)
 	else if (!ft_strncmp(input[1], "-n", 3))
 		do_print(input, 2, 2);
 	else if (!ft_strncmp(input[1], "-e", 3))
-		do_print(input, 2, 3);
+		process_flags(input, 2);
 	else
 		do_print(input, 1, 1);
 }
