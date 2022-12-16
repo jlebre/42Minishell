@@ -14,45 +14,6 @@
 
 //Se não tiveres " " e tiveres mais de 1 argumento tem de imprimir todos
 
-void	print_vars2(char **input)
-{
-	t_env_lst	*temp;
-	char 		*name;
-
-	name = input[1];
-	temp = com_info()->env_lst;
-	name++;
-	while (temp)
-	{
-		if (!ft_strncmp(ft_strjoin(name, "="), temp->name, ft_strlen(name) - 1))
-		{
-			printf("%s\n", temp->value);
-			return ;
-		}
-		temp = temp->next;
-	}
-}
-
-void	print_vars(char **input)
-{
-	t_env_lst	*temp;
-	char 		*name;
-
-	name = input[1];
-	temp = com_info()->vars;
-	name++;
-	while (temp)
-	{
-		if (!ft_strncmp(ft_strjoin(name, "="),temp->name, ft_strlen(name) - 1))
-		{
-			printf("%s\n", temp->value);
-			return ;
-		}
-		temp = temp->next;
-	}
-	print_vars2(input);
-}
-
 void	ft_echo(char **input)
 {
 	int	i;
@@ -71,10 +32,10 @@ void	ft_echo(char **input)
 	else
 	{
 		i = 1;
-		while (i < com_info()->nb_args)
+		while (i < com_info()->commands->nb_args)
 		{
 			printf("%s", input[i]);
-			if ((com_info()->nb_args - i) != 1)
+			if ((com_info()->commands->nb_args - i) != 1)
 				printf(" ");
 			i++;
 		}
