@@ -25,7 +25,8 @@ SRC = main.c init_shell.c print_dir.c ft_error.c shell_split.c \
 	commands/ft_unset.c commands/ft_export.c commands/ft_env.c commands/ft_pwd.c \
 	commands/change_color.c commands/ft_export_utils.c commands/ft_echo_utils.c\
 	get_next_line.c \
-	parser/parser.c parser/parser_utils.c parser/parser_utils2.c remove_quote.c 
+	parser/parser.c parser/parser_utils.c parser/parser_utils2.c remove_quote.c \
+	pipes.c
 	
 OBJ = $(SRC:.c=.o)
 

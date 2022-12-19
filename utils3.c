@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:18:52 by nvideira          #+#    #+#             */
-/*   Updated: 2022/12/15 18:32:33 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/19 11:46:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_args	*add_mat_node(char *args)
 	new_node = malloc(sizeof(t_args));
 	if (!new_node)
 		return (NULL);
-	//printf("args = %s\n", args);
 	new_node->arg = ft_split(args, ' ');
 	
 	new_node->next = NULL;
