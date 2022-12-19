@@ -14,10 +14,18 @@
 
 void	ft_echo(char **input)
 {
-	if (!ft_strncmp(input[1], "$?", 3))
+	if (!input[1])
+	{
+		printf("\n");
+		com_info()->exit_value = 0;
+	}
+	else if (!ft_strncmp(input[1], "$?", 3))
+	{
 		printf("%d\n", com_info()->exit_value);
+		com_info()->exit_value = 0;
+	}
 	else if (input[1][0] == '$' && ft_strlen(input[1]) < 2)
-		printf("Error: no such file \"%s\"\n", input[1]);
+		do_print(input, 1, 1);
 	else if (input[1][0] == '$')
 		print_vars(input);
 	else if (!ft_strncmp(input[1], "-n", 3))
