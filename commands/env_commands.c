@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/19 11:28:36 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/27 14:44:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 void	env_commands(char **input, char **env)
 {
-	char		*arr[2];
+	char		*arr[com_info()->commands->nb_args];
 	int			i;
+	int			j;
 	int			cenas;
 	int			temp;
 	t_env_lst	*temp_lst;
 
 	i = 0;
+	j = 1;
 	temp_lst = com_info()->env_lst;
 	cenas = fork();
 	if (!cenas)
@@ -34,8 +36,12 @@ void	env_commands(char **input, char **env)
 				com_info()->exit_value = 127;
 				return ;
 			}
-			arr[1] = input[1];
-			arr[2] = 0;
+			while (j < (com_info()->commands->nb_args + 1))
+			{
+				arr[j] = input[j];
+				j++;
+			}
+			arr[j] = 0;
 			while (temp_lst->next)
 			{
 				while (env[i])
