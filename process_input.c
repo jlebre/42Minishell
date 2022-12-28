@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/27 14:32:59 by marvin           ###   ########.fr       */
+/*   Updated: 2022/12/28 03:02:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,31 @@ char	*ft_itoa(int number)
 
 char	*change_val2(char *input)
 {
-	int	i;
-
+	int			i;
+	int			j;
+	static char	*name;
+	
+	i = 0;
+	j = 0;
 	while (input[i])
 	{
 		if (input[i] == '$')
 		{
-				printf("test\n");
+			i++;
+			while (input[i] != ' ')
+			{
+				name[j] = input[i];
+				j++;
+				i++;
+			}
+			//check name;
+			//change;
+			//join to previous str
 		}
 		i++;
 	}
 	
-	return ("\n");
+	return (input);
 }
 
 char	*change_val(char *input)

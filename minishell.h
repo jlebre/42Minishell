@@ -176,9 +176,12 @@ void					exit_errors(int error, char **input);
 //EXPORT
 void					*ft_export(char **input);
 void					change_value(char *str);
+void					change_value2(char *str);
 int						check_if_exists(char *str);
+int						check_if_exists2(char *str);
 void					print_exported(char **input);
-t_env_lst				*sort_list(t_env_lst	*curr);
+void 					check_export(char *input);
+t_env_lst				*sort_list(t_env_lst *curr);
 
 //PWD
 void					ft_pwd(void);
@@ -186,6 +189,10 @@ int						ft_isdigit(char *str);
 
 //UNSET
 void					ft_unset(char **input);
+void					unset_error(void);
+void					do_unset(char *input, t_env_lst *lst);
+int						check_if_exists_unset(char *input, t_env_lst *temp);
+void					check_unset(char *input);
 
 /*_   _ _____ ___ _    ___ 
  | | | |_   _|_ _| |  / __|
