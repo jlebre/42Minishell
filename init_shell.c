@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:59:18 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/27 14:00:11 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/03 23:40:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	init_shell(char **env)
 	signal(SIGINT, recieve);
 	com_info()->env_lst = env_to_lst(env);
 	com_info()->vars = NULL;
+	com_info()->fd_in = 0;
 	com_info()->color = "\033[1;32m:";
-	com_info()->exit_value = 0;
 	username = getenv("USER");
-	printf("\n\nUSER is: @%s\n", username);
-	//ft_clear();
+	printf("\n\nUSER is: @%s", username);
+	ft_clear();
 }
 
 void	recieve(int sig)

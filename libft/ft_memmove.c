@@ -1,41 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipes.c                                            :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 02:22:13 by nvideira          #+#    #+#             */
-/*   Updated: 2022/12/19 11:51:17 by marvin           ###   ########.fr       */
+/*   Created: 2022/10/25 17:55:46 by jlebre            #+#    #+#             */
+/*   Updated: 2023/01/04 01:09:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	use_pipe(int *pip)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	if (pipe(pip) < 0)
+	char		*dr;
+	const char	*sr;
+	size_t		i;
+
+	sr = src;
+	dr = dst;
+	i = 0;
+	if (!dst && !src)
+		return (NULL);
+	if (dr < sr)
 	{
-		write(2, "Error creating pipe\n", 20);
-		return (1);
-	}
-	com_info()->pid = fork();
-	if (com_info()->pid < 0)
-	{
-		write(2, "Error creating fork\n", 20);
-		return (1);
-	}
-	else if (com_info()->pid == 0)
-	{
-		dup2(pip[1], STDOUT_FILENO);
-		close(pip[0]);
-		close(pip[1]);
+		while (i < len)
+		{
+			dr[i] = sr[i];
+			i++;
+		}
 	}
 	else
 	{
-		dup2(pip[0], STDIN_FILENO);
-		close(pip[0]);
-		close(pip[1]);
+		while (len--)
+			dr[len] = sr[len];
 	}
-	return (0);
+	return (dst);
 }
