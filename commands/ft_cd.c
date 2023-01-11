@@ -21,7 +21,7 @@ int	cd_errors(char **input)
 		i++;
 	if (i > 2)
 	{
-		printf("cd: string not in pwd: %s\n", input[1]);
+		ft_error("cd: string not in pwd: %s\n", input[1]);
 		return (0);
 	}
 	if (i == 2)
@@ -32,7 +32,7 @@ int	cd_errors(char **input)
 			return (1);
 		if (access(input[1], F_OK) != 0)
 		{
-			printf("cd: no such file or directory: %s\n", input[1]);
+			ft_error("cd: no such file or directory: %s\n", input[1]);
 			return (0);
 		}
 	}
@@ -111,5 +111,3 @@ void	ft_cd(char **input, char **env)
 	com_info()->exit_value = 0;
 	change_pwd("OLDPWD=", curr, env);
 }
-
-//Nao aceita absoluth path! Escreve mal no env, mas ja funciona

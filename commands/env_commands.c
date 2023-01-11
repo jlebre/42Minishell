@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/04 00:42:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/11 14:19:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,46 +16,43 @@ void	env_commands(char **input, char **env)
 {
 	int			i;
 	t_env_lst	*temp_lst;
-	int			cenas;
 
 	i = 0;
 	temp_lst = com_info()->env_lst;
-	//use_pipe();
-	cenas = fork();
-	if (!cenas)
+	// if (com_info()->commands->next)
+	// 	use_pipe();
+	// else
+	com_info()->pid = fork();
+	if (com_info()->pid == 0)
 	{
-		if (com_info()->pid == 0)
+		//fd_dup(com_info()->cmds_done);
+		if (execve(input[0], input, env) == -1)
 		{
-			if (execve(input[0], input, env) == -1)
+			char *path = find_path(input[0], temp_lst);
+			if (!path)
 			{
-				char *path = find_path(input[0], temp_lst);
-				if (!path)
+				ft_error("\033[0;31mCommand not found: %s\033[0m\n", input[0]);
+				com_info()->exit_value = 127;
+				exit(127);
+			}
+			while (temp_lst->next)
+			{
+				while (env[i])
 				{
-					printf("\033[0;31mCommand not found: %s\033[0m\n", input[0]);
-					com_info()->exit_value = 127;
-					exit(127);
-				}
-				while (temp_lst->next)
-				{
-					while (env[i])
+					if (ft_strcmp(ft_strjoin(temp_lst->name, temp_lst->value), env[i]))
 					{
-						if (ft_strcmp(ft_strjoin(temp_lst->name, temp_lst->value), env[i]))
+						if (execve(path, input, env) == -1)
 						{
-							if (execve(path, input, env) == -1)
-							{
-								com_info()->exit_value = 126;
-								ft_error("Deu Merda");
-							}
+							com_info()->exit_value = 126;
+							ft_error("Deu Merda");
 						}
-						i++;
 					}
-					i = 0;
-					temp_lst = temp_lst->next;
+					i++;
 				}
+				i = 0;
+				temp_lst = temp_lst->next;
 			}
 		}
-		else
-			waitpid(com_info()->pid, &com_info()->status, 0);
 	}
 	else
 		waitpid(com_info()->pid, &com_info()->status, 0);

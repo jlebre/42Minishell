@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_input_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:04:30 by jlebre            #+#    #+#             */
-/*   Updated: 2022/12/14 17:04:59 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/01/11 14:18:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	exported_vars(char **input)
 	i = 0;
 	if (input[0][i] == '=')
 	{
-		printf("%s not found\n", input[1]);
+		ft_error("%s not found\n", input[1]);
 		return ;
 	}
 	while (input[i])
