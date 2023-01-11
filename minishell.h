@@ -69,6 +69,7 @@ typedef struct s_command
 	int					nb_args;
 	char				*color;
 	int					pipe_no;
+	int					temp_fd;
 }   t_command;
 
 /*__  __ ___ _  _ ___ ___ _  _ ___ _    _    
@@ -81,6 +82,8 @@ t_command				*com_info(void);
 
 //INIT SHELL
 void					init_shell(char **env);
+void					catch_signal(void);
+void					signal_block(void);
 void					recieve(int sig);
 
 //PRINT DIR

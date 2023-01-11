@@ -28,6 +28,7 @@ int	main(int argc, char **argv, char **env)
 	init_shell(env);
 	while (1)
 	{
+		catch_signal();
 		input = readline(print_info());
 		if (!input)
 		{

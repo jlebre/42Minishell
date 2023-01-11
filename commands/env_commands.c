@@ -6,57 +6,57 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/11 16:10:21 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/11 18:23:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
 void	env_commands(char **input, char **env)
 {
-	int			i;
-	t_env_lst	*temp_lst;
+	int	a;
 
-	i = 0;
-	temp_lst = com_info()->env_lst;
+	cmd = input[0];
+	a = fork();
+	if (!a)
+		exec_command(cmd, path);
+	waitpid(com_info()->pid, &com_info()->status, 0);
+	com_info()->exit_value = com_info()->status / 256;
+	free(cmd);
+}
+*/
+
+void	env_commands(char **input, char **env)
+{
+	char 		*path;
+
+	path = find_path(input[0], com_info()->env_lst);
+	printf("PATH: |%s|\n", path);
+	if (!path)
+	{
+		ft_error("\033[0;31mCommand not found: %s\033[0m\n", input[0]);
+		com_info()->exit_value = 127;
+		return ;
+	}
 	com_info()->pid = fork();
 	if (com_info()->pid == 0)
 	{
 		if (com_info()->pipe_no != 0)
 			fd_dup(com_info()->cmds_done);
-		if (execve(input[0], input, env) == -1)
+		if (execve(path, input, env) == -1)
 		{
-			char *path = find_path(input[0], temp_lst);
-			if (!path)
-			{
-				ft_error("\033[0;31mCommand not found: %s\033[0m\n", input[0]);
-				com_info()->exit_value = 127;
-				exit(127);
-			}
-			while (temp_lst->next)
-			{
-				while (env[i])
-				{
-					if (ft_strcmp(ft_strjoin(temp_lst->name, temp_lst->value), env[i]))
-					{
-						if (execve(path, input, env) == -1)
-						{
-							com_info()->exit_value = 126;
-							ft_error("Deu Merda");
-						}
-					}
-					i++;
-				}
-				i = 0;
-				temp_lst = temp_lst->next;
-			}
+			com_info()->exit_value = 126;
+			ft_error("Deu Merda\n");
 		}
 	}
-	else
-		waitpid(com_info()->pid, &com_info()->status, 0);
+	waitpid(com_info()->pid, &com_info()->status, 0);
 	com_info()->exit_value = com_info()->status / 256;
 }
 
+// Não funciona com absoluth path
+// Acrescentar condição para verificar se está no env!
+// Norminette
 char	*find_path(char *cmd, t_env_lst *env_lst)
 {
 	int			j;
