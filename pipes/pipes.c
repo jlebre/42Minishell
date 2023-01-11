@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 02:22:13 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/08 22:59:26 by nvideira         ###   ########.fr       */
+/*   Updated: 2023/01/11 16:10:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	fd_dup(int pos)
 {
 	if (pos == 0)
 	{
-		close(com_info()->pip[pos][0]);
 		dup2(com_info()->pip[pos][1], STDOUT_FILENO);
+		close(com_info()->pip[pos][0]);
 		close(com_info()->pip[pos][1]);
 	}
 	else if (pos == com_info()->pipe_no)

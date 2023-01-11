@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/11 14:19:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/11 16:10:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@ void	env_commands(char **input, char **env)
 
 	i = 0;
 	temp_lst = com_info()->env_lst;
-	// if (com_info()->commands->next)
-	// 	use_pipe();
-	// else
 	com_info()->pid = fork();
 	if (com_info()->pid == 0)
 	{
-		//fd_dup(com_info()->cmds_done);
+		if (com_info()->pipe_no != 0)
+			fd_dup(com_info()->cmds_done);
 		if (execve(input[0], input, env) == -1)
 		{
 			char *path = find_path(input[0], temp_lst);
