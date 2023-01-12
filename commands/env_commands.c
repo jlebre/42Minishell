@@ -6,52 +6,30 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/11 18:23:50 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/11 23:28:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-void	env_commands(char **input, char **env)
-{
-	int	a;
-
-	cmd = input[0];
-	a = fork();
-	if (!a)
-		exec_command(cmd, path);
-	waitpid(com_info()->pid, &com_info()->status, 0);
-	com_info()->exit_value = com_info()->status / 256;
-	free(cmd);
-}
-*/
-
 void	env_commands(char **input, char **env)
 {
 	char 		*path;
 
+	//printf("INPUT: |%s|\n", input[0]);
+	write(1, "INPUT:\n", 8);
 	path = find_path(input[0], com_info()->env_lst);
-	printf("PATH: |%s|\n", path);
 	if (!path)
 	{
 		ft_error("\033[0;31mCommand not found: %s\033[0m\n", input[0]);
 		com_info()->exit_value = 127;
 		return ;
 	}
-	com_info()->pid = fork();
-	if (com_info()->pid == 0)
+	if (execve(path, input, env) == -1)
 	{
-		if (com_info()->pipe_no != 0)
-			fd_dup(com_info()->cmds_done);
-		if (execve(path, input, env) == -1)
-		{
-			com_info()->exit_value = 126;
-			ft_error("Deu Merda\n");
-		}
+		com_info()->exit_value = 126;
+		ft_error("Deu Merda\n");
 	}
-	waitpid(com_info()->pid, &com_info()->status, 0);
-	com_info()->exit_value = com_info()->status / 256;
 }
 
 // Não funciona com absoluth path

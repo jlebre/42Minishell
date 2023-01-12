@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:45:00 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/03 20:48:22 by nvideira         ###   ########.fr       */
+/*   Updated: 2023/01/12 02:48:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+// Norminette
 void	parser(char *input, char **env)
 {
 	char		**tmp;
@@ -39,7 +40,7 @@ void	parser(char *input, char **env)
 	 	add_history(input);
 	if (check_quotes(input))
 	{
-		write(1, "minishell: syntax error: unclosed quotes\n", 41);
+		ft_error("minishell: syntax error: unclosed quotes\n");
 		return ;
 	}
 	pipe_no = count_pipes(input);
@@ -54,9 +55,4 @@ void	parser(char *input, char **env)
 	if (com_info()->pipe_no > 0)
 		init_pipes();
 	process_input(env);
-	// while (com_info()->commands)
-	// {
-	// 	print_matrix(com_info()->commands->arg);
-	// 	com_info()->commands = com_info()->commands->next;
-	// }
 }

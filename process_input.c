@@ -6,11 +6,19 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/04 01:25:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/12 01:49:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**parse_cenas(char **arg)
+{
+	arg = process_quotes(arg);
+	arg = check_ds(arg);
+	arg = process_peliculas(arg);
+	return (arg);
+}
 
 void	process_input(char **env)
 {
@@ -21,12 +29,24 @@ void	process_input(char **env)
 			exported_vars(com_info()->commands->arg);
 		else
 		{
-			com_info()->commands->arg = process_quotes(com_info()->commands->arg);
-			com_info()->commands->arg = check_ds(com_info()->commands->arg);
-			com_info()->commands->arg = process_peliculas(com_info()->commands->arg);
-			commands(com_info()->commands->arg, env);
+			com_info()->commands->arg = parse_cenas(com_info()->commands->arg);
+			if (needs_fork(com_info()->commands->arg))
+			{
+				//printf("In Needs Fork\n");
+				fork_commands(com_info()->commands->arg, env);
+				//printf("Out Needs Fork\n");
+			}
+			else
+			{		
+				//printf("In\n");
+				commands(com_info()->commands->arg, env);
+				//printf("Out\n");
+			}
 		}
 		com_info()->cmds_done++;
 		com_info()->commands = com_info()->commands->next;
+		//printf("aaaaaaaaaaaaaa\n");
 	}
+	wait_pid(com_info()->cmds_done);
+	//catch_signal();
 }

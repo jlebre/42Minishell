@@ -152,6 +152,9 @@ void					fd_dup(int i);
   \___\___/|_|  |_|_|  |_/_/ \_\_|\_|___/|___/*/
 
 void					commands(char **input, char **env);
+void					fork_commands(char **input, char **env);
+void					wait_pid(int counter);
+int						needs_fork(char	**input);
 
 void					env_commands(char **input, char **env);
 char					*find_path(char *cmd, t_env_lst *env_lst);

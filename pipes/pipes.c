@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 02:22:13 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/11 18:10:14 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/11 19:21:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,21 @@ void	init_pipes(void)
 		}
 	}
 	com_info()->pip[i] = NULL;
-	com_info()->temp_fd = dup(STDIN_FILENO);
 }
-
-	//printf("pos = %i\n", pos);
-	//printf("nopipe = %i\n", com_info()->pipe_no);
 
 void	fd_dup(int pos)
 {
 	pipe(com_info()->pip[pos]);
 	if (pos == 0)
 	{
-		dup2(com_info()->pip[pos][1], STDOUT_FILENO);
-		close(com_info()->pip[pos][0]);
-		close(com_info()->pip[pos][1]);
+		close(com_info()->pip[0][0]);
+		dup2(com_info()->pip[0][1], STDOUT_FILENO);
+		close(com_info()->pip[0][1]);
 	}
 	else if (pos == com_info()->pipe_no)
 	{
-		dup2(com_info()->temp_fd, STDIN_FILENO);
-		close(com_info()->temp_fd);
+		dup2(com_info()->pip[pos - 1][0], STDIN_FILENO);
+		close(com_info()->pip[pos - 1][0]);
 	}
 	else
 	{
