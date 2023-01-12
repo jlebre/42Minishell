@@ -129,7 +129,7 @@ char					*remove_peliculas(char *input);
 //DOLLAR SIGN
 char					**check_ds(char **input);
 char					*change_val(char *input);
-char					*change_val2(char *input);
+char					*change_val2(char *input, int i, int j);
 
 //PARSER
 void					parser(char *input, char **env);

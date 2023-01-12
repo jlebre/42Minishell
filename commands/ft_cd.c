@@ -81,6 +81,12 @@ void	change_pwd(char *type, char *str, char **env)
 	com_info()->env_lst = head;
 }
 
+void	do_cd(char *new_dir, char *new_pwd, char **env)
+{
+	chdir(new_dir);
+	change_pwd("PWD=", new_pwd, env);
+}
+
 void	ft_cd(char **input, char **env)
 {
 	char	*curr;
@@ -93,21 +99,12 @@ void	ft_cd(char **input, char **env)
 	if (input[1])
 	{
 		if (!ft_strncmp(input[1], "-", 2))
-		{
-			chdir(getenv("OLDPWD"));
-			change_pwd("PWD=", getenv("OLDPWD"), env);
-		}
+			do_cd(getenv("OLDPWD"), getenv("OLDPWD"), env);
 		else
-		{
-			chdir(input[1]);
-			change_pwd("PWD=", ft_strjoin(new, input[1]), env);
-		}
+			do_cd(input[1], ft_strjoin(new, input[1]), env);
 	}
 	else
-	{
-		chdir(getenv("HOME"));
-		change_pwd("PWD=", getenv("OLDPWD"), env);
-	}
+		do_cd(getenv("HOME"), getenv("OLDPWD"), env);
 	com_info()->exit_value = 0;
 	change_pwd("OLDPWD=", curr, env);
 }
