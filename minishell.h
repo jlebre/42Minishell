@@ -117,6 +117,9 @@ void					process_input(char **env);
 int						count_args(char **matrix);
 void					exported_vars(char **input);
 int						find_es(char *str);
+int						check_if_exists_vars(char *str);
+void					change_value_vars(char *str);
+
 
 //QUOTES
 char 					**process_quotes(char **input);

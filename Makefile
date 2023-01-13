@@ -19,8 +19,8 @@ NAME = minishell
 INCLUDE = .
 
 SRC = main.c init_shell.c print_dir.c ft_error.c shell_split.c \
-	process_input.c process_input_utils.c colors.c signals.c\
-	env_to_lst.c free_env.c ft_error_utils.c\
+	process_input.c process_input_utils.c process_input_utils2.c \
+	colors.c signals.c env_to_lst.c free_env.c ft_error_utils.c\
 	commands/commands.c commands/env_commands.c commands/ft_exit.c \
 	commands/ft_echo.c commands/ft_unset.c commands/ft_export.c \
 	commands/ft_env.c commands/ft_pwd.c commands/change_color.c \
