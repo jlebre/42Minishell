@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/11 23:28:11 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/14 00:00:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	env_commands(char **input, char **env)
 {
 	char 		*path;
 
-	//printf("INPUT: |%s|\n", input[0]);
-	write(1, "INPUT:\n", 8);
+	printf("INPUT: |%s|\n", input[0]);
 	path = find_path(input[0], com_info()->env_lst);
 	if (!path)
 	{
@@ -35,6 +34,7 @@ void	env_commands(char **input, char **env)
 // Não funciona com absoluth path
 // Acrescentar condição para verificar se está no env!
 // Norminette
+
 char	*find_path(char *cmd, t_env_lst *env_lst)
 {
 	int			j;

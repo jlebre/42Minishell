@@ -114,6 +114,7 @@ void					free_env(t_env_lst **env);
 
 //PROCESS INPUT
 void					process_input(char **env);
+char					**parse_cenas(char **arg);
 int						count_args(char **matrix);
 void					exported_vars(char **input);
 int						find_es(char *str);

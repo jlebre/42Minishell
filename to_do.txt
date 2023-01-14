@@ -1,1 +1,28 @@
 Errors to STDOUT
+
+/*
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    int pipefd[2];
+    pipe(pipefd);
+    pid_t pid = fork();
+    if (pid == 0) {
+        // child process
+        close(pipefd[0]);
+        dup2(pipefd[1], 1);
+        char *argv[] = {"ls", "-l", NULL};
+        execve("/bin/ls", argv, NULL);
+    } else {
+        // parent process
+        close(pipefd[1]);
+        dup2(pipefd[0], 0);
+        char buf[1024];
+        while (read(pipefd[0], buf, sizeof(buf)) > 0) {
+            printf("%s", buf);
+        }
+    }
+    return 0;
+}
+*/

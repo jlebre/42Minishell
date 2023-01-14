@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/12 04:27:53 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/13 23:47:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,29 @@ char	**parse_cenas(char **arg)
 	return (arg);
 }
 
+// but works with exported
+// a=3
+// b=$a
+// echo $b
+// $a
+
 void	process_input(char **env)
 {
 	while (com_info()->commands)
 	{
+		com_info()->commands->arg = parse_cenas(com_info()->commands->arg);
 		com_info()->commands->nb_args = count_args(com_info()->commands->arg);
 		if (find_es(com_info()->commands->arg[0]) == 1)
 			exported_vars(com_info()->commands->arg);
 		else
 		{
-			com_info()->commands->arg = parse_cenas(com_info()->commands->arg);
 			if (needs_fork(com_info()->commands->arg))
-			{
-				//printf("In Needs Fork\n");
 				fork_commands(com_info()->commands->arg, env);
-				//printf("Out Needs Fork\n");
-			}
 			else
-			{		
-				//printf("In\n");
 				commands(com_info()->commands->arg, env);
-				//printf("Out\n");
-			}
 		}
 		com_info()->cmds_done++;
 		com_info()->commands = com_info()->commands->next;
-		//printf("aaaaaaaaaaaaaa\n");
 	}
-	wait_pid(com_info()->cmds_done);
 	//catch_signal();
 }
