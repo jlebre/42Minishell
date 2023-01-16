@@ -121,12 +121,18 @@ void	wait_pid(int counter)
 int	needs_fork(char	**input)
 {
 	if (com_info()->pipe_no > 0)
+	{
+		init_pipes();
 		return (1);
+	}
 	else if (!ft_strncmp(input[0], "cd", 3) || !ft_strncmp(input[0], "export", 7)
 		|| !ft_strncmp(input[0], "unset", 6) || !ft_strncmp(input[0], "exit", 5)
 		|| !ft_strncmp(input[0], "echo", 5) || !ft_strncmp(input[0], "pwd", 4)
 		|| !ft_strncmp(input[0], "env", 4) || !ft_strncmp(input[0], "change_color", 13))
 		return (0);
 	else
+	{
+		init_pipes();
 		return (1);
+	}
 }

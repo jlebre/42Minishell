@@ -12,6 +12,14 @@
 
 #include "../minishell.h"
 
+char	**parse_cenas(char **arg)
+{
+	arg = process_quotes(arg);
+	arg = check_ds(arg);
+	arg = process_peliculas(arg);
+	return (arg);
+}
+
 // Norminette
 void	parser(char *input, char **env)
 {
@@ -21,6 +29,7 @@ void	parser(char *input, char **env)
 	int			here;
 	int			pipe_no;
 
+	(void)env;
 	here = 0;
 	tmp2 = NULL;
 	tmp3 = NULL;
@@ -52,7 +61,5 @@ void	parser(char *input, char **env)
 		pipe_no--;
 	}
 	free_matrix(tmp);
-	if (com_info()->pipe_no > 0)
-		init_pipes();
-	process_input(env);
+	com_info()->commands->arg = parse_cenas(com_info()->commands->arg);
 }

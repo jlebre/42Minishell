@@ -16,7 +16,7 @@ void	env_commands(char **input, char **env)
 {
 	char 		*path;
 
-	printf("INPUT: |%s|\n", input[0]);
+	//printf("INPUT: |%s|\n", input[0]);
 	path = find_path(input[0], com_info()->env_lst);
 	if (!path)
 	{
