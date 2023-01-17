@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/14 00:00:05 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/17 19:30:48 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	env_commands(char **input, char **env)
 {
 	char 		*path;
 
-	//printf("INPUT: |%s|\n", input[0]);
 	path = find_path(input[0], com_info()->env_lst);
 	if (!path)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:45:00 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/13 23:41:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/17 19:28:55 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,6 @@ void	parser(char *input, char **env)
 	}
 	free_matrix(tmp);
 	com_info()->commands->arg = parse_cenas(com_info()->commands->arg);
+	if (com_info()->pipe_no > 0)
+		init_pipes();
 }

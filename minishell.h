@@ -70,6 +70,7 @@ typedef struct s_command
 	char				*color;
 	int					pipe_no;
 	int					temp_fd;
+	char				**env;
 }   t_command;
 
 /*__  __ ___ _  _ ___ ___ _  _ ___ _    _    
@@ -149,14 +150,16 @@ void					free_matrix(char **matrix);
 
 //////////////PIPES
 void					init_pipes(void);
+void					do_pipes(char **input);
+void					execute_pipe(char **input);
 void					fd_dup(int i);
 /* ___ ___  __  __ __  __   _   _  _ ___  ___ 
   / __/ _ \|  \/  |  \/  | /_\ | \| |   \/ __|
  | (_| (_) | |\/| | |\/| |/ _ \| .` | |) \__ \
   \___\___/|_|  |_|_|  |_/_/ \_\_|\_|___/|___/*/
 
-void					commands(char **input, char **env);
-void					fork_commands(char **input, char **env);
+void					commands(char **input, char **env, int is_fork);
+void					fork_commands(char **input, char **env, int is_fork);
 void					wait_pid(int counter);
 int						needs_fork(char	**input);
 

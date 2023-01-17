@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:59:18 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/11 18:07:41 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/17 19:23:55 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_shell(char **env)
 	com_info()->fd_in = 0;
 	com_info()->cmds_done = 0;
 	com_info()->color = "\033[1;32m:";
+	com_info()->env = env;
 	username = getenv("USER");
 	printf("\n\nUSER is: @%s", username);
 	ft_clear();
