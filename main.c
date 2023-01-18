@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **env)
 			free (input);
 			exit(com_info()->exit_value);
 		}
-		parser(input, env);
+		parser(input);
 		process_input(env);
 	}
 	free (input);

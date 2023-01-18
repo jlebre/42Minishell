@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:45:00 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/17 19:28:55 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/01/17 22:50:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,29 @@ char	**parse_cenas(char **arg)
 	return (arg);
 }
 
-// Norminette
-void	parser(char *input, char **env)
+int	check_xor(char *input)
 {
-	char		**tmp;
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '|')
+		{
+			if (input[i + 1] == '|')
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	parser(char *input)
+{
 	char		*tmp2;
 	char		*tmp3;
 	int			here;
-	int			pipe_no;
 
-	(void)env;
 	here = 0;
 	tmp2 = NULL;
 	tmp3 = NULL;
@@ -47,11 +60,29 @@ void	parser(char *input, char **env)
 	}
 	if (ft_strlen(input))
 	 	add_history(input);
+	parser2(input);
+}
+
+void	parser2(char *input)
+{
 	if (check_quotes(input))
 	{
 		ft_error("minishell: syntax error: unclosed quotes\n");
 		return ;
 	}
+	if (check_xor(input))
+	{
+		ft_error("minishell: syntax error near unexpected token `|'\n");
+		return ;
+	}
+	parser3(input);
+}
+
+void	parser3(char *input)
+{
+	char		**tmp;
+	int			pipe_no;
+	
 	pipe_no = count_pipes(input);
 	com_info()->pipe_no = pipe_no;
 	tmp = ft_split(input, '|');

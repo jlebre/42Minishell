@@ -137,7 +137,9 @@ char					*change_val(char *input);
 char					*change_val2(char *input, int i, int j);
 
 //PARSER
-void					parser(char *input, char **env);
+void					parser(char *input);
+void					parser2(char *input);
+void					parser3(char *input);
 int						count_pipes(char *input);
 int						skip_quotes(char *input, int i, char quote);
 char					***split_split(char **matrix);

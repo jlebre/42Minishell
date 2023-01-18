@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 02:22:13 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/17 19:29:41 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/01/17 20:52:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,6 @@ void	execute_pipe(char **input)
 	else
 		waitpid(pid, &com_info()->exit_value, 0);
 	fd_close(com_info()->cmds_done);
-}
-
-void	do_pipes(char **input)
-{
-	int	i;
-
-	i = 0;
-	if (com_info()->pipe_no == 1)
-	{
-		execute_pipe(input);
-	}
-	else
-	{
-		while (i < (com_info()->pipe_no + 1))
-		{
-			execute_pipe(input);
-			i++;
-		}
-	}
 	unlink(".heredoc");
 }
 
