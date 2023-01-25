@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:45:00 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/17 22:50:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/24 23:09:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,29 @@ int	check_xor(char *input)
 	return (0);
 }
 
+int	check_and(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '&')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	parser(char *input)
 {
 	char		*tmp2;
 	char		*tmp3;
-	int			here;
 
-	here = 0;
 	tmp2 = NULL;
 	tmp3 = NULL;
 	if (empty_prompt(input))
 		return ;
-	if (!ft_strncmp(input, "<<", 2))
-		tmp2 = heredoc(find_limiter(input, 2), &here);
 	if (tmp2)
 	{
 		tmp3 = ft_strjoin(input, tmp2);
@@ -75,6 +85,11 @@ void	parser2(char *input)
 		ft_error("minishell: syntax error near unexpected token `|'\n");
 		return ;
 	}
+	if (check_and(input))
+	{
+		ft_error("minishell: syntax error near unexpected token `&'\n");
+		return ;
+	}
 	parser3(input);
 }
 
@@ -82,14 +97,18 @@ void	parser3(char *input)
 {
 	char		**tmp;
 	int			pipe_no;
+	int			i;
 	
+	i = 0;
 	pipe_no = count_pipes(input);
 	com_info()->pipe_no = pipe_no;
-	tmp = ft_split(input, '|');
+	com_info()->redir_no = count_redirs(input);
+	tmp = ft_split(input, "|<>");
 	while (pipe_no >= 0)
 	{
-		lst_add_front(&com_info()->commands, add_mat_node(tmp[pipe_no]));
+		lst_add_front(&com_info()->commands, add_mat_node(tmp[pipe_no], i));
 		pipe_no--;
+		i++;
 	}
 	free_matrix(tmp);
 	com_info()->commands->arg = parse_cenas(com_info()->commands->arg);

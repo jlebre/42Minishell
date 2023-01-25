@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_env.c                                         :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 17:18:35 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/23 15:50:34 by jlebre           ###   ########.fr       */
+/*   Created: 2021/10/30 19:33:11 by nvideira          #+#    #+#             */
+/*   Updated: 2021/10/30 20:41:42 by nvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	free_env(t_env_lst **env)
+void	ft_putstr_fd(char *s, int fd)
 {
-	while ((*env)->next)
+	unsigned int	i;
+
+	i = 0;
+	if (!s || !fd)
+		return ;
+	while (s[i] != '\0')
 	{
-		free((*env)->name);
-		free((*env)->value);
-		(*env)->name = NULL;
-		(*env)->value = NULL;
-		*env = (*env)->next;
+		write(fd, &s[i], 1);
+		i++;
 	}
 }

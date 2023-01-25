@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 17:03:49 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/12 04:48:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/25 00:12:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	ft_ispipe(char s, char c)
 		return (0);
 }
 
-static int	ft_wordcount(const char *str, char c)
+int	ft_wordcount(const char *str, char c)
 {
 	int		words;
 	size_t	i;
@@ -96,18 +96,24 @@ static int	split_it(char const *str, char c, int st, char **ns)
 			break ;
 		if (ft_ispipe(str[i], c) == 0 && ft_ispipe(str[i + 1], c) == 1)
 		{
-			while (ft_space(str[st]) || ft_ispipe(str[st], c))
+			while ((ft_space(str[st]) || ft_ispipe(str[st], c)) && str[st])
 				st++;
 			ns[j] = ft_substr(str, st, (i - st) + 1);
-			if (!ns[j++])
+			if (!ns[j])
 				return (0);
+			j++;
 			st = i + 1;
 		}
 		i++;
 	}
-	ns[j] = NULL;
+	ns[1] = NULL;
 	return (1);
 }
+
+//	Está a dar problemas ao corre o fsanitize
+//	Não está a conseguir pôr o NULL corretamente,
+//	portanto as outras funções não estão a funcionar
+//	quando dependem de (while != NULL)
 
 void	*freematrix(char **ns, int msize)
 {
@@ -134,3 +140,56 @@ char	**ft_split(const char *s, char c)
 		return (freematrix(ns, matlen));
 	return (ns);
 }
+
+/*
+int count_words(char* str, const char* delimiters)
+{
+    int count = 0;
+    int i = 0;
+
+    while (i < ft_strlen(str)) {
+        if (ft_strchr(delimiters, str[i])) {
+            if (str[i - 1] != '\'' && str[i + 1] != '\'') {
+                count++;
+            }
+        }
+        i++;
+    }
+
+    return count;
+}
+
+void split_it(char* str, const char* delimiters, char*** new) {
+    int i;
+    int words = 0;
+    char* start;
+
+    i = 0;
+	words = 0;
+    *new = (char**)malloc(sizeof(char*) * (count_words(str, delimiters) + 1));
+	start = str;
+    while (i < ft_strlen(str))
+	{
+        if (ft_strchr(delimiters, str[i]))
+		{
+            if (str[i - 1] != '\'' && str[i + 1] != '\'')
+			{
+                str[i] = '\0';
+                (*new)[words] = start;
+                words++;
+                start = &str[i + 1];
+            }
+        }
+        i++;
+    }
+    (*new)[words] = start;
+}
+
+char	**ft_split(char *str, char *delimiters)
+{
+	char **new;
+
+	split_it(str, delimiters, &new);
+	return (new);
+}
+*/
