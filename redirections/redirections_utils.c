@@ -1,6 +1,6 @@
-#include "../minishell"
+#include "../minishell.h"
 
-int	matmeasures(char **input, char *set)
+int	ft_matmeasures(char **input, char *set)
 {
 	int	i;
 	int	j;
@@ -63,10 +63,9 @@ int	split_all(char **input, char *set, int start, char ***new)
 				j = find_quotes(input[i], j, 39);
 			if (input[i][j] == '\0')
 				break ;
-
 		}
-		
 	}
+	return (0);
 }
 
 char ***split_redir(char **input, char *set)
@@ -82,7 +81,7 @@ char ***split_redir(char **input, char *set)
 	new = (char ***)malloc(sizeof(char **) * (matlen + 1));
 	if (!new)
 		return (NULL);
-	
+	return (new);
 }
 
 void	do_redir(char **input)
@@ -98,7 +97,7 @@ void	do_redir(char **input)
 	}
 	else
 		waitpid(pid, &com_info()->exit_value, 0);
-	fd_close(com_info()->cmds_done_redir);
+	//fd_close(com_info()->cmds_done_redir);
 	unlink(".heredoc");
 }
 

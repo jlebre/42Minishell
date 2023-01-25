@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:45:00 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/25 19:09:44 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/01/25 19:35:03 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void	parser3(char *input)
 {
 	char		**tmp;
 	int			pipe_no;
-	int			total;
 	int			i;
 	
 	i = 0;
