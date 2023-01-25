@@ -3,32 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:41:42 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/24 15:59:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/25 18:54:16 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-// Alterei a função porque estava a dar leaks ao ser char **
-int	count_redirs(char *input)
+int	count_redirs(char **input)
 {
 	int	i;
+	int	j;
 	int	redir_no;
 
 	i = 0;
 	redir_no = 0;
 	while (input[i])
 	{
-		if (input[i] == '>' || input[i] == '<')
+		j = 0;
+		while (input[i][j])
 		{
-			if ((input[i] == '>' && input[i + 1] == '>')
-				|| (input[i] == '<' && input[i + 1] == '<'))
-				i++;
-			redir_no++;
+			if (input[i][j] == '>' || input[i][j] == '<')
+			{
+				if ((input[i][j] == '>' && input[i][j + 1] == '>')
+					|| (input[i][j] == '<' && input[i][j + 1] == '<'))
+					j++;
+				redir_no++;
+			}
+			j++;
 		}
 		i++;
 	}
@@ -87,6 +91,29 @@ void	check_redir(char **input)
 {
 	int	i;
 	int	j;
+
+	i = 0;
+	while (input[i])
+	{
+		j = 0;
+		while (input[i][j])
+		{
+			if (input[i][j] == '>' || input[i][j] == '<')
+			{
+				com_info()->redir_type = check_redir_type(input[i], j);
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+
+/* void	check_redir(char **input)
+{
+	int	i;
+	int	j;
 	int	type;
 
 	i = 0;
@@ -106,3 +133,4 @@ void	check_redir(char **input)
 		i++;
 	}
 }
+ */

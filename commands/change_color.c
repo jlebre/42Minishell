@@ -12,6 +12,8 @@
 
 #include "../minishell.h"
 
+//	Acho que esta freed
+
 void	change_color_help(void)
 {
 	printf("HELP:\n");
@@ -50,6 +52,7 @@ void	do_change(char **input, int bold)
 	color = ft_strjoin(color, input[1]);
 	color = ft_strjoin(color, "m:");
 	com_info()->color = color;
+	free(color);
 }
 
 void	change_color(char	**input)

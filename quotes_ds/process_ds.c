@@ -40,6 +40,22 @@ char	*change_val(char *input)
 
 // ' and " handling not working properly when there's more than 2
 
+int	count_ds(char *str)
+{
+	int i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 char	**check_ds(char **input)
 {
 	int	i;
@@ -49,22 +65,15 @@ char	**check_ds(char **input)
 		return (input);
 	while (input[i])
 	{
-		if (!ft_strncmp(input[i], "$?", 3) && find_pelicula(input[i]) != 2)
+		if (!ft_strncmp(input[i], "$?", 3))
 			input[i] = ft_itoa(com_info()->exit_value);
-		else if (input[i][0] == '$' && ft_strlen(input[i]) > 1)
-		{
-			printf("2\n");
+		else if (input[i][0] == '$' && ft_strlen(input[i]) > 1
+			&& count_ds(input[i]) == 1)
 			input[i] = ft_strdup(change_val(input[i]));
-		}
-		else if ((ft_strchr(input[i], '$') != 0) && (ft_strlen(input[i]) > 1)
+		else if (count_ds(input[i]) >= 1 && (ft_strlen(input[i]) > 1)
 			&& (find_pelicula(input[i]) == 0))
-		{
-			printf("2\n");
 			input[i] = change_val2(input[i], 0, 0);
-		}
 		i++;
 	}
 	return (input);
 }
-
-//	Why printf 2?

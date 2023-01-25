@@ -58,6 +58,7 @@ typedef struct s_command
 	int					**pip;
 	int					**red;
 	int					cmds_done;
+	int					cmds_done_redir;
 	pid_t				pid;
 	int					fd_in;
 	int					status;
@@ -74,7 +75,7 @@ typedef struct s_command
 	int					redir_no;
 	int					temp_fd;
 	char				**env;
-	int					redir_type_prev;
+	int					redir_type;
 	int					redir_database[100];
 }	t_command;
 
@@ -127,6 +128,7 @@ int						find_es(char *str);
 int						check_if_exists_vars(char *str);
 void					change_value_vars(char *str);
 
+
 //QUOTES
 char 					**process_quotes(char **input);
 char 					**process_peliculas(char **input);
@@ -151,8 +153,6 @@ int						check_quotes(char *commands);
 int						empty_prompt(char *input);
 void					print_matrix(char **matrix);
 void					free_matrix(char **matrix);
-void					*freematrix(char **ns, int msize);
-int						ft_wordcount(const char *str, char c);
 
 void					do_fork(char **input, int type);
 
@@ -167,15 +167,17 @@ void					init_redirs(void);
 void					check_redir(char **input);
 void					redirections(char **input, int i, int j, int type);
 int						heredoc(char *limiter);
-int						count_redirs(char *input);
-
+int						count_redirs(char **input);
+int						verify_redir(char *input);
+void					execute_redir(char **input);
+char 					**split_redir(char **input);
 /*
    ___ ___  __  __ __  __   _   _  _ ___  ___ 
   / __/ _ \|  \/  |  \/  | /_\ | \| |   \/ __|
  | (_| (_) | |\/| | |\/| |/ _ \| .` | |) \__ \
   \___\___/|_|  |_|_|  |_/_/ \_\_|\_|___/|___/
 */
-
+void    				free_all(void);
 void					commands(char **input, char **env, int is_fork);
 void					fork_commands(char **input, char **env, int is_fork);
 
@@ -251,8 +253,10 @@ char					*ft_itoa(int number);
 int						size_of_number(long nb);
 
 //SHELL_SPLIT_UTILS
-int						find_quotes(const char *str, int i, int type);
+int						ft_space(char s);
 void					*freematrix(char **ns, int msize);
+//int					ft_rollback(char const *str, int st);
+int						ft_ispipe(char s, char c);
 
 //UTILS_PIPE
 int						ft_strichr(const char *s, int start, int c);
@@ -269,19 +273,19 @@ void					*ft_memmove(void *dst, const void *src, size_t len);
 void					ft_putstr_fd(char *s, int fd);
 
 //UTILS2
-//char					**ft_split(const char *s, char c);
-char					**ft_split(char *str, char *delimiters);
+char					**ft_split(const char *s, char c);
+int						find_quotes(const char *str, int i, int type);
 int						ft_strcmp(char *s1, char *s2);
 int 					strict_cmp(char *s1, char *s2);
 void					ft_clear(void);
-int						ft_str1chr(const char *s, int c);
+//int					ft_str1chr(const char s, int c);
 int						ft_strchr(const char *s, int c);
 int						ft_atoi(const char *str);
 
 //UTILS3
 char					*ft_strljoin(char const *s1, char const *s2, unsigned int len);
 void					lst_add_front(t_args **lst, t_args *new);
-t_args					*add_mat_node(char *args, int i);
+t_args					*add_mat_node(char *args);
 
 //GET_NEXT_LINE
 char					*get_next_line(int fd);

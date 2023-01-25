@@ -4,3 +4,14 @@
 // echo $b
 // $a
 // but works with exported
+
+a=3
+b=5
+echo $a$b
+$a$b
+35
+
+Redirects
+' e "
+Norminette
+Free()

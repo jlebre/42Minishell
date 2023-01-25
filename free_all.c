@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_mat_node.c                                     :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/04 01:13:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/01/25 18:32:10 by jlebre           ###   ########.fr       */
+/*   Created: 2023/01/25 15:35:18 by jlebre            #+#    #+#             */
+/*   Updated: 2023/01/25 15:37:36 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_args	*add_mat_node(char *args)
+void    free_all(void)
 {
-	t_args	*new_node;
-
-	new_node = malloc(sizeof(t_args));
-	if (!new_node)
-		return (NULL);
-	new_node->arg = ft_split(args, ' ');
-	//new_node->redir_type = com_info()->redir_database[i];
-	new_node->next = NULL;
-	return (new_node);
+    free(com_info()->cmd);
+    free(com_info()->path);
+    free(com_info()->color);
 }

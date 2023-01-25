@@ -6,11 +6,13 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:04:30 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/23 16:37:10 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/01/25 16:31:34 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//	Handle $
 
 void	exported_vars_utils(char *input)
 {

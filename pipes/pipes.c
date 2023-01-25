@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 02:22:13 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/24 15:45:29 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/25 18:28:31 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ void	fd_close(int pos)
 void	execute_pipe(char **input)
 {
 	int	pid;
-	
+
 	pid = fork();
 	if (pid == 0)
 	{
-		//Não queremos que faça o dup se for redirection
 		fd_dup(com_info()->cmds_done);
 		commands(input, com_info()->env, 1);
 	}

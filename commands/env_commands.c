@@ -6,11 +6,13 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/23 18:41:27 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/01/25 15:44:30 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+//	Acho que esta freed
 
 void	env_commands(char **input, char **env)
 {
@@ -22,12 +24,14 @@ void	env_commands(char **input, char **env)
 		ft_error("Command not found: %s\n", input[0]);
 		com_info()->exit_value = 127;
 		catch_signal();
+		free(path);
 		return ;
 	}
 	if (execve(path, input, env) == -1)
 	{
 		com_info()->exit_value = 126;
 		ft_error("Deu Merda\n");
+		free(path);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:57:06 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/24 22:33:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/22 23:16:32 by nvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_matrix(char **matrix)
 	int	i;
 
 	i = 0;
-	while (matrix[i] != NULL)
+	while (matrix[i])
 	{
 		free(matrix[i]);
 		i++;

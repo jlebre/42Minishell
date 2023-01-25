@@ -61,7 +61,7 @@ char	*remove_ds(char *input, int size)
 		return (NULL);
 	while (input[i])
 	{
-		if (input[i] == '$')
+		if (input[i] == '$' && i < size)
 		{
 			i++;
 			while (is_valid(input[i]) && input[i])

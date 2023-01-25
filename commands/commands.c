@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebee <jlebee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/23 29:08:32 by jlebee           ###   ########.fr       */
+/*   Updated: 2023/01/25 18:32:28 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+// Nao tem alocacoes de memoria
+
 void	commands(char **input, char **env, int is_fork)
 {
 	if (input[0])
 	{
-		if (!ft_strncmp(input[0], ">", 1) || !ft_strncmp(input[0], "<", 1))
-			check_redir(input);
 		if (!ft_strncmp(input[0], "echo", 5))
 			ft_echo(input);
 		else if (!ft_strncmp(input[0], "cd", 3))
