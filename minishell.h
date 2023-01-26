@@ -170,7 +170,7 @@ int						heredoc(char *limiter);
 int						count_redirs(char **input);
 int						verify_redir(char *input);
 void					execute_redir(char **input);
-char					***split_redir(char **input, char *set);
+char					***split_redir(char **input);
 /*
    ___ ___  __  __ __  __   _   _  _ ___  ___ 
   / __/ _ \|  \/  |  \/  | /_\ | \| |   \/ __|
