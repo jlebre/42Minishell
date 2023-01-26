@@ -31,13 +31,13 @@ int	count_second_word(char **input, int i)
 	int count;
 
 	count = 0;
+	if (input[i][0] == '>' || input[i][0] == '<')
+		return (1);
 	while (input[i] && input[i][0] != '>' && input[i][0] != '<')
 	{
 		count++;
 		i++;
 	}
-	if (count == 0)
-		return (1);
 	return (count);
 }
 
@@ -84,6 +84,7 @@ void	fill_word(char **input, int i, int nb_words, char **new)
 		j++;
 		i++;
 	}
+	new[j] = NULL;
 }
 
 int	split_all(char **input, char ***new, int matlen)
@@ -91,22 +92,30 @@ int	split_all(char **input, char ***new, int matlen)
 	int		i;
 	int		j;
 	int		nb_words;
+	int		test;
 
 	i = 0;
 	j = 0;
-	printf("NB_ARGS: %i\n", com_info()->nb_args);
 	while (j < matlen)
 	{
+			test = 0;
 		nb_words = count_second_word(input, i);
-		i += nb_words;
-		printf("nb_words[%i]: %i\n", j, nb_words);
+		printf("Len[%i]: %i\n", j, nb_words);
 		new[j] = malloc(sizeof(char *) * (nb_words + 1));
 		if (!new[j])
 			return (0);
-		fill_word(input, i, nb_words,new[j]);
+		printf("i: %i\n", i);
+		fill_word(input, i, nb_words, new[j]);
+		while (test < nb_words)
+		{
+			printf("new[%i][%i]: %s\n", j, test, new[j][test]);
+			test++;
+		}
+		i += nb_words;
 		j++;
+		printf("\n");
 	}
-	new[nb_words] = NULL;
+	new[matlen] = NULL;
 	return (0);
 }
 
@@ -124,7 +133,7 @@ char ***split_redir(char **input)
 	if (!input)
 		return (NULL);
 	matlen = ft_matmeasures(input);
-	printf("Total Len: %i\n", matlen);
+	printf("Total Len: %i\n\n", matlen);
 	new = (char ***)malloc(sizeof(char **) * (matlen + 1));
 	if (!new)
 		return (NULL);
@@ -150,6 +159,18 @@ void	do_redir(char **input)
 	unlink(".heredoc");
 }
 
+/*
+	// Teste do split
+	// How input should look like:
+
+	while (input[i])
+	{
+		printf("input[%i]: %s\n", i, input[i]);
+		i++;
+	}
+	i = 0;
+	*/
+
 void	execute_redir(char **input)
 {
 	char	***new;
@@ -158,16 +179,10 @@ void	execute_redir(char **input)
 
 	i = 0;
 	j = 0;
-	while (input[i])
-	{
-		printf("input[%i]: %s\n", i, input[i]);
-		i++;
-	}
-	com_info()->nb_args = i;
-	i = 0;
 	new = split_redir(input);
 	while (new[i])
 	{
+		j = 0;
 		while (new[i][j])
 		{
 			printf("matrix[%i][%i]: %s\n", i, j, new[i][j]);
