@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/25 18:32:28 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/01/26 02:29:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// Nao tem alocacoes de memoria
-
+// Esta função é chamada para executar os comandos
+// Compara o input com os comandos que temos e chama a função correspondente
+// Se não for nenhum dos comandos, chama a função fork_commands
 void	commands(char **input, char **env, int is_fork)
 {
 	if (input[0])
@@ -39,6 +40,8 @@ void	commands(char **input, char **env, int is_fork)
 	}
 }
 
+// Esta função é chamada para executar os comandos que não são builtins
+// Verifica se está dentro de um fork ou não (por causa dos pipes)
 void	fork_commands(char **input, char **env, int is_fork)
 {
 	int	cenas;

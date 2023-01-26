@@ -163,14 +163,23 @@ void					execute_pipe(char **input);
 void					fd_dup(int i);
 
 //////////////REDIRECTIONS
-void					init_redirs(void);
-void					check_redir(char **input);
+void					execute_redir(char **input);
+void					do_redir(char **input);
 void					redirections(char **input, int i, int j, int type);
+//void					check_redir(char **input);
+int						check_redir_type(char *input);
 int						heredoc(char *limiter);
 int						count_redirs(char **input);
 int						verify_redir(char *input);
-void					execute_redir(char **input);
+//SPLIT REDIR
 char					***split_redir(char **input);
+int						split_all(char **input, char ***new, int matlen);
+void					fill_word(char **input, int i, int nb_words, char **new);
+int						ft_matmeasures(char **input);
+int						count_second_word(char **input, int i);
+int						ft_strstr(char *str, char *set);
+int						get_size(char *input);
+void 					print_matrix_redir(char ***matrix);
 /*
    ___ ___  __  __ __  __   _   _  _ ___  ___ 
   / __/ _ \|  \/  |  \/  | /_\ | \| |   \/ __|
@@ -183,6 +192,7 @@ void					fork_commands(char **input, char **env, int is_fork);
 
 void					env_commands(char **input, char **env);
 char					*find_path(char *cmd, t_env_lst *env_lst);
+char					*find_return_path(char *path, int j, char *cmd);
 
 //CHANGE COLOR
 void					change_color(char	**input);
@@ -197,8 +207,6 @@ void					change_pwd_env(char *type, int size, char *val, char **env);
 
 //ECHO
 void					ft_echo(char **input);
-void					print_vars(char **input);
-void					print_vars2(char **input);
 void					do_print(char **input, int start, int type);
 void					check_flag(char c);
 void					process_flags(char **input, int start);

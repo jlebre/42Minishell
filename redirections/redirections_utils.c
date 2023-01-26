@@ -1,13 +1,13 @@
 #include "../minishell.h"
 
-int	ft_matmeasures(char **input)
+int	count_redirs(char **input)
 {
 	int	i;
 	int	j;
-	int	count;
+	int	redir_no;
 
 	i = 0;
-	count = 1;
+	redir_no = 0;
 	while (input[i])
 	{
 		j = 0;
@@ -15,208 +15,132 @@ int	ft_matmeasures(char **input)
 		{
 			if (input[i][j] == '>' || input[i][j] == '<')
 			{
-				if (input[i][j + 1] == '>' || input[i][j + 1] == '<')
+				if ((input[i][j] == '>' && input[i][j + 1] == '>')
+					|| (input[i][j] == '<' && input[i][j + 1] == '<'))
 					j++;
-				count += 2;
+				redir_no++;
 			}
 			j++;
 		}
 		i++;
 	}
-	return (count);
+	return (redir_no);
 }
 
-int	count_second_word(char **input, int i)
+int	check_redir_type(char *input)
 {
-	int count;
-
-	count = 0;
-	if (input[i][0] == '>' || input[i][0] == '<')
-		return (1);
-	while (input[i] && input[i][0] != '>' && input[i][0] != '<')
+	if (input[0] == '>')
 	{
-		count++;
-		i++;
+		if (input[1] && input[1] == '>')
+			return (1);
+		else
+			return (2);
 	}
-	return (count);
-}
-
-int	ft_strstr(char *str, char *set)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (str[i])
+	else if (input[0] == '<')
 	{
-		j = 0;
-		while (set[j])
-		{
-			if (str[i] == set[j])
-				return (1);
-			j++;
-		}
-		i++;
+		if (input[1] && input[1] == '<')
+			return (3);
+		else
+			return (4);
 	}
 	return (0);
 }
 
-int	get_size(char *input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i] && input[i] != '>' && input[i] != '<')
-		i++;
-	return (i);
-}
-
-void	fill_word(char **input, int i, int nb_words, char **new)
-{
-	int j;
-
-	j = 0;
-	while (j < nb_words)
-	{
-		new[j] = ft_strdup(input[i]);
-		if (!new[j])
-			return ;
-		j++;
-		i++;
-	}
-	new[j] = NULL;
-}
-
-int	split_all(char **input, char ***new, int matlen)
-{
-	int		i;
-	int		j;
-	int		nb_words;
-	int		test;
-
-	i = 0;
-	j = 0;
-	while (j < matlen)
-	{
-			test = 0;
-		nb_words = count_second_word(input, i);
-		printf("Len[%i]: %i\n", j, nb_words);
-		new[j] = malloc(sizeof(char *) * (nb_words + 1));
-		if (!new[j])
-			return (0);
-		printf("i: %i\n", i);
-		fill_word(input, i, nb_words, new[j]);
-		while (test < nb_words)
-		{
-			printf("new[%i][%i]: %s\n", j, test, new[j][test]);
-			test++;
-		}
-		i += nb_words;
-		j++;
-		printf("\n");
-	}
-	new[matlen] = NULL;
-	return (0);
-}
-
-//	Tem de se criar uma função no parser para confirmar se os redir
-//	estão rodeados por espaços! Para o input vir "ls > a.txt" em vez de 
-//	"ls>a.txt"
-
-//	O split está feito a contar que as coisas vêm bem separadas
-
-char ***split_redir(char **input)
-{
-	char	***new;
-	int		matlen;
-
-	if (!input)
-		return (NULL);
-	matlen = ft_matmeasures(input);
-	printf("Total Len: %i\n\n", matlen);
-	new = (char ***)malloc(sizeof(char **) * (matlen + 1));
-	if (!new)
-		return (NULL);
-	split_all(input, new, matlen);
-	new[matlen] = NULL;
-	return (new);
-}
-
-void	do_redir(char **input)
-{
-	int	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		//	Como por o i e o j
-		//	redirections(new[i], i, j, com_info()->redir_type);
-		commands(input, com_info()->env, 1);
-	}
-	else
-		waitpid(pid, &com_info()->exit_value, 0);
-	//fd_close(com_info()->cmds_done_redir);
-	unlink(".heredoc");
-}
-
 /*
-	// Teste do split
-	// How input should look like:
-
-	while (input[i])
-	{
-		printf("input[%i]: %s\n", i, input[i]);
-		i++;
-	}
-	i = 0;
-	*/
-
-void	execute_redir(char **input)
+int	check_redir_type(char *input, int j)
 {
-	char	***new;
-	int 	i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	new = split_redir(input);
-	while (new[i])
+	if (input[j] == '>')
 	{
-		j = 0;
-		while (new[i][j])
-		{
-			printf("matrix[%i][%i]: %s\n", i, j, new[i][j]);
-			j++;
-		}
-		//do_redir(new[i]);
-		i++;
+		if (input[j + 1] == '>')
+			return (1);
+		else
+			return (2);
 	}
-}
-
-/*
-int	split_all(char **input, int start, char ***new)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (input[i])
+	else if (input[j] == '<')
 	{
-		// while (input[i][j] && !ft_strchr(set, input[i][j]))
-		// 	j++;
-		while (input[i][j])
-		{
-			if (input[i][j] == 34)
-				j = find_quotes(input[i], j, 34);
-			if (input[i][j] == 39)
-				j = find_quotes(input[i], j, 39);
-			if (input[i][j] == '\0')
-				break ;
-		}
+		if (input[j + 1] == '<')
+			return (3);
+		else
+			return (4);
 	}
 	return (0);
 }
 */
+
+void	redirections(char **input, int i, int j, int type)
+{
+	int		fd;
+	char	*file;
+
+	if (input[i + 1] && input[i + 1] == input[i])
+		perror("minishell: syntax error near unexpected token");
+	if (((type == 1 || type == 3) && input[i][j + 2] != '\0'))
+		file = ft_substr(input[i], j + 2, ft_strlen(input[i]));
+	else if ((type == 2 || type == 4) && input[i][j + 1] != '\0')
+		file = ft_substr(input[i], j + 1, ft_strlen(input[i]));
+	else
+		file = ft_substr(input[i + 1], 0, ft_strlen(input[i + 1]));
+	if (type == 1)
+		fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	else if (type == 2)
+		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	else if (type == 4)
+		fd = open(file, O_RDONLY);
+	else if (type == 3)
+		fd = heredoc(file);
+	if (type == 1 || type == 2)
+		dup2(fd, STDOUT_FILENO);
+	else if (type == 4 || type == 3)
+		dup2(fd, STDIN_FILENO);
+	close(fd);
+	free(file);
+}
+
+/*
+void	check_redir(char **input)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (input[i])
+	{
+		j = 0;
+		while (input[i][j])
+		{
+			if (input[i][j] == '>' || input[i][j] == '<')
+			{
+				com_info()->redir_type = check_redir_type(input[i], j);
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+*/
+
+/* void	check_redir(char **input)
+{
+	int	i;
+	int	j;
+	int	type;
+
+	i = 0;
+	type = 0;
+	while (input[i])
+	{
+		j = 0;
+		while (input[i][j])
+		{
+			if (input[i][j] == '>' || input[i][j] == '<')
+			{
+				type = check_redir_type(input[i], j);
+				redirections(input, i, j, type);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+ */

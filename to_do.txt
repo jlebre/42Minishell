@@ -5,11 +5,11 @@
 // $a
 // but works with exported
 
-a=3
-b=5
-echo $a$b
-$a$b
-35
+Quando se volta a dar um valor a uma exported var já definida,
+fica com um '=' antes
+Fiz umas alterações no export por causa da Norminette e deve ser por isso
+
+TO DO:
 
 Redirects
 ' e "

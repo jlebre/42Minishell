@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:45:00 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/25 19:35:03 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/01/26 01:47:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	parser2(char *input)
 		ft_error("minishell: syntax error: unclosed quotes\n");
 		return ;
 	}
-	if (check_xor(input))
+	if (check_xor(input)) // Se a seguir a > estiver um |, dá o mesmo erro
 	{
 		ft_error("minishell: syntax error near unexpected token `|'\n");
 		return ;
@@ -95,6 +95,13 @@ void	parser2(char *input)
 		ft_error("minishell: syntax error near unexpected token `'\n");
 		return ;
 	}
+	/*
+	if () // Se a seguir a > estiver \n dá erro
+	{
+		ft_error("minishell: syntax error near unexpected token `newline'\n");
+		return ;
+	}
+	*/
 	parser3(input);
 }
 

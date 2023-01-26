@@ -46,7 +46,8 @@ SRC = \
 	quotes_ds/process_quotes.c quotes_ds/process_ds_utils.c \
 	\
 	redirections/redirections.c redirections/heredoc.c \
-	redirections/redirections_utils.c
+	redirections/redirections_utils.c redirections/split_redirs.c \
+	redirections/split_redirs_utils.c
 	
 OBJ = $(SRC:.c=.o)
 
