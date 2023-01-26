@@ -109,7 +109,6 @@ t_env_lst				*ft_lstlast(t_env_lst *lst);
 void					lst_add_back(t_env_lst **lst, t_env_lst *new);
 
 char					**lst_to_env(void);
-void					change_value(char *str);
 
 //FREE ENV
 void					free_env(t_env_lst **env);
@@ -125,9 +124,6 @@ char					**parse_cenas(char **arg);
 int						count_args(char **matrix);
 void					exported_vars(char **input);
 int						find_es(char *str);
-int						check_if_exists_vars(char *str);
-void					change_value_vars(char *str);
-
 
 //QUOTES
 char 					**process_quotes(char **input);
@@ -201,6 +197,7 @@ void					change_color_help(void);
 
 //CD
 void					ft_cd(char **input, char **env);
+void					do_cd(char *new_dir, char *new_pwd, char **env);
 void					change_pwd(char *type, char *str, char **env);
 int						cd_errors(char **input);
 void					change_pwd_env(char *type, int size, char *val, char **env);
@@ -223,10 +220,8 @@ void					exit_errors(int error, char **input);
 
 //EXPORT
 void					*ft_export(char **input);
-void					change_value(char *str);
-void					change_value2(char *str);
-int						check_if_exists(char *str);
-int						check_if_exists2(char *str);
+void					change_value(char *str, t_env_lst *lst);
+int						check_if_exists(char *str, t_env_lst *lst);
 void					print_exported(char **input);
 void 					check_export(char *input);
 t_env_lst				*sort_list(t_env_lst *curr);

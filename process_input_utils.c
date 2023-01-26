@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:04:30 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/26 02:24:58 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/26 03:03:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@
 // Adiciona à lista de variáveis
 void	exported_vars_utils(char *input)
 {
-	if (check_if_exists(input) && !check_if_exists_vars(input))
+	if (check_if_exists(input, com_info()->env_lst) 
+		&& !check_if_exists(input, com_info()->vars))
 	{
-		change_value(input);
+		change_value(input, com_info()->env_lst);
 		lst_add_back(&com_info()->vars, new_node(input));
 	}
-	else if (check_if_exists_vars(input))
-		change_value_vars(input);
+	else if (check_if_exists(input, com_info()->vars))
+		change_value(input, com_info()->vars);
 	else
 		lst_add_back(&com_info()->vars, new_node(input));
 }

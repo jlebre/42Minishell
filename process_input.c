@@ -6,14 +6,20 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/26 02:11:22 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/26 03:13:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Temos de fazer um check se há alguma coisa a seguir as redir
-
+// Processa o input
+// Enquanto houver comandos:
+// Se o comando tiver um sinal de '=', chama a função exported_vars
+// Se o comando tiver um sinal de redirecionamento, chama a função execute_redir
+// Se o comando tiver um sinal de pipe, chama a função execute_pipe
+// Se não, chama a função commands
+// Incrementa o número de comandos feitos
+// Avança para o próximo comando
 void	process_input(char **env)
 {
 	while (com_info()->commands)
