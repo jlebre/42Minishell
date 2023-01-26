@@ -12,3 +12,11 @@ Aspas acho que está feito
 Redirects a funcionar de maneira rudimentar
 Norminette quase (ainda vamos mexer em coisas)
 Problema do b=$a resolvido
+
+TESTES:
+uname -mrs > uname.log
+cat uname.log
+whoami >> uname.log
+
+ls > a.txt
+wc - l < a.txt

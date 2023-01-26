@@ -68,13 +68,14 @@ int	check_redir_type(char *input, int j)
 }
 */
 
+// Faz as redireções e as duplicações de file descriptors
+// O que se faz quando tem vários argumentos a seguir ao redirecionador?
 void	redirections(char **arquivo, int type)
 {
 	int		fd;
 	char 	*file;
-	
+
 	file = arquivo[0];
-	printf("file: %s\n", file);
 	if (type == 1)
 		fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	else if (type == 2)
