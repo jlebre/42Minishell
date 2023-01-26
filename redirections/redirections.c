@@ -6,21 +6,21 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:41:42 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/26 04:44:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/26 05:35:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	do_redir(char **input)
+void	do_redir(char **before, char **after)
 {
 	int	pid;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		//redirections(new[i], i, j, com_info()->redir_type);
-		commands(input, com_info()->env, 1);
+		redirections(after, com_info()->redir_type);
+		commands(before, com_info()->env, 1);
 	}
 	else
 		waitpid(pid, &com_info()->exit_value, 0);
@@ -29,18 +29,22 @@ void	do_redir(char **input)
 	unlink(".heredoc");
 }
 
-// Executa as redireções	
+// Executa as redireções.
+// Se i for impar, é o tipo de redireção.
+// Se i for par, é o arquivo.
 void	execute_redir(char **input)
 {
 	char	***new;
 	int i;
 
-	i = 0;
+	i = 1;
 	new = split_redir(input);
-	print_matrix_redir(new);
-	while (new[i])
+	//print_matrix_redir(new);
+	while (i < com_info()->redir_no * 2)
 	{
-		do_redir(new[i]);
-		i++;
+		if (i % 2 != 0)
+			com_info()->redir_type = check_redir_type(new[i][0]);
+		do_redir(new[i - 1], new[i + 1]);
+		i += 2;
 	}
 }

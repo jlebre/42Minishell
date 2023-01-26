@@ -28,7 +28,7 @@ char ***split_redir(char **input)
 	if (!input)
 		return (NULL);
 	matlen = ft_matmeasures(input);
-	printf("Total Len: %i\n\n", matlen);
+	//printf("Total Len: %i\n\n", matlen);
 	new = (char ***)malloc(sizeof(char **) * (matlen + 1));
 	if (!new)
 		return (NULL);
@@ -43,28 +43,28 @@ int	split_all(char **input, char ***new, int matlen)
 	int		i;
 	int		j;
 	int		nb_words;
-	int		test;
+	//int		test;
 
 	i = 0;
 	j = 0;
 	while (j < matlen)
 	{
-			test = 0;
+		//test = 0;
 		nb_words = count_second_word(input, i);
-		printf("Len[%i]: %i\n", j, nb_words);
+		//printf("Len[%i]: %i\n", j, nb_words);
 		new[j] = malloc(sizeof(char *) * (nb_words + 1));
 		if (!new[j])
 			return (0);
-		printf("i: %i\n", i);
+		//printf("i: %i\n", i);
 		fill_word(input, i, nb_words, new[j]);
-		while (test < nb_words)
-		{
-			printf("new[%i][%i]: %s\n", j, test, new[j][test]);
-			test++;
-		}
+		//while (test < nb_words)
+		//{
+			//printf("new[%i][%i]: %s\n", j, test, new[j][test]);
+			//test++;
+		//}
 		i += nb_words;
 		j++;
-		printf("\n");
+		//printf("\n");
 	}
 	new[matlen] = NULL;
 	return (0);

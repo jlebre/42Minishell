@@ -175,8 +175,10 @@ void					fd_close(int pos);
  |   / _|| |) | ||   /
  |_|_\___|___/___|_|_\*/
 void					execute_redir(char **input);
-void					do_redir(char **input);
-void					redirections(char **input, int i, int j, int type);
+//void					do_redir(char **input);
+void					do_redir(char **before, char **after);
+//void					redirections(char **input, int i, int j, int type);
+void					redirections(char **arquivo, int type);
 int						check_redir_type(char *input);
 int						heredoc(char *limiter);
 int						count_redirs(char **input);
