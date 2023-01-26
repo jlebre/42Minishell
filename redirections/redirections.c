@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:41:42 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/26 02:01:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/26 03:24:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	do_redir(char **input)
 	unlink(".heredoc");
 }
 
+// Executa as redireções	
 void	execute_redir(char **input)
 {
 	char	***new;

@@ -19,24 +19,28 @@
 # include <string.h>
 # include <stdarg.h>
 # include <fcntl.h>
-/////////////////////////////////////////////////
+//
 # include <signal.h>
-/////////////////////////////////////////////////
+//
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
-/////////////////////////////////////////////////
+//
 # include <dirent.h>
-/////////////////////////////////////////////////
+//
 # include <readline/readline.h>
 # include <readline/history.h>
-///////////////////////////////////////////////// PIPEX
+// PIPEX
 # include <fcntl.h>
 # include <errno.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
 
+/*___ _____ ___ _   _  ___ _____ ___ 
+ / __|_   _| _ \ | | |/ __|_   _/ __|
+ \__ \ | | |   / |_| | (__  | | \__ \
+ |___/ |_| |_|_\\___/ \___| |_| |___/*/
 typedef struct s_env_lst
 {
 	char				*name;
@@ -83,9 +87,8 @@ typedef struct s_command
  |  \/  |_ _| \| |_ _/ __| || | __| |  | |   
  | |\/| || || .` || |\__ \ __ | _|| |__| |__ 
  |_|  |_|___|_|\_|___|___/_||_|___|____|____|*/
-
-//COMMAND INFO - So you can acess the list in any part of the program
 t_command				*com_info(void);
+void    				free_all(void);
 
 //INIT SHELL
 void					init_shell(char **env);
@@ -107,7 +110,6 @@ t_env_lst				*env_to_lst(char **env);
 t_env_lst				*new_node(char *env);
 t_env_lst				*ft_lstlast(t_env_lst *lst);
 void					lst_add_back(t_env_lst **lst, t_env_lst *new);
-
 char					**lst_to_env(void);
 
 //FREE ENV
@@ -122,8 +124,16 @@ void					free_env(t_env_lst **env);
 void					process_input(char **env);
 char					**parse_cenas(char **arg);
 int						count_args(char **matrix);
+
+//EXPORTED VARS
 void					exported_vars(char **input);
+void					exported_vars_utils(char *input);
 int						find_es(char *str);
+int						cds(char *input, t_env_lst *temp);
+char					*remove_ds(char *input, int size);
+char					*create_new(char *input, int i, int j, char *name);
+int						is_valid(char c);
+int						count_ds(char *str);
 
 //QUOTES
 char 					**process_quotes(char **input);
@@ -150,23 +160,28 @@ int						empty_prompt(char *input);
 void					print_matrix(char **matrix);
 void					free_matrix(char **matrix);
 
-void					do_fork(char **input, int type);
-
-//////////////PIPES
+/*___ ___ ___ ___ ___ 
+ | _ \_ _| _ \ __/ __|
+ |  _/| ||  _/ _|\__ \
+ |_| |___|_| |___|___/*/
 void					init_pipes(void);
 void					do_pipes(char **input);
 void					execute_pipe(char **input);
 void					fd_dup(int i);
+void					fd_close(int pos);
 
-//////////////REDIRECTIONS
+/*___ ___ ___ ___ ___ 
+ | _ \ __|   \_ _| _ \
+ |   / _|| |) | ||   /
+ |_|_\___|___/___|_|_\*/
 void					execute_redir(char **input);
 void					do_redir(char **input);
 void					redirections(char **input, int i, int j, int type);
-//void					check_redir(char **input);
 int						check_redir_type(char *input);
 int						heredoc(char *limiter);
 int						count_redirs(char **input);
 int						verify_redir(char *input);
+
 //SPLIT REDIR
 char					***split_redir(char **input);
 int						split_all(char **input, char ***new, int matlen);
@@ -176,16 +191,16 @@ int						count_second_word(char **input, int i);
 int						ft_strstr(char *str, char *set);
 int						get_size(char *input);
 void 					print_matrix_redir(char ***matrix);
-/*
-   ___ ___  __  __ __  __   _   _  _ ___  ___ 
+
+/* ___ ___  __  __ __  __   _   _  _ ___  ___ 
   / __/ _ \|  \/  |  \/  | /_\ | \| |   \/ __|
  | (_| (_) | |\/| | |\/| |/ _ \| .` | |) \__ \
   \___\___/|_|  |_|_|  |_/_/ \_\_|\_|___/|___/
 */
-void    				free_all(void);
 void					commands(char **input, char **env, int is_fork);
 void					fork_commands(char **input, char **env, int is_fork);
 
+//DEFAULT COMMANDS
 void					env_commands(char **input, char **env);
 char					*find_path(char *cmd, t_env_lst *env_lst);
 char					*find_return_path(char *path, int j, char *cmd);
@@ -244,7 +259,6 @@ void					check_unset(char *input);
  | | | |_   _|_ _| |  / __|
  | |_| | | |  | || |__\__ \
   \___/  |_| |___|____|___/*/
-
 //FT_ERROR
 void					ft_error(char *err, ...);
 int						ft_putchar_fde(char c, int fd);
@@ -258,7 +272,6 @@ int						size_of_number(long nb);
 //SHELL_SPLIT_UTILS
 int						ft_space(char s);
 void					*freematrix(char **ns, int msize);
-//int					ft_rollback(char const *str, int st);
 int						ft_ispipe(char s, char c);
 
 //UTILS_PIPE
@@ -294,11 +307,11 @@ t_args					*add_mat_node(char *args);
 char					*get_next_line(int fd);
 void 					ft_putnbr_fd(int n, int fd);
 void					ft_putchar_fd(char c, int fd);
+
 /* ___ ___  _    ___  ___  ___ 
   / __/ _ \| |  / _ \| _ \/ __|
  | (_| (_) | |_| (_) |   /\__ \
   \___\___/|____\___/|_|_\|___/*/
-
 //NORMAL COLORS
 int						black(char *str);
 int						red(char *str);

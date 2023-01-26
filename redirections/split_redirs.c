@@ -18,6 +18,8 @@
 
 //	O split está feito a contar que as coisas vêm bem separadas
 
+// Função para fazer o split dos redirecionamentos
+// Faz a primeira alocação de memória para a matriz
 char ***split_redir(char **input)
 {
 	char	***new;
@@ -35,6 +37,7 @@ char ***split_redir(char **input)
 	return (new);
 }
 
+// Faz a segunda alocação de memória para a matriz
 int	split_all(char **input, char ***new, int matlen)
 {
 	int		i;
@@ -67,6 +70,7 @@ int	split_all(char **input, char ***new, int matlen)
 	return (0);
 }
 
+// Preenche a matriz com as palavras
 void	fill_word(char **input, int i, int nb_words, char **new)
 {
 	int j;

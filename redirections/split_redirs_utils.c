@@ -12,6 +12,7 @@
 
 #include "../minishell.h"
 
+// Conta o número de char** que serão alocadas na matriz
 int	ft_matmeasures(char **input)
 {
 	int	i;
@@ -38,6 +39,7 @@ int	ft_matmeasures(char **input)
 	return (count);
 }
 
+// Conta o número de palavras que serão alocadas na matriz
 int	count_second_word(char **input, int i)
 {
 	int count;
@@ -53,6 +55,7 @@ int	count_second_word(char **input, int i)
 	return (count);
 }
 
+// Verifica se o char está contido no set
 int	ft_strstr(char *str, char *set)
 {
 	int	i;
@@ -73,6 +76,7 @@ int	ft_strstr(char *str, char *set)
 	return (0);
 }
 
+// Retorna o tamanho da string até o próximo redirect
 int	get_size(char *input)
 {
 	int	i;
@@ -83,10 +87,11 @@ int	get_size(char *input)
 	return (i);
 }
 
-void print_matrix_redir(char ***matrix)
+// Imprime a matriz
+void	print_matrix_redir(char ***matrix)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;

@@ -12,6 +12,34 @@
 
 #include "minishell.h"
 
+// Processa o $.
+// Se for $? retorna o exit value.
+// Se input[i][0] for $ e tiver mais que 1 char e tiver apenas 1 $,
+// altera o valor com a funcao change_val.
+// Se tiver 1 ou mais $ altera o valor com a funcao change_val2.
+char	**check_ds(char **input)
+{
+	int	i;
+
+	i = 1;
+	if (!input[1])
+		return (input);
+	while (input[i])
+	{
+		if (!ft_strncmp(input[i], "$?", 3))
+			input[i] = ft_itoa(com_info()->exit_value);
+		else if (input[i][0] == '$' && ft_strlen(input[i]) > 1
+			&& count_ds(input[i]) == 1)
+			input[i] = ft_strdup(change_val(input[i]));
+		else if (count_ds(input[i]) >= 1 && (ft_strlen(input[i]) > 1)
+			&& (find_pelicula(input[i]) == 0))
+			input[i] = change_val2(input[i], 0, 0);
+		i++;
+	}
+	return (input);
+}
+
+// Altera o valor da variavel quando tiver apenas 1 $.
 char	*change_val(char *input)
 {
 	t_env_lst	*temp;
@@ -38,8 +66,39 @@ char	*change_val(char *input)
 	return ("");
 }
 
+// Altera o valor da variavel quando tiver um ou mais $.
+// Se tiver só 1 $, é porque está no meio da string.
+char	*change_val2(char *input, int i, int j)
+{
+	char		*name;
+
+	while (input[i])
+	{
+		if (input[i] == '$')
+		{
+			i++;
+			while (is_valid(input[i]))
+			{
+				i++;
+				j++;
+			}
+			name = ft_substr(input, (i - j - 1), (j + 1));
+			if (cds(name, com_info()->env_lst) || cds(name, com_info()->vars))
+				input = create_new(input, i, j, name);
+			else
+				input = remove_ds(input, ft_strlen(name));
+			i = 0;
+			j = 0;
+		}
+		else
+			i++;
+	}
+	return (input);
+}
+
 // ' and " handling not working properly when there's more than 2
 
+// Conta o numero de $ na string
 int	count_ds(char *str)
 {
 	int i;
@@ -54,26 +113,4 @@ int	count_ds(char *str)
 		i++;
 	}
 	return (count);
-}
-
-char	**check_ds(char **input)
-{
-	int	i;
-
-	i = 1;
-	if (!input[1])
-		return (input);
-	while (input[i])
-	{
-		if (!ft_strncmp(input[i], "$?", 3))
-			input[i] = ft_itoa(com_info()->exit_value);
-		else if (input[i][0] == '$' && ft_strlen(input[i]) > 1
-			&& count_ds(input[i]) == 1)
-			input[i] = ft_strdup(change_val(input[i]));
-		else if (count_ds(input[i]) >= 1 && (ft_strlen(input[i]) > 1)
-			&& (find_pelicula(input[i]) == 0))
-			input[i] = change_val2(input[i], 0, 0);
-		i++;
-	}
-	return (input);
 }

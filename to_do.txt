@@ -1,16 +1,6 @@
-// Doesn't work
-// a=3
-// b=$a
-// echo $b
-// $a
-// but works with exported
-
-Quando se volta a dar um valor a uma exported var já definida,
-fica com um '=' antes
-Fiz umas alterações no export por causa da Norminette e deve ser por isso
+command < input.txt > output.txt
 
 TO DO:
-
 Redirects
 ' e "
 Norminette

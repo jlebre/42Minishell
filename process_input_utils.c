@@ -6,33 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:04:30 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/26 03:03:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/26 03:53:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// Se já existir a variável no exported, mas não existir na lista de variáveis:
-// Altera o valor no exported e adiciona à lista de variáveis
-
-// Se já existir a variável na lista de variáveis:
-// Altera o valor na lista de variáveis
-
-// Se não existir a variável em lado nenhum:
-// Adiciona à lista de variáveis
-void	exported_vars_utils(char *input)
-{
-	if (check_if_exists(input, com_info()->env_lst) 
-		&& !check_if_exists(input, com_info()->vars))
-	{
-		change_value(input, com_info()->env_lst);
-		lst_add_back(&com_info()->vars, new_node(input));
-	}
-	else if (check_if_exists(input, com_info()->vars))
-		change_value(input, com_info()->vars);
-	else
-		lst_add_back(&com_info()->vars, new_node(input));
-}
 
 // Se o primeiro caracter for igual a '=':
 // Erro
@@ -54,6 +32,8 @@ void	exported_vars(char **input)
 	}
 	while (input[i])
 	{
+		if (ft_strchr(input[i], '$'))
+			input[i] = ft_strdup(change_val2(input[i], 0, 0));
 		if (ft_strchr(input[i], '='))
 			exported_vars_utils(input[i]);
 		else
@@ -61,6 +41,28 @@ void	exported_vars(char **input)
 		i++;
 	}
 	return ;
+}
+
+// Se já existir a variável no exported, mas não existir na lista de variáveis:
+// Altera o valor no exported e adiciona à lista de variáveis
+
+// Se já existir a variável na lista de variáveis:
+// Altera o valor na lista de variáveis
+
+// Se não existir a variável em lado nenhum:
+// Adiciona à lista de variáveis
+void	exported_vars_utils(char *input)
+{
+	if (check_if_exists(input, com_info()->env_lst) 
+		&& !check_if_exists(input, com_info()->vars))
+	{
+		change_value(input, com_info()->env_lst);
+		lst_add_back(&com_info()->vars, new_node(input));
+	}
+	else if (check_if_exists(input, com_info()->vars))
+		change_value(input, com_info()->vars);
+	else
+		lst_add_back(&com_info()->vars, new_node(input));
 }
 
 // Find Equal Sign
