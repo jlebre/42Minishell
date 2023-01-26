@@ -96,30 +96,6 @@ void	redirections(char **input, int i, int j, int type)
 	free(file);
 }
 
-/*
-void	check_redir(char **input)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (input[i])
-	{
-		j = 0;
-		while (input[i][j])
-		{
-			if (input[i][j] == '>' || input[i][j] == '<')
-			{
-				com_info()->redir_type = check_redir_type(input[i], j);
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-*/
-
 /* void	check_redir(char **input)
 {
 	int	i;

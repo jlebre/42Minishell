@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:41:42 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/26 03:24:05 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/26 04:44:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	do_redir(char **input)
 	pid = fork();
 	if (pid == 0)
 	{
-		//	Como por o i e o j?
-		//	redirections(new[i], i, j, com_info()->redir_type);
+		//redirections(new[i], i, j, com_info()->redir_type);
 		commands(input, com_info()->env, 1);
 	}
 	else

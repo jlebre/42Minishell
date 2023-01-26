@@ -21,9 +21,7 @@ char	**check_ds(char **input)
 {
 	int	i;
 
-	i = 1;
-	if (!input[1])
-		return (input);
+	i = 0;
 	while (input[i])
 	{
 		if (!ft_strncmp(input[i], "$?", 3))
@@ -31,8 +29,7 @@ char	**check_ds(char **input)
 		else if (input[i][0] == '$' && ft_strlen(input[i]) > 1
 			&& count_ds(input[i]) == 1)
 			input[i] = ft_strdup(change_val(input[i]));
-		else if (count_ds(input[i]) >= 1 && (ft_strlen(input[i]) > 1)
-			&& (find_pelicula(input[i]) == 0))
+		else if (count_ds(input[i]) >= 1 && (ft_strlen(input[i]) > 1))
 			input[i] = change_val2(input[i], 0, 0);
 		i++;
 	}
@@ -66,6 +63,15 @@ char	*change_val(char *input)
 	return ("");
 }
 
+// Salta as aspas simples.
+int	skip_quotes_ds(char *input, int i, char c)
+{
+	i++;
+	while (input[i] && input[i] != c)
+		i++;
+	return (i);
+}
+
 // Altera o valor da variavel quando tiver um ou mais $.
 // Se tiver só 1 $, é porque está no meio da string.
 char	*change_val2(char *input, int i, int j)
@@ -74,6 +80,8 @@ char	*change_val2(char *input, int i, int j)
 
 	while (input[i])
 	{
+		if (input[i] == '\'')
+			i = skip_quotes_ds(input, i, '\'');
 		if (input[i] == '$')
 		{
 			i++;

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:45:00 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/26 01:47:38 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/26 05:04:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,34 +103,6 @@ void	parser2(char *input)
 	}
 	*/
 	parser3(input);
-}
-
-int count_redir_pipe(char *input)
-{
-	int i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (input[i])
-	{
-		if (input[i] == '|' && input[i + 1] != '|')
-			count++;
-		else if (input[i] == '>')
-		{
-			if (input[i + 1] == '>')
-				i++;
-			count++;
-		}
-		else if (input[i] == '<')
-		{
-			if (input[i + 1] == '<')
-				i++;
-			count++;
-		}
-		i++;
-	}
-	return (count);
 }
 
 void	parser3(char *input)

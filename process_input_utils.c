@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:04:30 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/26 03:53:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/26 04:21:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	exported_vars(char **input)
 	}
 	while (input[i])
 	{
-		if (ft_strchr(input[i], '$'))
-			input[i] = ft_strdup(change_val2(input[i], 0, 0));
 		if (ft_strchr(input[i], '='))
 			exported_vars_utils(input[i]);
 		else

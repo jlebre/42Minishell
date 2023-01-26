@@ -181,6 +181,7 @@ int						check_redir_type(char *input);
 int						heredoc(char *limiter);
 int						count_redirs(char **input);
 int						verify_redir(char *input);
+int						is_redir(char c);
 
 //SPLIT REDIR
 char					***split_redir(char **input);
