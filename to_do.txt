@@ -1,7 +1,7 @@
 command < input.txt > output.txt
 
 TO DO:
-Redirects
+Função no Parser para ir ls > a.out e não ls>a.out (split só funciona assim)
 Norminette
 Free()
 Apagar funções e variáveis que não estão a ser usadas
@@ -9,7 +9,7 @@ Apagar funções e variáveis que não estão a ser usadas
 UPDATE:
 Split dos redirects a funcionar
 Aspas acho que está feito
-Redirects a funcionar de maneira rudimentar
+Redirects a funcionar (não testei Heredoc)
 Norminette quase (ainda vamos mexer em coisas)
 Problema do b=$a resolvido
 
