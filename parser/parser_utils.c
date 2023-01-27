@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:56:15 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/25 16:51:50 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/01/26 22:29:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,43 @@ int	verify_redir(char *input)
 			j = i + 1;
 			while (input[j] && ft_space(input[j]))
 				j++;
-			if (input[j] != input[i] && (input[j] == '>' || input[j] == '<' || input[j] == '|'))
+			if (input[j] != input[i] && (input[j] == '>'
+					|| input[j] == '<' || input[j] == '|'))
 				return (0);
 			j++;
 		}
 		i++;
 	}
 	return (1);
+}
+
+int	check_xor(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '|')
+		{
+			if (input[i + 1] == '|')
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	check_and(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '&')
+			return (1);
+		i++;
+	}
+	return (0);
 }

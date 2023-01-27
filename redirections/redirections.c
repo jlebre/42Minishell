@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:41:42 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/26 05:35:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/27 00:17:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,56 @@ void	do_redir(char **before, char **after)
 	}
 	else
 		waitpid(pid, &com_info()->exit_value, 0);
-	// E preciso dar close?
-	//fd_close(com_info()->cmds_done_redir);
 	unlink(".heredoc");
 }
+
+/*
+void	fd_dup_redir(int fd, int type)
+{
+	if (type == 1)
+		dup2(fd, 1);
+	else if (type == 2)
+		dup2(fd, 0);
+	else if (type == 3)
+		dup2(fd, 1);
+	else if (type == 4)
+		dup2(fd, 0);
+}
+
+void	redirections(char **input, int type)
+{
+	int	fd;
+
+	if (type == 1)
+		fd = open(input[0], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (type == 2)
+		fd = open(input[0], O_RDONLY);
+	else if (type == 3)
+		fd = open(input[0], O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else if (type == 4)
+		fd = open(".heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd_dup_redir(fd, type);
+}
+*/
+
+void	options(char ***new, int i)
+{
+	if (check_redir_type(new[i][0]) <= 2)
+		close(open(new[i + 1][0], O_CREAT, 0644));
+	else
+	{
+		if (check_file_access(new[i + 1][0]))
+			return ;
+		else
+		{	
+			com_info()->redir_type = check_redir_type(new[i][0]);
+			do_redir(new[0], new[i + 1]);
+		}
+	}
+}
+
+// E preciso dar close?
+//fd_close(com_info()->cmds_done_redir);
 
 // Executa as redireções.
 // Se i for impar, é o tipo de redireção.
@@ -35,16 +81,39 @@ void	do_redir(char **before, char **after)
 void	execute_redir(char **input)
 {
 	char	***new;
-	int i;
+	int		i;
 
 	i = 1;
 	new = split_redir(input);
-	//print_matrix_redir(new);
-	while (i < com_info()->redir_no * 2)
+	if (com_info()->redir_no > 1)
 	{
-		if (i % 2 != 0)
-			com_info()->redir_type = check_redir_type(new[i][0]);
-		do_redir(new[i - 1], new[i + 1]);
-		i += 2;
+		while (i < com_info()->redir_no * 2 - 2)
+		{
+			options(new, i);
+			i += 2;
+		}
 	}
+	com_info()->redir_type = check_redir_type(new[i][0]);
+	do_redir(new[0], new[i + 1]);
+}
+	// while (i < com_info()->redir_no * 2)
+	// {
+	// 	com_info()->redir_type = check_redir_type(new[i][0]);
+	// 	do_redir(new[i - 1], new[i + 1]);
+	// 	i += 2;
+	// }
+
+int	check_file_access(char *file)
+{
+	if (access(file, F_OK))
+	{
+		ft_error("%s: No such file or directory\n", file);
+		return (1);
+	}
+	else if (access(file, R_OK))
+	{
+		ft_error("%s: Permission denied\n", file);
+		return (1);
+	}
+	return (0);
 }
