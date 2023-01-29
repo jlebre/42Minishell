@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:45:00 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/26 22:30:35 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/29 23:02:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ char	**parse_cenas(char **arg)
 	arg = check_ds(arg);
 	arg = process_peliculas(arg);
 	return (arg);
+}
+
+char	*parse_input(char *input)
+{
+	input = put_spaces(input);
+	return (input);
 }
 
 void	parser(char *input)
@@ -44,6 +50,7 @@ void	parser(char *input)
 
 void	parser2(char *input)
 {
+	input = parse_input(input);
 	if (check_quotes(input))
 	{
 		ft_error("minishell: syntax error: unclosed quotes\n");
@@ -64,17 +71,10 @@ void	parser2(char *input)
 		ft_error("minishell: syntax error near unexpected token `'\n");
 		return ;
 	}
+	if (!verify_redir_2(input))
+		return ;
 	parser3(input);
 }
-
-	// Se a seguir a > estiver um |, dá o mesmo erro
-	/*
-	if () // Se a seguir a > estiver \n dá erro
-	{
-		ft_error("minishell: syntax error near unexpected token `newline'\n");
-		return ;
-	}
-	*/
 
 void	parser3(char *input)
 {
