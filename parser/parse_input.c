@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int is_space(char c)
+int	is_space(char c)
 {
 	if (c == '\n' || c == '\t' || c == '\v'
 		|| c == '\f' || c == '\r' || c == '\0'
@@ -53,7 +53,7 @@ char	*put_spaces(char *input)
 	int		j;
 	char	*new;
 	int		words;
-	
+
 	i = 0;
 	j = 0;
 	words = count_words(input);
@@ -65,18 +65,11 @@ char	*put_spaces(char *input)
 		while (input[i] && is_space(input[i]))
 			i++;
 		while (input[i] && !is_space(input[i]))
-		{
-			new[j] = input[i];
-			i++;
-			j++;
-		}
+			new[j++] = input[i++];
 		while (input[i] && is_space(input[i]))
 			i++;
 		if (input[i])
-		{
-			new[j] = ' ';
-			j++;
-		}
+			new[j++] = ' ';
 	}
 	new[j] = '\0';
 	return (new);

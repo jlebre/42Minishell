@@ -147,7 +147,6 @@ int						skip_quotes(char *input, int i, char quote);
 char					***split_split(char **matrix);
 int						check_quotes(char *commands);
 int						empty_prompt(char *input);
-char					*separate_input(char *input);
 void					print_matrix(char **matrix);
 void					free_matrix(char **matrix);
 int						check_xor(char *input);
@@ -157,6 +156,7 @@ int						check_and(char *input);
 int     				is_space(char c);
 int						count_words(char *input);
 char					*put_spaces(char *input);
+char					*separate_input(char *input);
 
 /*___ ___ ___ ___ ___ 
  | _ \_ _| _ \ __/ __|

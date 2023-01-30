@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:45:00 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/29 23:02:21 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/30 01:04:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	**parse_cenas(char **arg)
 char	*parse_input(char *input)
 {
 	input = put_spaces(input);
+	input = separate_input(input);
 	return (input);
 }
 
