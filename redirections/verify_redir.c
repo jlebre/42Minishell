@@ -17,11 +17,12 @@ int	verify_redir_2(char *input)
 	int	i;
 
 	i = 0;
-	printf("input: %s\n", input);
 	while (input[i])
 	{
-		if (input[i] == '>' && input[i + 1] == '>' && (input[i + 2] == '>'
-				|| input[i + 2] == '<' || input[i + 2] == '|'))
+		if ((input[i] == '>' || input[i] == '<')
+			&& (input[i + 1] == '>' || input[i + 1] == '<')
+			&& (input[i + 2] == '>' || input[i + 2] == '<'
+				|| input[i + 2] == '|'))
 		{
 			ft_error("minishell: syntax error near\
 				unexpected token `newline'\n");
