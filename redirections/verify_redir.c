@@ -14,7 +14,8 @@
 
 int	verify_redir_2(char *input)
 {
-	int	i;
+	int		i;
+	char	*err;
 
 	i = 0;
 	while (input[i])
@@ -24,8 +25,8 @@ int	verify_redir_2(char *input)
 			&& (input[i + 2] == '>' || input[i + 2] == '<'
 				|| input[i + 2] == '|'))
 		{
-			ft_error("minishell: syntax error near\
-				unexpected token `newline'\n");
+			err = "minishell: syntax error near unexpected token `newline'\n";
+			ft_error(err);
 			return (0);
 		}
 		i++;
