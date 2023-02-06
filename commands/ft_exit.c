@@ -10,7 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
+
+// Verifica se o input é maior que um int64
+int	check_size_int(char *str)
+{
+	char *max_int;
+	int	i;
+
+	i = 0;
+	max_int = "9223372036854775807";
+	while (str[i] && max_int[i])
+	{
+		if (str[i] > max_int[i])
+			return (0);
+		else if (str[i] < max_int[i])
+			return (1);
+		i++;
+	}
+	return (1);
+}
 
 // Recria a função exit
 void	ft_exit(char **input)
@@ -30,7 +49,9 @@ void	ft_exit(char **input)
 	}
 	else if (i == 2)
 	{
-		if (input[1][0] == '$' && ft_strlen(input[1]) > 1)
+		if (!check_size_int(input[1]))
+			exit_errors(1, input);
+		else if (input[1][0] == '$' && ft_strlen(input[1]) > 1)
 		{
 			value = print_vars_exit(input);
 			check_error_3(value, input);
@@ -48,56 +69,4 @@ void	do_exit(int exit_value, char **input)
 	rl_clear_history();
 	free (input);
 	exit(exit_value);
-}
-
-// Função que imprime as variáveis de ambiente
-char	*print_vars_exit(char **input)
-{
-	t_env_lst	*temp;
-	char		*name;
-
-	name = input[1];
-	temp = com_info()->vars;
-	name++;
-	while (temp)
-	{
-		if (!ft_strncmp(name, com_info()->vars->name, ft_strlen(name) - 1))
-			return (com_info()->vars->value);
-		temp = temp->next;
-	}
-	return (0);
-}
-
-// Verifica se o exit tem erros
-void	exit_errors(int error, char **input)
-{
-	if (error == 1)
-	{
-		ft_error("exit\nexit: %s: numeric argument required\n", input[1]);
-		rl_clear_history();
-		free (input);
-		exit(2);
-	}
-	else if (error == 2)
-	{
-		ft_error("exit\nexit: too many arguments\n");
-		com_info()->exit_value = 1;
-		return ;
-	}
-	else if (error == 3)
-	{
-		ft_error("exit\nexit: %s: numeric argument required\n", input[1]);
-		rl_clear_history();
-		free (input);
-		exit(2);
-	}
-}
-
-// Verifica se o exit tem erros
-void	check_error_3(char *arg, char **input)
-{
-	if (!ft_isdigit(arg))
-		exit_errors(3, input);
-	else
-		do_exit(ft_atoi(arg), input);
 }

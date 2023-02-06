@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:41:42 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/27 00:17:41 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/06 18:44:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 void	do_redir(char **before, char **after)
 {
@@ -60,7 +60,7 @@ void	options(char ***new, int i)
 {
 	if (check_redir_type(new[i][0]) <= 2)
 		close(open(new[i + 1][0], O_CREAT, 0644));
-	else
+	else if (check_redir_type(new[i][0]) == 4)
 	{
 		if (check_file_access(new[i + 1][0]))
 			return ;
@@ -70,6 +70,8 @@ void	options(char ***new, int i)
 			do_redir(new[0], new[i + 1]);
 		}
 	}
+	else
+		do_heredoc(new[i + 1][0]);
 }
 
 // E preciso dar close?
@@ -83,7 +85,10 @@ void	execute_redir(char **input)
 	char	***new;
 	int		i;
 
-	i = 1;
+	if (input[0][0] == '<' && input[0][1] == '<')
+		i = 0;
+	else
+		i = 1;
 	new = split_redir(input);
 	if (com_info()->redir_no > 1)
 	{
@@ -94,7 +99,11 @@ void	execute_redir(char **input)
 		}
 	}
 	com_info()->redir_type = check_redir_type(new[i][0]);
-	do_redir(new[0], new[i + 1]);
+	if (com_info()->redir_type != 3)
+		do_redir(new[0], new[i + 1]);
+	else
+		do_heredoc(new[1][0]);
+	free_triple(new);
 }
 	// while (i < com_info()->redir_no * 2)
 	// {

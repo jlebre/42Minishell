@@ -10,23 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	verify_redir_2(char *input)
 {
-	int		i;
-	char	*err;
+	int	i;
 
 	i = 0;
+	//printf("input: %s\n", input);
 	while (input[i])
 	{
-		if ((input[i] == '>' || input[i] == '<')
-			&& (input[i + 1] == '>' || input[i + 1] == '<')
-			&& (input[i + 2] == '>' || input[i + 2] == '<'
-				|| input[i + 2] == '|'))
+		if (input[i] == '>' && input[i + 1] == '>' && (input[i + 2] == '>'
+				|| input[i + 2] == '<' || input[i + 2] == '|'))
 		{
-			err = "minishell: syntax error near unexpected token `newline'\n";
-			ft_error(err);
+			ft_error("minishell: syntax error near\
+				unexpected token `newline'\n");
 			return (0);
 		}
 		i++;

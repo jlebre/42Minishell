@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 char	*ft_put_space_before(char *input, int i)
 {
@@ -68,7 +68,35 @@ char	*ft_put_space_after(char *input, int i)
 	return (new);
 }
 
-//	Está a pôr um ' ' a mais antes dos sinais <>|
+// char	*separate_input(char *input)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (input[i])
+// 	{
+// 		if ((input[i + 1] == '>' || input[i + 1] == '<'
+// 				|| input[i + 1] == '|') && input[i] != ' ')
+// 		{
+// 			input = ft_put_space_before(input, i);
+// 			printf("input after put space before: %s\n", input);
+// 			i += 2;
+// 			while (input[i] && (input[i] == '>'
+// 					|| input[i] == '<' || input[i] == '|'))
+// 				i++;
+// 		}
+// 		if (input[i - 1] && input[i] != ' ' && (input[i - 1] == '>'
+// 				|| input[i - 1] == '<' || input[i - 1] == '|'))
+// 		{
+// 			input = ft_put_space_after(input, i);
+// 			printf("input after put space after: %s\n", input);
+// 			i += 2;
+// 		}
+// 		i++;
+// 	}
+// 	return (input);
+// }
+
 char	*separate_input(char *input)
 {
 	int	i;

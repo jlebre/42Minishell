@@ -60,6 +60,8 @@ typedef struct s_args
 typedef struct s_command
 {
 	int					**pip;
+	pid_t				*pid;
+	int					pid_counter;
 	int					cmds_done;
 	int					exit_value;
 	t_env_lst			*env_lst;
@@ -79,6 +81,8 @@ typedef struct s_command
  |_|  |_|___|_|\_|___|___/_||_|___|____|____|*/
 t_command				*com_info(void);
 void					free_all(void);
+void					free_triple(char ***triple);
+void					free_list(t_env_lst *lst);
 
 //INIT SHELL
 void					init_shell(char **env);
@@ -167,7 +171,8 @@ void					do_pipes(char **input);
 void					execute_pipe(char **input);
 void					fd_dup(int i);
 void					fd_close(int pos);
-
+void					ft_wait_pid(void);
+void					pipe_cleanup(void);
 /*___ ___ ___ ___ ___ 
  | _ \ __|   \_ _| _ \
  |   / _|| |) | ||   /
@@ -177,6 +182,8 @@ void					do_redir(char **before, char **after);
 void					redirections(char **arquivo, int type);
 int						check_redir_type(char *input);
 int						heredoc(char *limiter);
+void					do_heredoc(char *limiter);
+
 int						count_redirs(char **input);
 int						verify_redir(char *input);
 int						verify_redir_2(char *input);

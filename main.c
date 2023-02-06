@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		parser(input);
 		process_input(env);
+		free (input);
 	}
-	free (input);
 	return (com_info()->exit_value);
 }

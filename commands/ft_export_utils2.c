@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 // Verifica se a variável já existe na lista de variáveis de ambiente
 // e na lista de variáveis locais

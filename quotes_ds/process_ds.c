@@ -25,7 +25,7 @@ char	**check_ds(char **input)
 	while (input[i])
 	{
 		if (!ft_strncmp(input[i], "$?", 3))
-			input[i] = ft_itoa(com_info()->exit_value);
+			input[i] = ft_itoa(com_info()->exit_value >> 8);
 		else if (input[i][0] == '$' && ft_strlen(input[i]) > 1
 			&& count_ds(input[i]) == 1)
 			input[i] = ft_strdup(change_val(input[i]));

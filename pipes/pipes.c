@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 02:22:13 by nvideira          #+#    #+#             */
-/*   Updated: 2023/01/26 03:05:03 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/06 17:01:192 by nvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	init_pipes(void)
 	i = 0;
 	com_info()->cmds_done = 0;
 	com_info()->pip = malloc(sizeof(int *) * (com_info()->pipe_no + 1));
+	//com_info()->pid = malloc(sizeof(pid_t *) * (com_info()->pipe_no + 1));
+//	com_info()->pid_counter = 0;
 	while (i < com_info()->pipe_no)
 	{
 		com_info()->pip[i] = malloc(sizeof(int) * 2);
@@ -36,18 +38,35 @@ void	init_pipes(void)
 // Executa os pipes
 void	execute_pipe(char **input)
 {
-	int	pid;
+	printf("teste\n");
+	//int	pid;
+	int	cenas;
 
-	pid = fork();
-	if (pid == 0)
+	//com_info()->pid[com_info()->pid_counter] = fork();
+	//com_info()->pid_counter++;
+	cenas = fork();
+	if (cenas == 0)
 	{
 		fd_dup(com_info()->cmds_done);
 		commands(input, com_info()->env, 1);
 	}
 	else
-		waitpid(pid, &com_info()->exit_value, 0);
+		waitpid(cenas, &com_info()->exit_value, 0);
 	fd_close(com_info()->cmds_done);
 	unlink(".heredoc");
+}
+
+// Espera por todos os processos
+void	ft_wait_pid(void)
+{
+	int	i;
+
+	i = 0;
+	while (i < com_info()->pid_counter)
+	{
+		waitpid(com_info()->pid[i], &com_info()->exit_value, 0);
+		i++;
+	}
 }
 
 // Duplica os file descriptors

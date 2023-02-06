@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:46:39 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/26 02:41:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/06 16:06:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 // Recria o comando env
 void	ft_env(char **input)
