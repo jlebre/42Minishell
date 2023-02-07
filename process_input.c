@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/06 18:41:11 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/07 19:31:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	process_input(char **env)
 		com_info()->commands = com_info()->commands->next;
 		catch_signal();
 	}
+	//pipe_cleanup();
 	ft_wait_pid();
-	pipe_cleanup();
 }
 
 // Temos de fazer free do input no fim

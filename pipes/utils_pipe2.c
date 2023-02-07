@@ -17,7 +17,7 @@ void	pipe_cleanup(void)
 	int	i;
 
 	i = 0;
-	while (i < com_info()->pipe_no * 2)
+	while (i < com_info()->pipe_no)
 	{
 		close(com_info()->pip[i][0]);
 		close(com_info()->pip[i][1]);

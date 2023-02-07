@@ -20,8 +20,6 @@ void	init_pipes(void)
 	i = 0;
 	com_info()->cmds_done = 0;
 	com_info()->pip = malloc(sizeof(int *) * (com_info()->pipe_no + 1));
-	//com_info()->pid = malloc(sizeof(pid_t *) * (com_info()->pipe_no + 1));
-//	com_info()->pid_counter = 0;
 	while (i < com_info()->pipe_no)
 	{
 		com_info()->pip[i] = malloc(sizeof(int) * 2);
@@ -38,7 +36,6 @@ void	init_pipes(void)
 // Executa os pipes
 void	execute_pipe(char **input)
 {
-	printf("teste\n");
 	//int	pid;
 	int	cenas;
 
@@ -50,8 +47,8 @@ void	execute_pipe(char **input)
 		fd_dup(com_info()->cmds_done);
 		commands(input, com_info()->env, 1);
 	}
-	else
-		waitpid(cenas, &com_info()->exit_value, 0);
+	// else
+	// 	waitpid(cenas, &com_info()->exit_value, 0);
 	fd_close(com_info()->cmds_done);
 	unlink(".heredoc");
 }
@@ -62,9 +59,9 @@ void	ft_wait_pid(void)
 	int	i;
 
 	i = 0;
-	while (i < com_info()->pid_counter)
+	while (i < com_info()->pipe_no + com_info()->redir_no)
 	{
-		waitpid(com_info()->pid[i], &com_info()->exit_value, 0);
+		waitpid(-1, &com_info()->exit_value, 0);
 		i++;
 	}
 }

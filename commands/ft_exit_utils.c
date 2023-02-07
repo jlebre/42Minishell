@@ -46,20 +46,32 @@ void	exit_errors(int error, char **input)
 		com_info()->exit_value = 1;
 		return ;
 	}
-	else if (error == 3)
-	{
-		ft_error("exit\nexit: %s: numeric argument required\n", input[1]);
-		rl_clear_history();
-		free (input);
-		exit(2);
-	}
 }
 
 // Verifica se o exit tem erros
 void	check_error_3(char *arg, char **input)
 {
-	if (!ft_isdigit(arg))
-		exit_errors(3, input);
+	if (!ft_isdigit(arg) || !check_size_int(arg))
+		exit_errors(1, input);
 	else
 		do_exit(ft_atoi(arg), input);
+}
+
+// Verifica se o input é maior que um int64
+int	check_size_int(char *str)
+{
+	char *max_int;
+	int	i;
+
+	i = 0;
+	max_int = "9223372036854775807";
+	while (str[i] && max_int[i])
+	{
+		if (str[i] > max_int[i])
+			return (0);
+		if (str[i] < max_int[i])
+			return (1);
+		i++;
+	}
+	return (1);
 }

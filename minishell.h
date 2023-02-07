@@ -61,7 +61,7 @@ typedef struct s_command
 {
 	int					**pip;
 	pid_t				*pid;
-	int					pid_counter;
+	int					pid_index;
 	int					cmds_done;
 	int					exit_value;
 	t_env_lst			*env_lst;
@@ -73,6 +73,7 @@ typedef struct s_command
 	int					redir_no;
 	char				**env;
 	int					redir_type;
+	int					hereflag;
 }	t_command;
 
 /*__  __ ___ _  _ ___ ___ _  _ ___ _    _    
@@ -86,9 +87,12 @@ void					free_list(t_env_lst *lst);
 
 //INIT SHELL
 void					init_shell(char **env);
+
+//SIGNALS
 void					catch_signal(void);
 void					signal_block(void);
 void					recieve(int sig);
+void					change_ev(int sig);
 
 //PRINT DIR
 char					*print_info(void);
@@ -241,6 +245,7 @@ void					check_error_3(char *arg, char **input);
 char					*print_vars_exit(char **input);
 void					do_exit(int exit_value, char **input);
 void					exit_errors(int error, char **input);
+int						check_size_int(char *str);
 
 //EXPORT
 void					*ft_export(char **input);

@@ -27,7 +27,14 @@ void	ft_cd(char **input, char **env)
 	if (input[1])
 	{
 		if (!ft_strncmp(input[1], "-", 2))
+		{
+			if (!check_if_exists("OLDPWD", com_info()->env_lst))
+			{
+				ft_error("minishell: cd: OLDPWD not set\n");
+				return ;
+			}
 			do_cd(getenv("OLDPWD"), getenv("OLDPWD"), env);
+		}
 		else
 			do_cd(input[1], ft_strjoin(new, input[1]), env);
 	}

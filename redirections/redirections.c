@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:41:42 by nvideira          #+#    #+#             */
-/*   Updated: 2023/02/06 18:44:09 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/07 19:15:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 
 void	do_redir(char **before, char **after)
 {
-	int	pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		redirections(after, com_info()->redir_type);
-		commands(before, com_info()->env, 1);
+		if (com_info()->hereflag == 0)
+		{
+			redirections(after, com_info()->redir_type);
+			commands(before, com_info()->env, 1);
+		}
+		else
+		{
+			redirections(after, com_info()->redir_type);
+			com_info()->hereflag = 0;
+		}
 	}
 	else
 		waitpid(pid, &com_info()->exit_value, 0);
-	unlink(".heredoc");
+	//unlink(".heredoc");
 }
 
 /*
@@ -71,7 +79,10 @@ void	options(char ***new, int i)
 		}
 	}
 	else
+	{
+		com_info()->hereflag = 1;
 		do_heredoc(new[i + 1][0]);
+	}
 }
 
 // E preciso dar close?
@@ -102,8 +113,11 @@ void	execute_redir(char **input)
 	if (com_info()->redir_type != 3)
 		do_redir(new[0], new[i + 1]);
 	else
+	{
 		do_heredoc(new[1][0]);
-	free_triple(new);
+		com_info()->hereflag = 1;
+	}
+	//free_triple(new);
 }
 	// while (i < com_info()->redir_no * 2)
 	// {

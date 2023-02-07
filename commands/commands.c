@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/06 18:54:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/07 19:32:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ void	commands(char **input, char **env, int is_fork)
 // Verifica se está dentro de um fork ou não (por causa dos pipes)
 void	fork_commands(char **input, char **env, int is_fork)
 {
-	int	cenas;
+	int	pid;
 
 	signal_block();
 	if (!is_fork)
 	{
-		cenas = fork();
-		if (cenas == 0)
+		pid = fork();
+		if (pid == 0)
 			env_commands(input, env);
 		else
-			waitpid(cenas, &com_info()->exit_value, 0);
+			waitpid(pid, &com_info()->exit_value, 0);
 	}
 	else
 		env_commands(input, env);

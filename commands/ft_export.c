@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 00:33:34 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/06 18:59:09 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/07 14:33:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,15 @@ void	export_without_value(char *name)
 
 void	check_export_without_value(char *name)
 {
-	t_env_lst	*tmp;
-	char		*value;
+	int	exist1;
+	int	exist2;
 
-	tmp = com_info()->env_lst;
-	while (tmp)
-	{
-		if (!ft_strcmp(tmp->name, name))
-			return ;
-		tmp = tmp->next;
-	}
-	value = ft_strdup("");
-	lst_add_back(&com_info()->env_lst, new_node(name));
-	free(value);
+	exist1 = check_if_exists(name, com_info()->env_lst);
+	exist2 = check_if_exists(name, com_info()->vars);
+	if (exist1 || exist2)
+		return ;
+	else
+		export_without_value(name);
 }
 
 // Recria o comando export

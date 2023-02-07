@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:49:58 by nvideira          #+#    #+#             */
-/*   Updated: 2023/02/06 18:33:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/07 19:00:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	do_heredoc(char *limiter)
 	if (pid == 0)
 	{
 		heredoc(limiter);
+		com_info()->hereflag = 1;
 	}
 	else
 		waitpid(pid, &com_info()->exit_value, 0);

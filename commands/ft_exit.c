@@ -12,25 +12,6 @@
 
 #include "minishell.h"
 
-// Verifica se o input é maior que um int64
-int	check_size_int(char *str)
-{
-	char *max_int;
-	int	i;
-
-	i = 0;
-	max_int = "9223372036854775807";
-	while (str[i] && max_int[i])
-	{
-		if (str[i] > max_int[i])
-			return (0);
-		else if (str[i] < max_int[i])
-			return (1);
-		i++;
-	}
-	return (1);
-}
-
 // Recria a função exit
 void	ft_exit(char **input)
 {
@@ -49,9 +30,7 @@ void	ft_exit(char **input)
 	}
 	else if (i == 2)
 	{
-		if (!check_size_int(input[1]))
-			exit_errors(1, input);
-		else if (input[1][0] == '$' && ft_strlen(input[1]) > 1)
+		if (input[1][0] == '$' && ft_strlen(input[1]) > 1)
 		{
 			value = print_vars_exit(input);
 			check_error_3(value, input);

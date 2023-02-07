@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:59:18 by jlebre            #+#    #+#             */
-/*   Updated: 2023/01/26 23:13:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/07 18:12:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_shell(char **env)
 	com_info()->vars = NULL;
 	com_info()->cmds_done = 0;
 	com_info()->redir_type = 0;
+	com_info()->hereflag = 0;
 	com_info()->color = "\033[1;32m:";
 	com_info()->env = env;
 	username = getenv("USER");
