@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/07 19:32:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/08 02:00:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	fork_commands(char **input, char **env, int is_fork)
 {
 	int	pid;
 
-	signal_block();
+	//signal_block();
 	if (!is_fork)
 	{
 		pid = fork();

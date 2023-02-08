@@ -31,24 +31,20 @@ void	init_pipes(void)
 		i++;
 	}
 	com_info()->pip[i] = NULL;
+	com_info()->pid = malloc(sizeof(int) * (com_info()->pipe_no + 1));
 }
 
 // Executa os pipes
 void	execute_pipe(char **input)
 {
-	//int	pid;
-	int	cenas;
-
-	//com_info()->pid[com_info()->pid_counter] = fork();
-	//com_info()->pid_counter++;
-	cenas = fork();
-	if (cenas == 0)
+	signal_block();
+	com_info()->pid[com_info()->pid_counter] = fork();
+	if (com_info()->pid[com_info()->pid_counter] == 0)
 	{
 		fd_dup(com_info()->cmds_done);
 		commands(input, com_info()->env, 1);
 	}
-	// else
-	// 	waitpid(cenas, &com_info()->exit_value, 0);
+	com_info()->pid_counter++;
 	fd_close(com_info()->cmds_done);
 	unlink(".heredoc");
 }
@@ -59,9 +55,10 @@ void	ft_wait_pid(void)
 	int	i;
 
 	i = 0;
-	while (i < com_info()->pipe_no + com_info()->redir_no)
+	signal_block();
+	while (i < com_info()->pid_counter)
 	{
-		waitpid(-1, &com_info()->exit_value, 0);
+		waitpid(com_info()->pid[i], &com_info()->exit_value, 0);
 		i++;
 	}
 }
