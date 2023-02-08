@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:55:34 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/07 19:32:47 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/08 04:31:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	env_commands(char **input, char **env)
 	path = find_path(input[0], com_info()->env_lst);
 	if (!path)
 	{
-		ft_error("Command not found: %s\n", input[0]);
+		ft_error("Command not found: %s", input[0]);
 		free(path);
 		catch_signal();
 		exit(127);

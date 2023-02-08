@@ -277,9 +277,9 @@ void					check_unset(char *input);
   \___/  |_| |___|____|___/*/
 //FT_ERROR
 void					ft_error(char *err, ...);
-int						ft_putchar_fde(char c, int fd);
-int						ft_putstr_fde(char *s, int fd);
-int						ft_putnbr_fde(int n, int k, int fd);
+char					*ft_putchar_fde(char c);
+char					*ft_putstr_fde(char *s);
+char					*ft_putnbr_fde(int n, int k);
 
 //ITOA
 char					*ft_itoa(int number);

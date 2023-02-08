@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:59:18 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/08 01:53:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/08 02:16:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	init_shell(char **env)
 	com_info()->cmds_done = 0;
 	com_info()->redir_type = 0;
 	com_info()->hereflag = 0;
-	com_info()->pid_counter = 0;
 	com_info()->color = "\033[1;32m:";
 	com_info()->env = env;
 	if (check_if_exists("USER", com_info()->env_lst))

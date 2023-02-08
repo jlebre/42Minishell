@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 20:41:42 by nvideira          #+#    #+#             */
-/*   Updated: 2023/02/07 19:15:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/08 02:17:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void	execute_redir(char **input)
 	}
 	//free_triple(new);
 }
+
 	// while (i < com_info()->redir_no * 2)
 	// {
 	// 	com_info()->redir_type = check_redir_type(new[i][0]);
