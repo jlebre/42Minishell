@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:59:18 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/08 02:16:38 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/09 16:53:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ void	init_shell(char **env)
 		username = getenv("USER");
 	else
 	{
-		printf("USER not found, setting to 'user'\n");
+		write(1, "USER not found, setting to 'user'\n", 35);
 		lst_add_back(&com_info()->env_lst, new_node("USER=user"));
 		username = get_cenas_do_env("USER=");
 	}
-	printf("\n\nUSER is: @%s\n", username);
+	write(1, "\n\nUSER is: @", 12);
+	write(1, username, ft_strlen(username));
+	write(1, "\n", 1);
 }

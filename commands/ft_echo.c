@@ -32,7 +32,7 @@ int	check_n(char **input)
 void	ft_echo(char **input)
 {
 	if (!input[1])
-		printf("\n");
+		write(1, "\n", 1);
 	else if (!ft_strncmp(input[1], "-n", 2))
 	{
 		if (check_n(input))

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 02:15:07 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/08 04:01:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/09 19:00:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_pipes(void)
 		i++;
 	}
 	com_info()->pip[i] = NULL;
-	com_info()->pid = malloc(sizeof(int) * (com_info()->pipe_no));
+	com_info()->pid = malloc(sizeof(int) * (com_info()->pipe_no + 1));
 	com_info()->pid[com_info()->pipe_no] = 0;
 }
 
@@ -46,8 +46,8 @@ void	execute_pipe(char **input)
 		fd_dup(com_info()->cmds_done);
 		commands(input, com_info()->env, 1);
 	}
-	com_info()->pid_counter++;
 	fd_close(com_info()->cmds_done);
+	com_info()->pid_counter++;
 	unlink(".heredoc");
 }
 
@@ -58,6 +58,7 @@ void	ft_wait_pid(void)
 
 	i = 0;
 	signal_block();
+	printf("com_info()->pid_counter: %d\n", com_info()->pid_counter);
 	while (i < (com_info()->pid_counter))
 	{
 		waitpid(com_info()->pid[i], &com_info()->exit_value, 0);

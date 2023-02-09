@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_sound.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 18:44:55 by jlebre            #+#    #+#             */
-/*   Updated: 2022/11/16 15:44:09 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/02/09 16:56:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	play_sound(char **env, char *sound)
 		if (execve(arr[0], arr, env) == -1)
 		{
 			play_sound(env, "error.ogg");
-			printf("ERROR!\n");
+			ft_error("ERROR!\n");
 		}
 	}
 	free(arr[0]);

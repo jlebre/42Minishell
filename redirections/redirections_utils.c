@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:29:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/06 16:09:02 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/09 17:02:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ int	check_redir_type(char *input)
 	}
 	return (0);
 }
+
+/*
+> - 2
+>> - 1
+< - 4
+<< - 3
+*/
+
 
 // Faz as redireções e as duplicações de file descriptors
 // O que se faz quando tem vários argumentos a seguir ao redirecionador?

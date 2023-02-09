@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:35:05 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/08 02:05:51 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/09 18:49:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	process_input(char **env)
 		com_info()->commands = com_info()->commands->next;
 		catch_signal();
 	}
+	unlink(".heredoc");
 	//pipe_cleanup();
 	ft_wait_pid();
 }
