@@ -17,15 +17,18 @@ void	do_print(char **input, int start, int type)
 {
 	while (start < com_info()->commands->nb_args)
 	{
-		write (1, input[start], ft_strlen(input[start]));
+		printf("%s", input[start]);
+		//write (1, input[start], ft_strlen(input[start]));
 		if ((com_info()->commands->nb_args - start) != 1
 			&& ft_strncmp(com_info()->commands->arg[start], "", 1)
 			&& ft_strncmp(com_info()->commands->arg[start + 1], "", 1))
-			write (1, " ", 1);
+			printf(" ");
+			//write (1, " ", 1);
 		start++;
 	}
 	if (type != 2)
-		write (1, "\n", 1);
+		printf("\n");
+		//write (1, "\n", 1);
 	com_info()->exit_value = 0;
 }
 
@@ -66,13 +69,16 @@ void	process_flags(char **input, int start)
 					check_flag(input[start][i]);
 			}
 			else
-				write(1, &input[start][i], 1);
+				printf("%c", input[start][i]);
+				//write(1, &input[start][i], 1);
 			i++;
 		}
 		if ((com_info()->commands->nb_args - start) != 1)
-			write(1, " ", 1);
+			printf(" ");
+			//write(1, " ", 1);
 		start++;
 	}
-	write(1, "\n", 1);
+	printf("\n");
+	//write(1, "\n", 1);
 	com_info()->exit_value = 0;
 }

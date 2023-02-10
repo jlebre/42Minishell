@@ -61,7 +61,6 @@ typedef struct s_command
 {
 	int					**pip;
 	pid_t				*pid;
-	//int					pid_index;
 	int					pid_counter;
 	int					cmds_done;
 	int					exit_value;

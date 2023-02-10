@@ -12,12 +12,6 @@
 
 #include "minishell.h"
 
-//	Tem de se criar uma função no parser para confirmar se os redir
-//	estão rodeados por espaços! Para o input vir "ls > a.txt" em vez de 
-//	"ls>a.txt"
-
-//	O split está feito a contar que as coisas vêm bem separadas
-
 // Função para fazer o split dos redirecionamentos
 // Faz a primeira alocação de memória para a matriz
 char	***split_redir(char **input)
