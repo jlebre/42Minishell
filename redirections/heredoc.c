@@ -3,15 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:49:58 by nvideira          #+#    #+#             */
-/*   Updated: 2023/02/08 19:24:54 by nvideira         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:38:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	heredoc(char *eof)
+{
+	char	*content;
+	int		tmp_fd;
+	int		fd_in;
+
+	tmp_fd = open("./.tmp/tmpfile.txt", O_TRUNC | O_CREAT | O_WRONLY, 0666);
+	write(1, "> ", 2);
+	content = get_next_line(STDIN_FILENO);
+	while (1)
+	{
+		if (ft_strncmp(content, eof, ft_strlen(content) - 1) == 0
+			&& ft_strlen(content) > 1)
+			break ;
+		write(tmp_fd, content, ft_strlen(content));
+		free(content);
+		write(1, "> ", 2);
+		content = get_next_line(STDIN_FILENO);
+	}
+	free(content);
+	close(tmp_fd);
+	fd_in = open("./.tmp/tmpfile.txt", O_RDONLY, 0777);
+	return (fd_in);
+}
+
+/*
 void	do_heredoc(char ***mat_array, int i)
 {
 	pid_t	pid;
@@ -59,3 +85,4 @@ int	heredoc(char *limiter)
 	}
 	return (fd);
 }
+*/

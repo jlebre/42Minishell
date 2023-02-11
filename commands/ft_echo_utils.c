@@ -15,20 +15,15 @@
 // Imprime o que foi passado para o comando echo
 void	do_print(char **input, int start, int type)
 {
-	while (start < com_info()->commands->nb_args)
+	while (start < com_info()->nb_args)
 	{
 		printf("%s", input[start]);
-		//write (1, input[start], ft_strlen(input[start]));
-		if ((com_info()->commands->nb_args - start) != 1
-			&& ft_strncmp(com_info()->commands->arg[start], "", 1)
-			&& ft_strncmp(com_info()->commands->arg[start + 1], "", 1))
+		if ((com_info()->nb_args - start) != 1)
 			printf(" ");
-			//write (1, " ", 1);
 		start++;
 	}
 	if (type != 2)
 		printf("\n");
-		//write (1, "\n", 1);
 	com_info()->exit_value = 0;
 }
 
@@ -58,7 +53,7 @@ void	process_flags(char **input, int start)
 	int	i;
 
 	i = 0;
-	while (start < com_info()->commands->nb_args)
+	while (start < com_info()->nb_args)
 	{
 		while (input[start][i])
 		{
@@ -70,15 +65,12 @@ void	process_flags(char **input, int start)
 			}
 			else
 				printf("%c", input[start][i]);
-				//write(1, &input[start][i], 1);
 			i++;
 		}
-		if ((com_info()->commands->nb_args - start) != 1)
+		if ((com_info()->nb_args - start) != 1)
 			printf(" ");
-			//write(1, " ", 1);
 		start++;
 	}
 	printf("\n");
-	//write(1, "\n", 1);
 	com_info()->exit_value = 0;
 }

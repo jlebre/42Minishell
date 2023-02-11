@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+char	*parse_input(char *input)
+{
+	input = put_spaces(input);
+	input = separate_input(input);
+	return (input);
+}
+
+char	**parse_cenas(char **arg)
+{
+	arg = process_quotes(arg);
+	arg = check_ds(arg);
+	arg = process_peliculas(arg);
+	return (arg);
+}
+
 int	is_space(char c)
 {
 	if (c == '\n' || c == '\t' || c == '\v'

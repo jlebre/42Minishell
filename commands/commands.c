@@ -6,17 +6,15 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/08 04:00:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/11 18:23:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Esta função é chamada para executar os comandos
-// Compara o input com os comandos que temos e chama a função correspondente
-// Se não for nenhum dos comandos, chama a função fork_commands
-void	commands(char **input, char **env, int is_fork)
+void	default_commands(char **input, char **env, int is_fork)
 {
+	com_info()->nb_args = count_args(input);
 	if (input[0])
 	{
 		if (!ft_strncmp(input[0], "echo", 5))
@@ -40,6 +38,56 @@ void	commands(char **input, char **env, int is_fork)
 	}
 }
 
+// Esta função é chamada para executar os comandos
+// Compara o input com os comandos que temos e chama a função correspondente
+// Se não for nenhum dos comandos, chama a função fork_commands
+void	commands(char *input, char **env, int is_fork)
+{
+	char **arg;
+
+	arg = ft_split(input, ' ');
+	com_info()->nb_args = count_args(arg);
+	if (arg[0])
+	{
+		if (!ft_strncmp(arg[0], "echo", 5))
+			ft_echo(arg);
+		else if (!ft_strncmp(arg[0], "cd", 3))
+			ft_cd(arg, env);
+		else if (!ft_strncmp(arg[0], "pwd", 4))
+			ft_pwd();
+		else if (!ft_strncmp(arg[0], "export", 7))
+			ft_export(arg);
+		else if (!ft_strncmp(arg[0], "unset", 6))
+			ft_unset(arg);
+		else if (!ft_strncmp(arg[0], "env", 4))
+			ft_env(arg);
+		else if (!ft_strncmp(arg[0], "exit", 5))
+			ft_exit(arg);
+		else if (!ft_strncmp(arg[0], "change_color", 13))
+			change_color(arg);
+		else
+			fork_commands(arg, env, is_fork);
+	}
+}
+
+int	parent_commands(char *input, char **env)
+{
+	char **arg;
+
+	arg = ft_split(input, ' ');
+	if (!ft_strncmp(arg[0], "cd", 3))
+		ft_cd(arg, env);
+	else if (!ft_strncmp(arg[0], "export", 7))
+		ft_export(arg);
+	else if (!ft_strncmp(arg[0], "unset", 6))
+		ft_unset(arg);
+	else if (!ft_strncmp(arg[0], "exit", 5))
+		ft_exit(arg);
+	else
+		return (0);
+	return (1);
+}
+
 // Esta função é chamada para executar os comandos que não são builtins
 // Verifica se está dentro de um fork ou não (por causa dos pipes)
 void	fork_commands(char **input, char **env, int is_fork)
@@ -58,25 +106,3 @@ void	fork_commands(char **input, char **env, int is_fork)
 	else
 		env_commands(input, env);
 }
-
-/*
-void	fork_commands(char **input, char **env, int is_fork)
-{
-	//int	cenas;
-
-	signal_block();
-	if (!is_fork)
-	{
-		com_info()->pid[com_info()->pid_counter++] = fork();
-		if (com_info()->pid[com_info()->pid_counter - 1] == 0)
-		{
-			env_commands(input, env);
-			com_info()->pid_counter++;
-		}
-		else
-			waitpid(com_info()->pid[com_info()->pid_counter - 1], &com_info()->exit_value, 0);
-	}
-	else
-		env_commands(input, env);
-}
-*/

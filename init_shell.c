@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:59:18 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/09 16:53:39 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/11 17:56:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ void	init_shell(char **env)
 
 	com_info()->env_lst = env_to_lst(env);
 	com_info()->vars = NULL;
-	com_info()->cmds_done = 0;
-	com_info()->redir_type = 0;
-	com_info()->hereflag = 0;
 	com_info()->color = "\033[1;32m:";
 	com_info()->env = env;
 	if (check_if_exists("USER", com_info()->env_lst))

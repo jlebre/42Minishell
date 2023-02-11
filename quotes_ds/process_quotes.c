@@ -41,3 +41,46 @@ char	**process_peliculas(char **input)
 	}
 	return (input);
 }
+
+int	check_special(char *input, char c)
+{
+	int i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == c)
+		{
+			if (special_quote(input, i) == 0)
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	special_quote(char *input, int i)
+{
+	int a;
+	int b;
+	int count;
+
+	if (i == -1)
+		return (0);
+	a = 0;
+	b = 0;
+	count = i;
+	while (count >= 0)
+	{
+		if (input[count] == '\"' && count >= 1
+			&& input[count - 1] != '\\')
+			a++;
+		else if (input[count] == '\'' && count >= 1
+			&& input[count - 1] != '\\')
+			b++;
+		count--;
+	}
+	if (a % 2 == 0 && b % 2 == 0)
+		return (0);
+	return (1);
+}

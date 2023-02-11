@@ -61,6 +61,8 @@ typedef struct s_command
 {
 	int					**pip;
 	pid_t				*pid;
+	int					fd[2];
+	int					pipe_fd;
 	int					pid_counter;
 	int					cmds_done;
 	int					exit_value;
@@ -120,9 +122,15 @@ void					free_env(t_env_lst **env);
  |_|/_/ \_\_|_\|___/___|_|_\*/
 
 //PROCESS INPUT
+int 					ft_find_char(char *str, char c);
 void					process_input(char **env);
 char					**parse_cenas(char **arg);
 int						count_args(char **matrix);
+int 					parser_checks(char *input);
+char					*parse_input(char *input);
+void					parser_checks2(char *input);
+int						check_special(char *input, char c);
+int						special_quote(char *input, int i);
 
 //EXPORTED VARS
 void					exported_vars(char **input);
@@ -148,7 +156,7 @@ char					*change_val(char *input);
 char					*change_val2(char *input, int i, int j);
 
 //PARSER
-void					parser(char *input);
+void    				parser(char *input, char **env);
 void					parser2(char *input);
 void					parser3(char *input);
 int						count_pipes(char *input);
@@ -173,22 +181,29 @@ char					*separate_input(char *input);
  |_| |___|_| |___|___/*/
 void					init_pipes(void);
 void					do_pipes(char **input);
-void					execute_pipe(char **input);
+void					execute_pipe(char **input, int count, char **env);
+void					pipe_commands(char **input, char **env);
 void					fd_dup(int i);
 void					fd_close(int pos);
-void					ft_wait_pid(void);
+void					ft_wait_pid(int counter);
 void					pipe_cleanup(void);
+void					child_input(char **input, int count);
 /*___ ___ ___ ___ ___ 
  | _ \ __|   \_ _| _ \
  |   / _|| |) | ||   /
  |_|_\___|___/___|_|_\*/
+int						redirect_input(char *input);
+int						redirect_output(char *input);
+int						get_input_fd(char *input, int nb, int count);
+int						get_output_fd(char *input, int nb, int count);
+char					*get_filename(char *input, int count);
+int						count_redir(char *input, char redir);
+void					redir_commands(char **input);
 void					execute_redir(char **input);
 void					do_redir(char **before, char **after);
-void					redirections(char **arquivo, int type);
+void					redirections(char *input, char **env);
 int						check_redir_type(char *input);
-int						heredoc(char *limiter);
-void					do_heredoc(char ***mat_array, int i);
-
+int						heredoc(char *eof);
 int						count_redirs(char **input);
 int						verify_redir(char *input);
 int						verify_redir_2(char *input);
@@ -210,7 +225,9 @@ void 					print_matrix_redir(char ***matrix);
  | (_| (_) | |\/| | |\/| |/ _ \| .` | |) \__ \
   \___\___/|_|  |_|_|  |_/_/ \_\_|\_|___/|___/
 */
-void					commands(char **input, char **env, int is_fork);
+void					commands(char *input, char **env, int is_fork);
+int					parent_commands(char *input, char **env);
+void					default_commands(char **input, char **env, int is_fork);
 void					fork_commands(char **input, char **env, int is_fork);
 
 //DEFAULT COMMANDS
@@ -280,6 +297,8 @@ char					*ft_putchar_fde(char c);
 char					*ft_putstr_fde(char *s);
 char					*ft_putnbr_fde(int n, int k);
 
+char					*ft_strtrim(char const *s1, char const *set);
+
 //ITOA
 char					*ft_itoa(int number);
 int						size_of_number(long nb);
@@ -324,29 +343,5 @@ char					*ft_strljoin(char const *s1, char const *s2,
 char					*get_next_line(int fd);
 void					ft_putnbr_fd(int n, int fd);
 void					ft_putchar_fd(char c, int fd);
-
-/* ___ ___  _    ___  ___  ___ 
-  / __/ _ \| |  / _ \| _ \/ __|
- | (_| (_) | |_| (_) |   /\__ \
-  \___\___/|____\___/|_|_\|___/*/
-//NORMAL COLORS
-int						black(char *str);
-int						red(char *str);
-int						green(char *str);
-int						yellow(char *str);
-int						blue(char *str);
-int						purple(char *str);
-int						cyan(char *str);
-int						white(char *str);
-
-//BOLD
-int						bold_black(char *str);
-int						bold_red(char *str);
-int						bold_green(char *str);
-int						bold_yellow(char *str);
-int						bold_blue(char *str);
-int						bold_purple(char *str);
-int						bold_cyan(char *str);
-int						bold_white(char *str);
 
 #endif

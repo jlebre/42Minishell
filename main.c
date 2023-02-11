@@ -32,9 +32,9 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	init_shell(env);
+	catch_signal();
 	while (1)
 	{
-		catch_signal();
 		input = readline(print_info());
 		if (!input)
 		{
@@ -43,10 +43,9 @@ int	main(int argc, char **argv, char **env)
 			free (input);
 			exit(com_info()->exit_value >> 8 & 0xFF);
 		}
-		parser(input);
-		process_input(env);
-		//free (input);
-		//wait(NULL);
+		signal_block();
+		parser(input, env);
+		catch_signal();
 	}
 	return (com_info()->exit_value);
 }

@@ -5,12 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 22:29:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/09 17:02:42 by marvin           ###   ########.fr       */
+/*   Created: 2023/02/11 18:10:11 by marvin            #+#    #+#             */
+/*   Updated: 2023/02/11 18:10:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	count_redir(char *input, char redir)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (input[i])
+	{
+		if (input[i] == redir)
+		{
+			if (input[i + 1] == redir)
+				i++;
+			count++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+char	*get_filename(char *input, int count)
+{
+	char	*filename;
+	int		i;
+
+	i = 0;
+	filename = malloc(sizeof(char) * (ft_strlen(input) + 1));
+	while (input[count] && input[count] == ' ')
+		count++;
+	while (ft_strchr("<> ", input[count]) == 0 && input[count])
+	{
+		filename[i] = input[count];
+		i++;
+		count++;
+	}
+	filename[i] = '\0';
+	return (filename);
+}
+
+int	check_file_access(char *file)
+{
+	if (access(file, F_OK))
+	{
+		ft_error("%s: No such file or directory\n", file);
+		return (1);
+	}
+	else if (access(file, R_OK))
+	{
+		ft_error("%s: Permission denied\n", file);
+		return (1);
+	}
+	return (0);
+}
 
 int	count_redirs(char **input)
 {
@@ -57,36 +111,4 @@ int	check_redir_type(char *input)
 			return (4);
 	}
 	return (0);
-}
-
-/*
-> - 2
->> - 1
-< - 4
-<< - 3
-*/
-
-
-// Faz as redireções e as duplicações de file descriptors
-// O que se faz quando tem vários argumentos a seguir ao redirecionador?
-void	redirections(char **arquivo, int type)
-{
-	int		fd;
-	char	*file;
-
-	file = arquivo[0];
-	if (type == 1)
-		fd = open(file, O_CREAT | O_WRONLY | O_APPEND, 0644);
-	else if (type == 2)
-		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	else if (type == 4)
-		fd = open(file, O_RDONLY);
-	else if (type == 3)
-		fd = heredoc(file);
-	if (type == 1 || type == 2)
-		dup2(fd, STDOUT_FILENO);
-	else if (type == 4 || type == 3)
-		dup2(fd, STDIN_FILENO);
-	close(fd);
-	free(file);
 }
