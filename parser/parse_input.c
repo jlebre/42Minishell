@@ -19,12 +19,12 @@ char	*parse_input(char *input)
 	return (input);
 }
 
-char	**parse_cenas(char **arg)
+char	*parse_input2(char *input)
 {
-	arg = process_quotes(arg);
-	arg = check_ds(arg);
-	arg = process_peliculas(arg);
-	return (arg);
+	input = process_quotes(input);
+	input = check_ds(input);
+	input = process_peliculas(input);
+	return (input);
 }
 
 int	is_space(char c)

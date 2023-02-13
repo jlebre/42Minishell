@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **env)
 		input = readline(print_info());
 		if (!input)
 		{
-			write(1, "exit\n", 5);
+			write(2, "exit\n", 5);
 			rl_clear_history();
 			free (input);
 			exit(com_info()->exit_value >> 8 & 0xFF);

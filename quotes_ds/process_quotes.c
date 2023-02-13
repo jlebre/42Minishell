@@ -13,32 +13,18 @@
 #include "minishell.h"
 
 // Processa aspas duplas
-char	**process_quotes(char **input)
+char	*process_quotes(char *input)
 {
-	int	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (find_quote(input[i]) % 2 == 0 && find_quote(input[i]) != 0)
-			input[i] = remove_quotes(input[i]);
-		i++;
-	}
+	if (find_quote(input) % 2 == 0 && find_quote(input) != 0)
+		input = remove_quotes(input);
 	return (input);
 }
 
 // Processa aspas simples
-char	**process_peliculas(char **input)
+char	*process_peliculas(char *input)
 {
-	int	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (find_pelicula(input[i]) % 2 == 0 && find_pelicula(input[i]) != 0)
-			input[i] = remove_peliculas(input[i]);
-		i++;
-	}
+	if (find_pelicula(input) % 2 == 0 && find_pelicula(input) != 0)
+		input = remove_peliculas(input);
 	return (input);
 }
 
@@ -51,9 +37,33 @@ int	check_special(char *input, char c)
 	{
 		if (input[i] == c)
 		{
-			if (special_quote(input, i) == 0)
+			if (!special_quote(input, i) && !surround_quote(input, i, '"'))
 				return (1);
 		}
+		i++;
+	}
+	return (0);
+}
+
+int	surround_quote(char *input, int index, int quote)
+{
+	int i;
+	int quote_nb;
+	int	a;
+
+	i = 0;
+	a = 0;
+	quote_nb = 0;
+	while (input[i])
+	{
+		if (quote_nb == 2)
+			quote_nb = 0;
+		if (input[i] == quote)
+			quote_nb++;
+		if (i == index)
+			a = 1;
+		if (quote_nb == 1 && i > index && a == 1)
+			return (1);
 		i++;
 	}
 	return (0);

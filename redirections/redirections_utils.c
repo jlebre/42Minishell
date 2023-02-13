@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	count_redir(char *input, char redir)
+int	count_char(char *input, char c)
 {
 	int	i;
 	int	count;
@@ -21,34 +21,15 @@ int	count_redir(char *input, char redir)
 	count = 0;
 	while (input[i])
 	{
-		if (input[i] == redir)
+		if (input[i] == c)
 		{
-			if (input[i + 1] == redir)
+			if (input[i + 1] == c)
 				i++;
 			count++;
 		}
 		i++;
 	}
 	return (count);
-}
-
-char	*get_filename(char *input, int count)
-{
-	char	*filename;
-	int		i;
-
-	i = 0;
-	filename = malloc(sizeof(char) * (ft_strlen(input) + 1));
-	while (input[count] && input[count] == ' ')
-		count++;
-	while (ft_strchr("<> ", input[count]) == 0 && input[count])
-	{
-		filename[i] = input[count];
-		i++;
-		count++;
-	}
-	filename[i] = '\0';
-	return (filename);
 }
 
 int	check_file_access(char *file)
@@ -64,34 +45,6 @@ int	check_file_access(char *file)
 		return (1);
 	}
 	return (0);
-}
-
-int	count_redirs(char **input)
-{
-	int	i;
-	int	j;
-	int	redir_no;
-
-	i = 0;
-	redir_no = 0;
-	while (input[i])
-	{
-		j = 0;
-		while (input[i][j])
-		{
-			if (input[i][j] == '>' || input[i][j] == '<')
-			{
-				if ((input[i][j] == '>' && input[i][j + 1] == '>')
-					|| (input[i][j] == '<' && input[i][j + 1] == '<'))
-					j++;
-				redir_no++;
-			}
-			j++;
-		}
-		i++;
-	}
-	com_info()->redir_no = redir_no;
-	return (redir_no);
 }
 
 int	check_redir_type(char *input)

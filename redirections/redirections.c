@@ -6,11 +6,33 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:29:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/11 18:24:43 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/12 19:49:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*remove_redirections(char *input)
+{
+	char	**arr;
+	char	*new;
+	int	i;
+
+	i = 1;
+	arr = ft_split(input, ' ');
+	new = ft_strjoin(arr[0], " ");
+	while (arr[i])
+	{
+		if (ft_str1chr(arr[i], '<') || ft_str1chr(arr[i], '>'))
+			break ;	
+		new = ft_strjoin(new, arr[i]);
+		if (!ft_str1chr(arr[i + 1], '<') && !ft_str1chr(arr[i + 1], '>'))
+			new = ft_strjoin(new, " ");
+		i++;
+	}
+	free_matrix(arr);
+	return (new);
+}
 
 // Faz as redireções e as duplicações de file descriptors
 // O que se faz quando tem vários argumentos a seguir ao redirecionador?
@@ -33,6 +55,7 @@ void	redirections(char *input, char **env)
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 	}
+	input = remove_redirections(input);
 	commands(input, env, 1);
 	exit(com_info()->exit_value);
 }
