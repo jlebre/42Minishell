@@ -37,7 +37,8 @@ int	check_special(char *input, char c)
 	{
 		if (input[i] == c)
 		{
-			if (!special_quote(input, i) && !surround_quote(input, i, '"'))
+			if (!special_quote(input, i)
+				&& !surround_quote(input, i, '"'))
 				return (1);
 		}
 		i++;
@@ -45,27 +46,51 @@ int	check_special(char *input, char c)
 	return (0);
 }
 
-int	surround_quote(char *input, int index, int quote)
+int	check_before(char *input, int index, int quote)
 {
-	int i;
-	int quote_nb;
-	int	a;
+	int	i;
+	int	count;
 
 	i = 0;
-	a = 0;
-	quote_nb = 0;
-	while (input[i])
+	count = 0;
+	while (i < index)
 	{
-		if (quote_nb == 2)
-			quote_nb = 0;
 		if (input[i] == quote)
-			quote_nb++;
-		if (i == index)
-			a = 1;
-		if (quote_nb == 1 && i > index && a == 1)
-			return (1);
+			count++;
 		i++;
 	}
+	return (count);
+}
+
+int	check_after(char *input, int index, int quote)
+{
+	int	count;
+
+	count = 0;
+	while (input[index])
+	{
+		if (input[index] == quote)
+			count++;
+		index++;
+	}
+	return (count);
+}
+
+
+int	surround_quote(char *input, int index, int quote)
+{
+	int quote_before;
+	int quote_after;
+
+	quote_before = check_before(input, index, quote);
+	quote_after = check_after(input, index, quote);
+	if (quote_before != 0 && quote_before % 2 == 0)
+		return (0);
+	if (quote_after != 0 && quote_after % 2 == 0)
+		return (0);
+	if ((quote_before != 0 && quote_before % 2 != 0)
+		&& (quote_after != 0 && quote_after % 2 == 0))
+		return (1);
 	return (0);
 }
 

@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+// Faz as verificações para saber se o comando echo tem a flag -n
 int	check_n(char **input)
 {
 	int i;

@@ -17,13 +17,16 @@ void	do_print(char **input, int start, int type)
 {
 	while (start < com_info()->nb_args)
 	{
-		printf("%s", input[start]);
+		write(1, input[start], ft_strlen(input[start]));
+		//printf("%s", input[start]);
 		if ((com_info()->nb_args - start) != 1)
-			printf(" ");
+			write(1, " ", 1);
+			//printf(" ");
 		start++;
 	}
 	if (type != 2)
-		printf("\n");
+		write(1, "\n", 1);
+		//printf("\n");
 	com_info()->exit_value = 0;
 }
 

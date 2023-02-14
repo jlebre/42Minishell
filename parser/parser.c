@@ -24,6 +24,7 @@ void    parser(char *input, char **env)
 	input = parse_input(input);
 	if (check_special(input, '|'))
 	{
+		input = parse_input2(input);
 		args = ft_split(input, '|');
 		pipe_commands(args, env);
 		free_matrix(args);
