@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:56:15 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/13 01:29:45 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/14 15:52:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	parser_checks2(char *input)
 
 int	check_quotes(char *commands)
 {
-	if (find_quote(commands) % 2 != 0)
+	if (find_quote(commands) % 2 != 0 && find_quote(commands) != 0)
 		return (1);
-	if (find_pelicula(commands) % 2 != 0)	
+	if (find_pelicula(commands) % 2 != 0 && find_pelicula(commands) != 0)
 		return (1);
 	return (0);
 }
