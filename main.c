@@ -20,6 +20,12 @@ t_command	*com_info(void)
 	return (&a);
 }
 
+void	free_all(char *input, char *info)
+{
+	free(input);
+	free(info);
+}
+
 // Main
 // Inicia o shell e fica em loop para ler os comandos
 // Se o comando for nulo (ctrl + D) ele sai do shell
@@ -28,6 +34,7 @@ t_command	*com_info(void)
 int	main(int argc, char **argv, char **env)
 {
 	char	*input;
+	char	*info;
 
 	(void)argc;
 	(void)argv;
@@ -35,16 +42,18 @@ int	main(int argc, char **argv, char **env)
 	catch_signal();
 	while (1)
 	{
-		input = readline(print_info());
+		info = print_info();
+		input = readline(info);
 		if (!input)
 		{
 			write(2, "exit\n", 5);
 			rl_clear_history();
-			free (input);
+			free_all(input, info);
 			exit(com_info()->exit_value >> 8 & 0xFF);
 		}
 		signal_block();
 		parser(input, env);
+		free_all(input, info);
 		catch_signal();
 	}
 	return (com_info()->exit_value);

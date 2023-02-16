@@ -40,6 +40,7 @@ char	*check_ds(char *input)
 {
 	char	**args;
 	int		i;
+	char	*new;
 
 	i = 0;
 	args = ft_split(input, ' ');
@@ -54,8 +55,9 @@ char	*check_ds(char *input)
 			args[i] = change_val2(args[i], 0, 0);
 		i++;
 	}
-	input = join_args(args);
-	return (input);
+	new = join_args(args);
+	free(input);
+	return (new);
 }
 
 // Altera o valor da variavel quando tiver apenas 1 $.

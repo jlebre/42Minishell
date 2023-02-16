@@ -201,6 +201,7 @@ int						check_file_access(char *file);
   \___\___/|_|  |_|_|  |_/_/ \_\_|\_|___/|___/
 */
 void					commands(char *input, char **env, int is_fork);
+void					commands2(char **arg, char **env, int is_fork);
 int						parent_commands(char *input, char **env);
 void					fork_commands(char **input, char **env, int is_fork);
 

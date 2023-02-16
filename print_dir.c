@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:17:25 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/15 13:23:56 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/16 19:55:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@ char	*print_info(void)
 	char	*str;
 	char	*username;
 	char	*dir;
+	char	*temp;
 
 	dir = getcwd(cwd, sizeof(cwd));
 	username = gce("USER=");
 	str = ft_strjoin(username, com_info()->color);
-	str = ft_strjoin(str, dir);
-	str = ft_strjoin(str, "$ \033[0m");
+	free(username);
+	temp = ft_strjoin(str, dir);
+	free(str);
+	str = ft_strjoin(temp, "$ \033[0m");
+	free(temp);
 	return (str);
 }
 
