@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char *join_args(char **args)
+char	*join_args(char **args)
 {
 	char	*input;
 	int		i;
@@ -120,21 +120,4 @@ char	*change_val2(char *input, int i, int j)
 			i++;
 	}
 	return (input);
-}
-
-// Conta o numero de $ na string
-int	count_ds(char *str)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] == '$')
-			count++;
-		i++;
-	}
-	return (count);
 }

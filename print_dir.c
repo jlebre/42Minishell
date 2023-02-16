@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:17:25 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/08 01:38:41 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/15 13:23:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*print_info(void)
 	char	*dir;
 
 	dir = getcwd(cwd, sizeof(cwd));
-	username = get_cenas_do_env("USER=");
+	username = gce("USER=");
 	str = ft_strjoin(username, com_info()->color);
 	str = ft_strjoin(str, dir);
 	str = ft_strjoin(str, "$ \033[0m");
