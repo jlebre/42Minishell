@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:15:16 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/20 18:48:24 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/20 18:52:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ char	*check(char c, va_list arg)
 char	*get_error(char *begin, char *middle, char *end)
 {
 	char	*error;
+	char	*temp;
 
-	error = ft_strjoin(begin, middle);
-	error = ft_strjoin(error, end);
+	temp = ft_strjoin(begin, middle);
+	error = ft_strjoin(temp, end);
 	free_all(begin, end);
+	free_all(temp, middle);
 	return (error);
 }
 

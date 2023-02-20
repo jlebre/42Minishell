@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:13:10 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/13 01:25:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/20 23:26:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*remove_quotes(char *input)
 
 	i = 0;
 	j = 0;
-	new = malloc(sizeof(char) * (ft_strlen(input) - 2));
+	new = malloc(sizeof(char) * (ft_strlen(input) - 1));
 	if (!new)
 		return (NULL);
 	while (input[i])
@@ -44,7 +44,7 @@ char	*remove_peliculas(char *input)
 
 	i = 0;
 	j = 0;
-	new = malloc(sizeof(char) * (ft_strlen(input) - 2));
+	new = malloc(sizeof(char) * (ft_strlen(input) - 1));
 	if (!new)
 		return (NULL);
 	while (input[i])
