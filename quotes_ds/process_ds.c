@@ -16,14 +16,21 @@ char	*join_args(char **args)
 {
 	char	*input;
 	int		i;
+	char	*tmp;
 
 	i = 0;
-	input = ft_strdup("");
+	tmp = ft_strdup("");
 	while (args[i])
 	{
-		input = ft_strjoin(input, args[i]);
+		input = ft_strjoin(tmp, args[i]);
+		free(tmp);
 		if (args[i + 1])
-			input = ft_strjoin(input, " ");
+		{
+			tmp = ft_strjoin(input, " ");
+			free(input);
+			input = ft_strdup(tmp);
+			free(tmp);
+		}
 		i++;
 	}
 	return (input);
@@ -43,6 +50,8 @@ char	*check_ds(char *input)
 	char	*new;
 
 	i = 0;
+	if (ft_strchr(input, '$'))
+		return (input);
 	args = ft_split(input, ' ');
 	while (args[i])
 	{
@@ -56,6 +65,7 @@ char	*check_ds(char *input)
 		i++;
 	}
 	new = join_args(args);
+	free_matrix(args);
 	free(input);
 	return (new);
 }

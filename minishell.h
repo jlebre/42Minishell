@@ -76,6 +76,7 @@ typedef struct s_command
  |_|  |_|___|_|\_|___|___/_||_|___|____|____|*/
 t_command				*com_info(void);
 void					free_list(t_env_lst *lst);
+void					free_all(char *input, char *info);
 
 //INIT SHELL
 void					init_shell(char **env);
@@ -124,6 +125,7 @@ int						check_and(char *input);
 //PARSE INPUT
 char					*parse_input(char *input);
 char					*parse_input2(char *input);
+char					**parse_input3(char **input);
 char					*separate_input(char *input);
 char					**parse_cenas(char **arg);
 int     				is_space(char c);

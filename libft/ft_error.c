@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:15:16 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/16 13:09:02 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/20 18:48:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,20 @@ char	*check(char c, va_list arg)
 		return (NULL);
 }
 
+char	*get_error(char *begin, char *middle, char *end)
+{
+	char	*error;
+
+	error = ft_strjoin(begin, middle);
+	error = ft_strjoin(error, end);
+	free_all(begin, end);
+	return (error);
+}
+
 char	*ft_main(va_list arg, char *c)
 {
 	char	*error;
 	char	*begin;
-	char	*middle;
 	char	*end;
 	int		i;
 
@@ -42,13 +51,12 @@ char	*ft_main(va_list arg, char *c)
 			begin = ft_substr(c, 0, i);
 			end = ft_substr(c, i + 2, ft_strlen(c));
 			if (ft_strchr("cs", c[++i]))
-			{
-				middle = check(c[i], arg);
-				error = ft_strjoin(begin, middle);
-				error = ft_strjoin(error, end);
-			}
+				error = get_error(begin, check(c[i], arg), end);
 			else
+			{
+				free_all(begin, end);
 				return (error);
+			}
 		}
 	}
 	return (error);
@@ -58,13 +66,16 @@ void	ft_error(char *err, ...)
 {
 	va_list	arg;
 	char	*error;
+	char	*temp;
 
 	if (!err)
 		return ;
 	va_start(arg, err);
 	error = ft_main(arg, (char *)err);
 	va_end(arg);
-	error = ft_strjoin("\033[0;31m", error);
-	error = ft_strjoin(error, "\033[0m");
+	temp = ft_strjoin("\033[0;31m", error);
+	free(error);
+	error = ft_strjoin(temp, "\033[0m");
 	perror(error);
+	free_all(temp, error);
 }

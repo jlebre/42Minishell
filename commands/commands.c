@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/16 20:11:26 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/20 18:06:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	commands(char *input, char **env, int is_fork)
 	char	**arg;
 
 	arg = ft_split(input, ' ');
+	arg = parse_input3(arg);
 	com_info()->nb_args = count_args(arg);
 	if (arg[0])
 	{
@@ -57,6 +58,7 @@ int	parent_commands(char *input, char **env)
 	char	**arg;
 
 	arg = ft_split(input, ' ');
+	arg = parse_input3(arg);
 	if (!ft_strncmp(arg[0], "cd", 3))
 		ft_cd(arg, env);
 	else if (!ft_strncmp(arg[0], "export", 7))

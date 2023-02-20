@@ -6,13 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 17:03:49 by nvideira          #+#    #+#             */
-/*   Updated: 2023/02/16 22:32:22 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/20 12:16:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// Shell_Split não está de acordo com a Norminette
 
 int	find_quotes(const char *str, int i, int type)
 {
@@ -66,7 +64,6 @@ int	get_i(const char *str, int i)
 	return (i);
 }
 
-// Norminette
 void	split_it(char const *str, char c, int st, char **ns)
 {
 	int	i;
