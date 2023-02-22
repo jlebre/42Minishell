@@ -14,7 +14,7 @@
 
 char	*join_args(char **args)
 {
-	char	*input;
+	char	*new;
 	int		i;
 	char	*tmp;
 
@@ -22,18 +22,13 @@ char	*join_args(char **args)
 	tmp = ft_strdup("");
 	while (args[i])
 	{
-		input = ft_strjoin(tmp, args[i]);
+		new = ft_strjoin(tmp, args[i]);
 		free(tmp);
 		if (args[i + 1])
-		{
-			tmp = ft_strjoin(input, " ");
-			free(input);
-			input = ft_strdup(tmp);
-			free(tmp);
-		}
+			tmp = ft_strjoin(new, " ");
 		i++;
 	}
-	return (input);
+	return (new);
 }
 
 // Processa o $.
@@ -47,7 +42,7 @@ char	*check_ds(char *input)
 {
 	char	**args;
 	int		i;
-	char	*new;
+	//char	*new;
 
 	i = 0;
 	if (ft_strchr(input, '$'))
@@ -64,10 +59,11 @@ char	*check_ds(char *input)
 			args[i] = change_val2(args[i], 0, 0);
 		i++;
 	}
-	new = join_args(args);
+	//new = join_args(args);
+	input = join_args(args);
 	free_matrix(args);
-	free(input);
-	return (new);
+	//free(input);
+	return (input);
 }
 
 // Altera o valor da variavel quando tiver apenas 1 $.

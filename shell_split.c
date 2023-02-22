@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 17:03:49 by nvideira          #+#    #+#             */
-/*   Updated: 2023/02/20 12:16:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/21 23:27:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	get_i(const char *str, int i)
 	return (i);
 }
 
-void	split_it(char const *str, char c, int st, char **ns)
+int	split_it(char const *str, char c, int st, char **ns)
 {
 	int	i;
 	int	j;
@@ -86,11 +86,14 @@ void	split_it(char const *str, char c, int st, char **ns)
 			while (str[st] && (ft_space(str[st]) || ft_ispipe(str[st], c)))
 				st++;
 			ns[j] = ft_substr(str, st, (i - st) + 1);
+			if (!ns[j])
+				return (0);
 			j++;
 			st = i + 1;
 		}
 		i++;
 	}
+	return (1);
 }
 
 char	**ft_split(const char *s, char c)
@@ -107,6 +110,10 @@ char	**ft_split(const char *s, char c)
 	if (!ns)
 		return (NULL);
 	ns[matlen] = NULL;
-	split_it(s, c, st, ns);
+	if (!split_it(s, c, st, ns))
+	{
+		free_matrix(ns);
+		return (NULL);
+	}
 	return (ns);
 }
