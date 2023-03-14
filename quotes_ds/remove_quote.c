@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:13:10 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/20 23:26:07 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/10 17:04:19 by nvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*remove_quotes(char *input)
+char	*remove_quotes(char *input, char quote)
 {
 	char	*new;
 	int		i;
@@ -25,7 +25,7 @@ char	*remove_quotes(char *input)
 		return (NULL);
 	while (input[i])
 	{
-		if (input[i] != '"')
+		if (input[i] != quote)
 		{
 			new[j] = input[i];
 			j++;
@@ -33,30 +33,7 @@ char	*remove_quotes(char *input)
 		i++;
 	}
 	new[j] = '\0';
-	return (new);
-}
-
-char	*remove_peliculas(char *input)
-{
-	char	*new;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	new = malloc(sizeof(char) * (ft_strlen(input) - 1));
-	if (!new)
-		return (NULL);
-	while (input[i])
-	{
-		if (input[i] != '\'')
-		{
-			new[j] = input[i];
-			j++;
-		}
-		i++;
-	}
-	new[j] = '\0';
+	//free(input);
 	return (new);
 }
 

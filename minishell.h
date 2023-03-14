@@ -77,9 +77,10 @@ typedef struct s_command
 t_command				*com_info(void);
 void					free_list(t_env_lst *lst);
 void					free_all(char *input, char *info);
+void					my_free(char *input);	
 
 //INIT SHELL
-void					init_shell(char **env);
+void					init_shell(int argc, char **argv, char **env);
 char					*gce(char *str);
 
 //SIGNALS
@@ -108,7 +109,7 @@ void					free_env(t_env_lst **env);
  |  _/ _ \|   /\__ \ _||   /
  |_|/_/ \_\_|_\|___/___|_|_\*/
 //PARSER
-void    				parser(char *input, char **env);
+char 					*parser(char *input, char **env);
 int						skip_quotes(char *input, int i, char quote);
 char					***split_split(char **matrix);
 int						check_quotes(char *commands);
@@ -121,6 +122,8 @@ int 					parser_checks(char *input);
 int						parser_checks2(char *input);
 int						check_xor(char *input);
 int						check_and(char *input);
+int						find_quote_position(char *input, char type);
+int						check_if_inside_quotes(char *input, int i);
 
 //PARSE INPUT
 char					*parse_input(char *input);
@@ -133,7 +136,7 @@ char					*put_spaces(char *input);
 int						count_words(char *input);
 
 //PROCESS INPUT
-void					process_input(char **args, char *input, char **env);
+char *process_input(char **args, char *input, char **env);
 int 					ft_find_char(char *str, char c);
 int						ft_find_in_matrix(char **matrix, char c);
 int						count_args(char **matrix);
@@ -156,8 +159,8 @@ char 					*process_quotes(char *input);
 char 					*process_peliculas(char *input);
 int						find_quote(char *str);
 int						find_pelicula(char *str);
-char					*remove_quotes(char *input);
-char					*remove_peliculas(char *input);
+char					*remove_quotes(char *input, char quote);
+//char					*remove_peliculas(char *input);
 int						surround_quote(char *input, int index, int quote);
 
 //DOLLAR SIGN

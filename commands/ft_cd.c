@@ -19,6 +19,8 @@ void	ft_cd(char **input, char **env)
 {
 	char	*curr;
 	char	*new;
+	char	*tmp;
+	char	*tmp2;
 
 	if (!cd_errors(input))
 		return ;
@@ -33,13 +35,25 @@ void	ft_cd(char **input, char **env)
 				ft_error("minishell: cd: OLDPWD not set\n");
 				return ;
 			}
-			do_cd(gce("OLDPWD="), gce("OLDPWD="), env);
+			tmp = gce("OLDPWD=");
+			do_cd(tmp, tmp, env);
+			free(tmp);
 		}
 		else
-			do_cd(input[1], ft_strjoin(new, input[1]), env);
+		{
+			tmp = ft_strjoin(new, input[1]);
+			do_cd(input[1], tmp, env);
+			free(tmp);
+		}
 	}
 	else
-		do_cd(gce("HOME="), gce("OLDPWD="), env);
+	{
+		tmp = gce("HOME=");
+		tmp2 = gce("OLDPWD=");
+		do_cd(tmp, tmp2, env);
+		free_all(tmp, tmp2);
+	}
+	free(new);
 	com_info()->exit_value = 0;
 	change_pwd("OLDPWD=", curr, env);
 }
@@ -109,11 +123,12 @@ void	change_pwd(char *type, char *str, char **env)
 	char		*val;
 
 	head = com_info()->env_lst;
+	val = ft_strdup(str);
 	while (com_info()->env_lst)
 	{
 		if (!ft_strncmp(type, com_info()->env_lst->name, ft_strlen(type)))
 		{
-			val = ft_strdup(str);
+			free(com_info()->env_lst->value);
 			com_info()->env_lst->value = val;
 			change_pwd_env(type, ft_strlen(type), val, env);
 			break ;
