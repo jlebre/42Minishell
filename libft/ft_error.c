@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:15:16 by jlebre            #+#    #+#             */
-/*   Updated: 2023/02/28 18:05:01 by nvideira         ###   ########.fr       */
+/*   Updated: 2023/03/17 08:38:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	ft_error(char *err, ...)
 	temp = ft_strjoin("\033[0;31m", error);
 	free(error);
 	error = ft_strjoin(temp, "\033[0m\n");
-	write(2, error, ft_strlen(error));
+	if (error)
+		write(2, error, ft_strlen(error));
 	free_all(temp, error);
 }
