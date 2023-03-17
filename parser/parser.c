@@ -24,8 +24,8 @@ char	*parser(char *input, char **env)
 	input = parse_input(input);
 	if (check_special(input, '|'))
 	{
-		input = parse_input2(input);
 		args = ft_split(input, '|');
+		args = parse_input3(args);
 		pipe_commands(args, env);
 		free(input);
 		return NULL;
@@ -55,9 +55,7 @@ char	**parse_input3(char **input)
 	i = 0;
 	while (input[i])
 	{
-		input[i] = process_quotes(input[i]);
-		input[i] = check_ds(input[i]);
-		input[i] = process_peliculas(input[i]);
+		input[i] = parse_input2(input[i]);
 		i++;
 	}
 	return (input);

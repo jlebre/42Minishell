@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_checks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:56:15 by jlebre            #+#    #+#             */
-/*   Updated: 2023/03/09 01:09:39 by nvideira         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:24:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	check_if_inside_quotes(char *input, int i)
 {
 	int	j;
 
-	j = i;
+	j = i - 1;
 	while (j >= 0)
 	{
 		if (input[j] == '"' || input[j] == '\'')
