@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:29:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/15 19:44:19 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/17 20:12:28 by nvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ char	*remove_redirections(char *input)
 	char	*temp;
 	int		i;
 
-	i = 1;
+	i = 0;
 	arr = ft_split(input, ' ');
 	new = ft_strjoin(arr[0], " ");
-	while (arr[i])
+	while (arr[++i])
 	{
 		if (ft_str1chr(arr[i], '<') || ft_str1chr(arr[i], '>'))
 			break ;
@@ -34,8 +34,7 @@ char	*remove_redirections(char *input)
 			temp = ft_strjoin(new, " ");
 			free(new);
 			new = temp;
-		}	
-		i++;
+		}
 	}
 	free_matrix(arr);
 	free(input);

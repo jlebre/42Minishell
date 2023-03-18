@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 17:03:49 by nvideira          #+#    #+#             */
-/*   Updated: 2023/03/16 03:14:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/17 20:06:53 by nvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	split_it(char const *str, char c, int st, char **ns)
 {
 	int	i;
 	int	j;
+
 	i = 0;
 	j = 0;
 	while (str[i])
@@ -98,6 +99,7 @@ char	**ft_split(const char *s, char c)
 	char	**ns;
 	size_t	st;
 	int		matlen;
+
 	st = 0;
 	if (!s)
 		return (NULL);

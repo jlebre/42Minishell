@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:15:16 by jlebre            #+#    #+#             */
-/*   Updated: 2023/03/17 08:38:14 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/17 20:15:57 by nvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ char	*ft_main(va_list arg, char *c)
 
 	i = -1;
 	error = NULL;
-	begin = NULL;
-	end = NULL;
 	while (c[++i])
 	{
 		if (c[i] == '%')
@@ -55,9 +53,7 @@ char	*ft_main(va_list arg, char *c)
 			begin = ft_substr(c, 0, i);
 			end = ft_substr(c, i + 2, ft_strlen(c));
 			if (ft_strchr("cs", c[++i]))
-			{
 				error = get_error(begin, check(c[i], arg), end);
-			}
 			else
 			{
 				free_all(begin, end);

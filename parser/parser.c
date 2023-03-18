@@ -18,9 +18,9 @@ char	*parser(char *input, char **env)
 	char	**args;
 
 	if (parser_checks(input))
-		return NULL;
+		return (NULL);
 	if (!parser_checks2(input))
-		return NULL;
+		return (NULL);
 	input = parse_input(input);
 	if (check_special(input, '|'))
 	{
@@ -28,7 +28,7 @@ char	*parser(char *input, char **env)
 		args = parse_input3(args);
 		pipe_commands(args, env);
 		free(input);
-		return NULL;
+		return (NULL);
 	}
 	args = ft_split(input, ' ');
 	return (process_input(args, input, env));
