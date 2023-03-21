@@ -68,7 +68,6 @@ typedef struct s_command
 	int					nb_args;
 	char				*color;
 	char				**env;
-	int					heredoc;
 }	t_command;
 
 /*__  __ ___ _  _ ___ ___ _  _ ___ _    _    

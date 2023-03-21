@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 15:59:18 by jlebre            #+#    #+#             */
-/*   Updated: 2023/03/21 17:31:50 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/21 17:50:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	init_shell(int argc, char **argv, char **env)
 	com_info()->vars = NULL;
 	com_info()->color = "\033[1;32m:";
 	com_info()->env = env;
-	com_info()->heredoc = 0;
 	if (check_if_exists("USER", com_info()->env_lst))
 		username = getenv("USER");
 	else

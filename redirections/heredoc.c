@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 22:49:58 by nvideira          #+#    #+#             */
-/*   Updated: 2023/03/21 17:30:09 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/21 17:45:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	heredoc(char *limiter)
 	int		fd;
 	int		fd_in;
 
-	com_info()->heredoc = 1;
 	fd = open(".tmpfile.txt", O_TRUNC | O_CREAT | O_WRONLY, 0666);
 	write(1, "> ", 2);
 	file = readline(STDIN_FILENO);

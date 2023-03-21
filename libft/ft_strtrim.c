@@ -31,6 +31,8 @@ char	*trim_redir(char *input)
 	int		len;
 	char	*trimmed;
 
+	if (!input)
+		return (NULL);
 	while (input[len] != '<' && input[len] != '>')
 		len++;
 	trimmed = ft_substr(input, 0, len);

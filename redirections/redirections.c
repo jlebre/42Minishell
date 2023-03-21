@@ -6,13 +6,25 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:29:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/21 17:31:42 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/21 18:06:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 char	*remove_redirections(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i] && input[i] == ' ')
+		i++;
+	if (input[i] == '<' || input[i] == '>')
+		return (NULL);
+	return (input);
+}
+
+char	*remove_redirections1(char *input)
 {
 	char	**arr;
 	char	*new;
@@ -62,11 +74,11 @@ void	redirections(char *input, char **env)
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 	}
-	if (!com_info()->heredoc)
+	input = remove_redirections(input);
+	if (input)
 	{
-		input = remove_redirections(input);
+		input = remove_redirections1(input);
 		commands(input, env, 1);
-		com_info()->heredoc = 0;
 	}
 	exit(com_info()->exit_value);
 }
