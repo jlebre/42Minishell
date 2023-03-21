@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:29:35 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/17 20:12:28 by nvideira         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:31:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ void	redirections(char *input, char **env)
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 	}
-	input = remove_redirections(input);
-	commands(input, env, 1);
+	if (!com_info()->heredoc)
+	{
+		input = remove_redirections(input);
+		commands(input, env, 1);
+		com_info()->heredoc = 0;
+	}
 	exit(com_info()->exit_value);
 }

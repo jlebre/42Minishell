@@ -68,6 +68,7 @@ typedef struct s_command
 	int					nb_args;
 	char				*color;
 	char				**env;
+	int					heredoc;
 }	t_command;
 
 /*__  __ ___ _  _ ___ ___ _  _ ___ _    _    
@@ -287,6 +288,7 @@ char					*ft_putstr_fde(char *s);
 char					*ft_putnbr_fde(int n, int k);
 
 char					*ft_strtrim(char const *s1, char const *set);
+char					*trim_redir(char *input);
 
 //ITOA
 char					*ft_itoa(int number);
