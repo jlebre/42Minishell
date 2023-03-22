@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_checks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:56:15 by jlebre            #+#    #+#             */
-/*   Updated: 2023/03/17 20:10:40 by nvideira         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:47:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ int	check_quotes(char *commands)
 {
 	int	i;
 
-	if (find_quote(commands) % 2 != 0 && find_quote(commands) != 0)
+	if (find_quote(commands, '"') % 2 != 0 && find_quote(commands, '"') != 0)
 	{
 		i = find_quote_position(commands, '"');
 		if (check_if_inside_quotes(commands, i))
 			return (0);
 		return (1);
 	}
-	if (find_pelicula(commands) % 2 != 0 && find_pelicula(commands) != 0)
+	if (find_quote(commands, '\'') % 2 != 0 && find_quote(commands, '\'') != 0)
 	{
 		i = find_quote_position(commands, '\'');
 		if (check_if_inside_quotes(commands, i))

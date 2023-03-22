@@ -44,6 +44,7 @@ char	*parse_input2(char *input)
 {
 	input = check_ds(input);
 	input = process_peliculas(input);
+
 	input = process_quotes(input);
 	return (input);
 }
@@ -53,6 +54,8 @@ char	**parse_input3(char **input)
 	int		i;
 
 	i = 0;
+	if (!strncmp(input[0], "export", 6))
+		return (input);
 	while (input[i])
 	{
 		input[i] = parse_input2(input[i]);

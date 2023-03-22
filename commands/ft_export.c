@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 00:33:34 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/22 18:29:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/22 19:38:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	export_without_value(char *name)
 		tmp = tmp->next;
 	}
 	value = ft_strdup("");
-	printf("name: %s\n", name);
 	lst_add_back(&com_info()->env_lst, new_node(name));
 	free(value);
 }
@@ -56,6 +55,13 @@ void	*ft_export(char **input)
 	}
 	while (input[i])
 	{
+		if (ft_str1chr(input[i], '-')
+			&& (!surround_quote(input[i], ft_strchr(input[i], '-'), '"')
+			&& !surround_quote(input[i], ft_strchr(input[i], '-'), '\'')))
+		{
+			ft_error("export: %s: not a valid identifier", input[i]);
+			return (0);
+		}
 		if (ft_strchr(input[i], '='))
 			check_export(input[i]);
 		else

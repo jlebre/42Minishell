@@ -158,8 +158,7 @@ int						count_ds(char *str);
 //QUOTES
 char 					*process_quotes(char *input);
 char 					*process_peliculas(char *input);
-int						find_quote(char *str);
-int						find_pelicula(char *str);
+int						find_quote(char *str, char quote);
 char					*remove_quotes(char *input, char quote);
 int						surround_quote(char *input, int index, int quote);
 char					*join_args(char **args);

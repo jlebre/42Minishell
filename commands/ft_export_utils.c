@@ -35,16 +35,25 @@ int	cmp_name(char *s1, char *s2)
 t_env_lst	*sort_list(t_env_lst *curr)
 {
 	t_env_lst	*head;
+	int			i;
 
 	head = curr;
-	while (curr->next)
+	i = 0;
+	while (i == 0)
 	{
-		if (cmp_name(curr->name, curr->next->name) == 1)
-			do_sort(curr, head);
-		else
-			curr = curr->next;
+		i = 1;
+		while (curr->next)
+		{
+			if (cmp_name(curr->name, curr->next->name) == 1)
+			{
+				do_sort(curr, head);
+				i = 0;
+			}
+			else
+				curr = curr->next;
+		}
+		curr = head;
 	}
-	curr = head;
 	return (curr);
 }
 
@@ -68,10 +77,20 @@ void	do_sort(t_env_lst *curr, t_env_lst *head)
 	free(value);
 }
 
+void	write_exported(char *name, char *value)
+{
+	write(1, "declare -x ", 11);
+	write(1, name, ft_strlen(name));
+	write(1, "\"", 1);
+	write(1, value, ft_strlen(value));
+	write(1, "\"\n", 2);
+}
+
 // Imprime as variaveis exportadas
 void	print_exported(char **input)
 {
 	t_env_lst	*temp;
+	char		*value;
 
 	(void)input;
 	temp = sort_list(com_info()->env_lst);
@@ -79,11 +98,11 @@ void	print_exported(char **input)
 	{
 		if (ft_str1chr(temp->name, '='))
 		{
-			write(1, "declare -x ", 11);
-			write(1, temp->name, ft_strlen(temp->name));
-			write(1, "\"", 1);
-			write(1, temp->value, ft_strlen(temp->value));
-			write(1, "\"\n", 2);
+			value = remove_quotes(temp->value, '"');
+			free(temp->value);
+			temp->value = ft_strdup(value);
+			free(value);
+			write_exported(temp->name, temp->value);
 		}
 		else
 		{
@@ -95,5 +114,3 @@ void	print_exported(char **input)
 	}
 	com_info()->exit_value = 0;
 }
-
-//ft_strncmp(temp->value, "", 1)

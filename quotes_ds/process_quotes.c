@@ -17,7 +17,7 @@ char	*process_quotes(char *input)
 {
 	char	*new;
 
-	if (find_quote(input) % 2 == 0 && find_quote(input) != 0)
+	if (find_quote(input, '"') % 2 == 0 && find_quote(input, '"') != 0)
 	{
 		new = remove_quotes(input, '"');
 		free(input);
@@ -32,9 +32,9 @@ char	*process_peliculas(char *input)
 {
 	char	*new;
 
-	if (find_pelicula(input) % 2 == 0 && find_pelicula(input) != 0)
+	if (find_quote(input, '\'') % 2 == 0 && find_quote(input, '\'') != 0)
 	{
-		if (!surround_quote(input, 0, '"'))
+		if (surround_quote(input, 0, '"'))
 		{
 			new = remove_quotes(input, '\'');
 			free(input);
