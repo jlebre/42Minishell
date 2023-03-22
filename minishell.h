@@ -266,7 +266,7 @@ void					change_value_help(t_env_lst *lst,
 							char *name, char *value, int len);
 
 //PWD
-void					ft_pwd(void);
+void					ft_pwd(char **arg);
 int						ft_isdigit(char *str);
 
 //UNSET

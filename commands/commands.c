@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2023/03/22 17:05:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/22 18:14:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	commands(char *input, char **env, int is_fork)
 		else if (!ft_strncmp(arg[0], "cd", 3))
 			ft_cd(arg, env);
 		else if (!ft_strncmp(arg[0], "pwd", 4))
-			ft_pwd();
+			ft_pwd(arg);
 		else
 			commands2(arg, env, is_fork);
 	}
