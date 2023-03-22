@@ -77,7 +77,7 @@ void	print_exported(char **input)
 	temp = sort_list(com_info()->env_lst);
 	while (temp)
 	{
-		if (ft_strncmp(temp->value, "", 1))
+		if (ft_str1chr(temp->name, '='))
 		{
 			write(1, "declare -x ", 11);
 			write(1, temp->name, ft_strlen(temp->name));
@@ -95,3 +95,5 @@ void	print_exported(char **input)
 	}
 	com_info()->exit_value = 0;
 }
+
+//ft_strncmp(temp->value, "", 1)

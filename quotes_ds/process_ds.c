@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-char *get_return_value(char **args, int i)
+char	*get_return_value(char **args, int i)
 {
 	char	*tmp;
 	char	*before;
 	char	*after;
 	char	*new;
-	int j;
+	int		j;
 
 	j = 0;
 	while (args[i][j])

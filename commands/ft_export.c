@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 00:33:34 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/07 14:33:11 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/22 18:29:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	export_without_value(char *name)
 		tmp = tmp->next;
 	}
 	value = ft_strdup("");
+	printf("name: %s\n", name);
 	lst_add_back(&com_info()->env_lst, new_node(name));
 	free(value);
 }

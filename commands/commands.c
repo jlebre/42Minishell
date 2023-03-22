@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:02:49 by jlebre            #+#    #+#             */
-/*   Updated: 2023/03/22 18:14:10 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/22 18:35:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	commands(char *input, char **env, int is_fork)
 void	commands2(char **arg, char **env, int is_fork)
 {
 	if (!ft_strncmp(arg[0], "export", 7))
-			ft_export(arg);
+		ft_export(arg);
 	else if (!ft_strncmp(arg[0], "unset", 6))
 		ft_unset(arg);
 	else if (!ft_strncmp(arg[0], "env", 4))
