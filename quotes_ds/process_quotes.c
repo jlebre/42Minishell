@@ -34,7 +34,7 @@ char	*process_peliculas(char *input)
 
 	if (find_quote(input, '\'') % 2 == 0 && find_quote(input, '\'') != 0)
 	{
-		if (surround_quote(input, 0, '"'))
+		if (!surround_quote(input, 0, '"'))
 		{
 			new = remove_quotes(input, '\'');
 			free(input);
