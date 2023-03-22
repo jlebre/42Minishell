@@ -16,7 +16,8 @@ int	is_valid(char c)
 {
 	if (c == '\n' || c == '\v' || c == '\0'
 		|| c == '\r' || c == '\t' || c == '\f' || c == '$'
-		|| c == '\'')
+		|| c == '\'' || c == '\"' || c == ' ' || c == ';'
+		|| c == '|' || c == '>' || c == '<')
 		return (0);
 	return (1);
 }
@@ -59,6 +60,7 @@ char	*remove_ds(char *input, int size)
 
 	i = 0;
 	j = 0;
+	printf("input: %s\n", input);
 	new = malloc(sizeof(char) * (ft_strlen(input) - size));
 	if (!new)
 		return (NULL);
