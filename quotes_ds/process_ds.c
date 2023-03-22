@@ -47,7 +47,7 @@ char	*check_ds_help(char **args, int i)
 
 	args[i] = get_return_value(args, i);
 	if (args[i][0] == '$' && ft_strlen(args[i]) > 1
-		&& count_ds(args[i]) == 1)
+		&& count_ds(args[i]) == 1 && is_valid(args[i][1]))
 	{
 		tmp = change_val(args[i]);
 		free(args[i]);

@@ -60,7 +60,6 @@ char	*remove_ds(char *input, int size)
 
 	i = 0;
 	j = 0;
-	printf("input: %s\n", input);
 	new = malloc(sizeof(char) * (ft_strlen(input) - size));
 	if (!new)
 		return (NULL);
