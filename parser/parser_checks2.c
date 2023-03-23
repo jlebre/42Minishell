@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 20:11:00 by nvideira          #+#    #+#             */
-/*   Updated: 2023/03/22 18:34:58 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/23 01:58:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ int	check_xor(char *input)
 {
 	int	i;
 
+	if (!input)
+		return (0);
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '|')
+		if (input[i] == '|' && input[i + 1])
 		{
 			i++;
 			while (input[i] && is_space(input[i]))
@@ -37,6 +39,8 @@ int	check_and(char *input)
 {
 	int	i;
 
+	if (!input)
+		return (0);
 	i = 0;
 	while (input[i])
 	{

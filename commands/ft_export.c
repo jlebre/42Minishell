@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 00:33:34 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/22 19:38:50 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/22 20:29:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,19 @@ void	check_export_without_value(char *name)
 		export_without_value(name);
 }
 
+int	errors_export(char *input)
+{
+	if (ft_str1chr(input, '-')
+		&& (!surround_quote(input, ft_strchr(input, '-'), '"')
+		&& !surround_quote(input, ft_strchr(input, '-'), '\'')))
+		return (1);
+	if (ft_isdigit(input))
+		return (1);
+	if (!ft_strncmp(input, "=", 1))
+		return (1);
+	return (0);
+}
+
 // Recria o comando export
 void	*ft_export(char **input)
 {
@@ -55,9 +68,7 @@ void	*ft_export(char **input)
 	}
 	while (input[i])
 	{
-		if (ft_str1chr(input[i], '-')
-			&& (!surround_quote(input[i], ft_strchr(input[i], '-'), '"')
-			&& !surround_quote(input[i], ft_strchr(input[i], '-'), '\'')))
+		if (errors_export(input[i]))
 		{
 			ft_error("export: %s: not a valid identifier", input[i]);
 			return (0);
