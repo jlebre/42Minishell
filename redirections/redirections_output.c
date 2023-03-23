@@ -52,6 +52,8 @@ int	get_output_fd(char *input, int nb, int count)
 		filename = out_file(input, count + 1);
 		if (check_file_access(filename, W_OK))
 			exit(1);
+		//if (check_file_existence(filename))
+		//	exit(1);
 		fd = open(filename, O_RDWR | O_APPEND | O_CREAT, 0666);
 	}
 	else
@@ -59,6 +61,8 @@ int	get_output_fd(char *input, int nb, int count)
 		filename = out_file(input, count + 1);
 		if (check_file_access(filename, W_OK))
 			exit(1);
+		//if (check_file_existence(filename))
+		//	exit(1);
 		fd = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
 	}
 	if (nb == 1)
@@ -80,7 +84,7 @@ char	*out_file(char *input, int count)
 	filename = malloc(sizeof(char) * (ft_strlen(input) + 1));
 	while (input[count] && input[count] == ' ')
 		count++;
-	while (ft_str1chr("<> ", input[count]) == 0 && input[count])
+	while (input[count] && !ft_str1chr("<> ", input[count]))
 	{
 		filename[i] = input[count];
 		i++;

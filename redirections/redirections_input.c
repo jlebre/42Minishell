@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:08:14 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/23 22:04:45 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/23 22:19:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,8 @@ int	get_input_fd(char *input, int nb, int count)
 		filename = out_file(input, count + 1);
 		if (check_file_access(filename, R_OK))
 			exit(1);
-		if (access(filename, F_OK))
-		{
-			ft_error("%s: No such file or directory\n", filename);
+		if (check_file_existence(filename))
 			exit(1);
-		}
 		fd = open(filename, O_RDONLY);
 		if (fd < 0)
 			count = -1;

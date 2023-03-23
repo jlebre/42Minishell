@@ -1,0 +1,24 @@
+char	*out_file(char *input, int count)
+{
+	char	*filename;
+	int		i;
+
+	i = 0;
+	if (count > ft_strlen(input))
+		return (NULL);
+	filename = malloc(sizeof(char) * (ft_strlen(input) + 1));
+	while (input[count] && input[count] == ' ')
+		count++;
+	while (input[count] && !ft_str1chr("<> ", input[count]))
+	{
+		filename[i] = input[count];
+		i++;
+		count++;
+	}
+	filename[i] = '\0';
+	input = ft_substr(input, count, ft_strlen(input));
+	if (ft_str1chr(input, '.') || ft_str1chr(input, '/'))
+		filename = out_file(input, 0);
+	free(input);
+	return (filename);
+}

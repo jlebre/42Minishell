@@ -42,13 +42,16 @@ int	check_file_access(char *file, int type)
 			return (1);
 		}
 	}
-	/*
+	return (0);
+}
+
+int	check_file_existence(char *file)
+{
 	if (access(file, F_OK))
 	{
 		ft_error("%s: No such file or directory\n", file);
 		return (1);
 	}
-	*/
 	return (0);
 }
 

@@ -204,6 +204,7 @@ int						heredoc(char *limiter);
 int						verify_redir(char *input);
 int						verify_redir_2(char *input);
 int						check_file_access(char *file, int type);
+int						check_file_existence(char *file);
 
 /* ___ ___  __  __ __  __   _   _  _ ___  ___ 
   / __/ _ \|  \/  |  \/  | /_\ | \| |   \/ __|
