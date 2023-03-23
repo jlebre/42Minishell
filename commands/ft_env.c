@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:46:39 by jlebre            #+#    #+#             */
-/*   Updated: 2023/03/14 22:42:36 by nvideira         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:15:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int	env_errors(char *path, char **input)
 {
 	if (!path)
 	{
-		printf("\033[0;31mCommand not found: env\033[0m\n");
+		printf("Command not found: env");
 		com_info()->exit_value = 127;
 		return (1);
 	}
 	if (input[1])
 	{
-		ft_error("Env: '%s': No such file or directory\n",
+		ft_error("Env: '%s': No such file or directory",
 			input[1]);
 		com_info()->exit_value = 127;
 		free(path);

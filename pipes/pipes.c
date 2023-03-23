@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 02:15:07 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/21 16:18:47 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/23 19:18:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	pipe_commands(char **input, char **env)
 	com_info()->pid = malloc(sizeof(int) * count_args(input));
 	while (input[count])
 	{
-		if (parent_commands(input[count], env))
-			com_info()->pid[count] = 1;
-		else
+		//if (parent_commands(input[count], env))
+		//	com_info()->pid[count] = 1;
+		//else
 		{
 			if (pipe(com_info()->fd) == -1)
 				return ;
