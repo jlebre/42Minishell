@@ -170,6 +170,7 @@ char					*change_val2(char *input, int i, int j);
 char					*change_val_help(char *name, t_env_lst *lst);
 char					*change_val2_help(char *input, int i, int j);
 char					*check_ds_help(char **args, int i);
+int						convert_return_value(int exit_value);
 
 /*___ ___ ___ ___ ___ 
  | _ \_ _| _ \ __/ __|

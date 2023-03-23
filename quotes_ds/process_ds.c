@@ -23,10 +23,11 @@ char	*get_return_value(char **args, int i)
 	j = 0;
 	while (args[i][j])
 	{
-		if (args[i][j] == '$' && args[i][j + 1] == '?')
+		if (args[i][j] == '$' && args[i][j + 1] == '?'
+			&& !surround_quote(args[i], j, '\''))
 		{
 			before = ft_substr(args[i], 0, j);
-			tmp = ft_itoa((com_info()->exit_value >> 8 & 255));
+			tmp = ft_itoa(convert_return_value(com_info()->exit_value));
 			after = ft_substr(args[i], j + 2, ft_strlen(args[i]));
 			new = ft_strjoin(before, tmp);
 			free(args[i]);

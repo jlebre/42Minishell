@@ -23,7 +23,9 @@ void	ft_exit(char **input)
 		i++;
 	if (i > 2)
 	{
-		if (!ft_isdigit(input[1]))
+		if (input[2])
+			exit_errors(2, input);
+		else if (!ft_isdigit(input[1]))
 			exit_errors(1, input);
 		else
 			exit_errors(2, input);

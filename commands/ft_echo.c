@@ -41,9 +41,12 @@ void	ft_echo(char **input)
 		else
 			do_print(input, 1, 1);
 	}
-	else if (!ft_strncmp(input[1], "-e", 3))
-		process_flags(input, 2);
 	else
 		do_print(input, 1, 1);
 	com_info()->exit_value = 0;
 }
+
+/*
+else if (!ft_strncmp(input[1], "-e", 3))
+	process_flags(input, 2);
+*/

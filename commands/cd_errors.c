@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:55:28 by nvideira          #+#    #+#             */
-/*   Updated: 2023/03/14 22:55:40 by nvideira         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:08:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	cd_errors(char **input)
 		i++;
 	if (i > 2)
 	{
-		ft_error("cd: string not in pwd: %s\n", input[1]);
+		write(2, "cd: too many arguments", 22);
+		com_info()->exit_value = 1;
 		return (0);
 	}
 	if (i == 2)
@@ -33,7 +34,8 @@ int	cd_errors(char **input)
 			return (1);
 		if (access(input[1], F_OK) != 0)
 		{
-			ft_error("cd: no such file or directory: %s\n", input[1]);
+			write(2, "cd: No such file or directory", 29);
+			com_info()->exit_value = 1;
 			return (0);
 		}
 	}

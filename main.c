@@ -28,12 +28,18 @@ void	free_all(char *input, char *info)
 
 void	ft_clean(char *input, char *info)
 {
-	write(2, "exit\n", 5);
+	write(1, "exit\n", 5);
 	rl_clear_history();
 	free_all(input, info);
 	free_list(com_info()->env_lst);
 	free_list(com_info()->vars);
-	exit(com_info()->exit_value >> 8 & 0xFF);
+	if (com_info()->exit_value == 0)
+		exit(1);
+	else if (com_info()->exit_value == 1
+		|| com_info()->exit_value == 256)
+		exit(0);
+	else
+		exit(com_info()->exit_value >> 8 & 0xFF);
 }
 
 // Main

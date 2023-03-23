@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 00:33:34 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/22 20:29:28 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/23 16:40:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	*ft_export(char **input)
 		if (errors_export(input[i]))
 		{
 			ft_error("export: %s: not a valid identifier", input[i]);
+			com_info()->exit_value = 1;
 			return (0);
 		}
 		if (ft_strchr(input[i], '='))
