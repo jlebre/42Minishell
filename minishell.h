@@ -117,6 +117,7 @@ int						check_quotes(char *commands);
 int						empty_prompt(char *input);
 void					print_matrix(char **matrix);
 void					free_matrix(char **matrix);
+int						check_acess_all(char **arr);
 
 //PARSER CHECKS
 int 					parser_checks(char *input);
@@ -185,7 +186,7 @@ void					ft_wait_pid(int counter);
  | _ \ __|   \_ _| _ \
  |   / _|| |) | ||   /
  |_|_\___|___/___|_|_\*/
-void					redirections(char *input, char **env);
+int						redirections(char *input, char **env);
 char					*get_filename(char *input, int count);
 
 //INPUT
@@ -202,7 +203,7 @@ int						check_redir_type(char *input);
 int						heredoc(char *limiter);
 int						verify_redir(char *input);
 int						verify_redir_2(char *input);
-int						check_file_access(char *file);
+int						check_file_access(char *file, int type);
 
 /* ___ ___  __  __ __  __   _   _  _ ___  ___ 
   / __/ _ \|  \/  |  \/  | /_\ | \| |   \/ __|

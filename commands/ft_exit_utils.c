@@ -86,6 +86,8 @@ int convert_return_value(int exit_value)
 		return (0);
 	else if (exit_value == 1)
 		return (1);
+	else if (exit_value == 2)
+		return (2);
 	else if (exit_value == 256)
 		return (1);
 	else

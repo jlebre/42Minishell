@@ -12,7 +12,7 @@
 
 CC = gcc
 RM = @rm -rf
-CFLAGS = -I. -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -I. -Wall -Werror -Wextra #-g -fsanitize=address
 
 NAME = minishell
 

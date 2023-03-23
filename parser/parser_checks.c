@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 16:56:15 by jlebre            #+#    #+#             */
-/*   Updated: 2023/03/22 19:47:28 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/23 21:11:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,22 @@ int	parser_checks2(char *input)
 {
 	if (check_quotes(input))
 	{
-		printf("minishell: syntax error: unclosed quotes\n");
+		ft_error("minishell: syntax error: unclosed quotes\n");
 		return (0);
 	}
 	if (check_xor(input))
 	{
-		printf("minishell: syntax error near unexpected token `|'\n");
+		ft_error("minishell: syntax error near unexpected token `|'\n");
 		return (0);
 	}
 	if (check_and(input))
 	{
-		printf("minishell: syntax error near unexpected token `&'\n");
+		ft_error("minishell: syntax error near unexpected token `&'\n");
 		return (0);
 	}
 	if (!verify_redir(input))
 	{
-		printf("minishell: syntax error near unexpected token `'\n");
+		ft_error("minishell: syntax error near unexpected token `'\n");
 		return (0);
 	}
 	if (!verify_redir_2(input))

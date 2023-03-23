@@ -50,11 +50,15 @@ int	get_output_fd(char *input, int nb, int count)
 	{
 		count++;
 		filename = out_file(input, count + 1);
+		if (check_file_access(filename, W_OK))
+			exit(1);
 		fd = open(filename, O_RDWR | O_APPEND | O_CREAT, 0666);
 	}
 	else
 	{	
 		filename = out_file(input, count + 1);
+		if (check_file_access(filename, W_OK))
+			exit(1);
 		fd = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
 	}
 	if (nb == 1)
