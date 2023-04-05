@@ -157,7 +157,7 @@ int						is_valid(char c);
 int						count_ds(char *str);
 
 //QUOTES
-char 					*process_quotes(char *input);
+char 					*process_quotes(char *input, char *old);
 char 					*process_peliculas(char *input);
 int						find_quote(char *str, char quote);
 char					*remove_quotes(char *input, char quote);

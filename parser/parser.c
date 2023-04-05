@@ -42,9 +42,13 @@ char	*parse_input(char *input)
 
 char	*parse_input2(char *input)
 {
+	char	*old;
+
 	input = check_ds(input);
+	old = ft_strdup(input);
 	input = process_peliculas(input);
-	input = process_quotes(input);
+	input = process_quotes(input, old);
+	free(old);
 	return (input);
 }
 
