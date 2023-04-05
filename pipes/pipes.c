@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 02:15:07 by marvin            #+#    #+#             */
-/*   Updated: 2023/04/05 21:12:11 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/04/05 21:32:55 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	pipe_commands(char **input, char **env)
 // Executa os pipes
 void	execute_pipe(char **input, int count, char **env)
 {
-	int		fd_out;
+	int	fd_out;
 
 	child_input(input, count);
 	if (!ft_find_char(input[count], '>'))
