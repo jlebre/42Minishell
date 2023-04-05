@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nvideira <nvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 22:55:28 by nvideira          #+#    #+#             */
-/*   Updated: 2023/03/23 17:08:46 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/05 20:42:32 by nvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	cd_errors(char **input)
 			return (1);
 		if (access(input[1], F_OK) != 0)
 		{
-			write(2, "cd: No such file or directory", 29);
+			write(2, "cd: No such file or directory\n", 29);
 			com_info()->exit_value = 1;
 			return (0);
 		}
