@@ -222,9 +222,9 @@ char					*find_path(char *cmd, t_env_lst *env_lst);
 char					*find_return_path(char *path, int j, char *cmd);
 
 //CHANGE COLOR
-void					change_color(char	**input);
-void					do_change(char **input, int bold);
-void					change_color_help(void);
+//void					change_color(char	**input);
+//void					do_change(char **input, int bold);
+//void					change_color_help(void);
 
 //CD
 void					ft_cd(char **input, char **env);

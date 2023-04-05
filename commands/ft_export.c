@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 00:33:34 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/23 22:19:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/05 19:29:08 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	errors_export(char *input)
 {
 	if (ft_str1chr(input, '-')
 		&& (!surround_quote(input, ft_strchr(input, '-'), '"')
-		&& !surround_quote(input, ft_strchr(input, '-'), '\'')))
+			&& !surround_quote(input, ft_strchr(input, '-'), '\'')))
 		return (1);
 	if (ft_isdigit(input))
 		return (1);

@@ -14,8 +14,8 @@
 
 void	write_exported(char *name, char *value)
 {
-	char    *str;
-	char    *temp;
+	char	*str;
+	char	*temp;
 
 	str = ft_strjoin("declare -x ", name);
 	temp = ft_strjoin(str, "\"");
@@ -24,30 +24,21 @@ void	write_exported(char *name, char *value)
 	free(temp);
 	temp = ft_strjoin(str, "\"\n");
 	free(str);
-    write(1, temp, ft_strlen(temp));
+	write(1, temp, ft_strlen(temp));
 	free(temp);
 }
 
-void    write_exported2(char *name)
+void	write_exported2(char *name)
 {
-    char    *str;
-    char    *temp;
+	char	*str;
+	char	*temp;
 
-    str = ft_strjoin("declare -x ", name);
-    temp = ft_strjoin(str, "\n");
-    free(str);
-    write(1, temp, ft_strlen(temp));
-    free(temp);
+	str = ft_strjoin("declare -x ", name);
+	temp = ft_strjoin(str, "\n");
+	free(str);
+	write(1, temp, ft_strlen(temp));
+	free(temp);
 }
-
-/*
-	write(1, "declare -x ", 11);
-	write(1, name, ft_strlen(name));
-	write(1, "\"", 1);
-	write(1, value, ft_strlen(value));
-	write(1, "\"", 1);
-	write(1, "\n", 1);
-*/
 
 // Imprime as variaveis exportadas
 void	print_exported(char **input)
@@ -68,7 +59,7 @@ void	print_exported(char **input)
 			write_exported(temp->name, temp->value);
 		}
 		else if (!ft_str1chr(temp->name, '='))
-            write_exported2(temp->name);
+			write_exported2(temp->name);
 		temp = temp->next;
 	}
 	com_info()->exit_value = 0;

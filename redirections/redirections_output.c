@@ -41,6 +41,19 @@ int	redirect_output(char *input)
 	return (fd);
 }
 
+int	get_fd(char *filename)
+{
+	int	fd;
+
+	if (input[count + 1] == '>')
+		fd = open(filename, O_RDWR | O_APPEND | O_CREAT, 0666);
+	else
+		fd = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
+	return (fd);
+}
+
+//if (check_file_existence(filename))
+//	exit(1);
 int	get_output_fd(char *input, int nb, int count)
 {
 	int		fd;
@@ -52,19 +65,14 @@ int	get_output_fd(char *input, int nb, int count)
 		filename = out_file(input, count + 1);
 		if (check_file_access(filename, W_OK))
 			exit(1);
-		//if (check_file_existence(filename))
-		//	exit(1);
-		fd = open(filename, O_RDWR | O_APPEND | O_CREAT, 0666);
 	}
 	else
 	{	
 		filename = out_file(input, count + 1);
 		if (check_file_access(filename, W_OK))
 			exit(1);
-		//if (check_file_existence(filename))
-		//	exit(1);
-		fd = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
 	}
+	fd = get_fd(filename);
 	if (nb == 1)
 	{
 		free(filename);

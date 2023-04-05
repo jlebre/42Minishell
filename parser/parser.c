@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+//input = separate_input(input);
 // Processa o input e verifica se há erros
 char	*parser(char *input, char **env)
 {
@@ -21,7 +22,6 @@ char	*parser(char *input, char **env)
 		return (NULL);
 	if (!parser_checks2(input))
 		return (NULL);
-	//input = separate_input(input);
 	if (check_special(input, '|'))
 	{
 		args = ft_split(input, '|');

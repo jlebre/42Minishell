@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:13:10 by jlebre            #+#    #+#             */
-/*   Updated: 2023/03/22 19:48:53 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/05 19:30:53 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*remove_quotes(char *input, char quote)
 
 	i = 0;
 	j = 0;
-	new = malloc(sizeof(char) * (ft_strlen(input) - find_quote(input, quote) + 1));
+	new = malloc(sizeof(char)
+			* (ft_strlen(input) - find_quote(input, quote) + 1));
 	if (!new)
 		return (NULL);
 	while (input[i])
@@ -51,4 +52,3 @@ int	find_quote(char *str, char quote)
 	}
 	return (counter);
 }
-

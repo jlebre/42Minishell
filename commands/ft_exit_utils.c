@@ -80,7 +80,7 @@ int	check_size_int(char *str)
 	return (1);
 }
 
-int convert_return_value(int exit_value)
+int	convert_return_value(int exit_value)
 {
 	if (exit_value == 0)
 		return (0);

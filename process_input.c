@@ -12,21 +12,20 @@
 
 #include "minishell.h"
 
-int		check_acess_all(char **arr)
+int	check_acess_all(char **arr)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 	{
 		j = 0;
 		while (arr[i][j] && (arr[i][j] == '<' || arr[i][j] == '>'
 		|| arr[i][j] == ' ' || arr[i][j] == '\t' || arr[i][j] == '\n'
 		|| arr[i][j] == '\v' || arr[i][j] == '\f' || arr[i][j] == '\r'
-		|| arr[i][j] == '\'' || arr[i][j] == '\"'
-		|| arr[i][j] == '|' || arr[i][j] == ';'
-		|| arr[i][j] == '&' || arr[i][j] == '('
+		|| arr[i][j] == '\'' || arr[i][j] == '\"' || arr[i][j] == '|'
+		|| arr[i][j] == ';' || arr[i][j] == '&' || arr[i][j] == '('
 		|| arr[i][j] == ')' || arr[i][j] == '$'))
 			j++;
 		if (arr[i][j] == '.' || arr[i][j] == '/')
