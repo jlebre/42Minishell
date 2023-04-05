@@ -41,7 +41,7 @@ int	redirect_output(char *input)
 	return (fd);
 }
 
-int	get_fd(char *filename)
+int	get_fd(char *filename, int count, char *input)
 {
 	int	fd;
 
@@ -60,19 +60,11 @@ int	get_output_fd(char *input, int nb, int count)
 	char	*filename;
 
 	if (input[count + 1] == '>')
-	{
 		count++;
-		filename = out_file(input, count + 1);
-		if (check_file_access(filename, W_OK))
-			exit(1);
-	}
-	else
-	{	
-		filename = out_file(input, count + 1);
-		if (check_file_access(filename, W_OK))
-			exit(1);
-	}
-	fd = get_fd(filename);
+	filename = out_file(input, count + 1);
+	if (check_file_access(filename, W_OK))
+		exit(1);
+	fd = get_fd(filename, count, input);
 	if (nb == 1)
 	{
 		free(filename);

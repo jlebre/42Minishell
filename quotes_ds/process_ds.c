@@ -32,7 +32,7 @@ char	*get_return_value(char **args, int i)
 			new = ft_strjoin(before, tmp);
 			free(args[i]);
 			args[i] = ft_strjoin(new, after);
-			free_all(befor, after);
+			free_all(before, after);
 			free_all(tmp, new);
 		}
 		j++;

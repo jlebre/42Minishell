@@ -6,7 +6,7 @@
 /*   By: jlebre <jlebre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:08:14 by marvin            #+#    #+#             */
-/*   Updated: 2023/04/05 19:44:24 by jlebre           ###   ########.fr       */
+/*   Updated: 2023/04/05 19:52:54 by jlebre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	redirect_input(char *input)
 	return (fd);
 }
 
-int	get_fd_input(char *filename)
+int	get_fd_input(char *filename, int count, char *input)
 {
 	int	fd;
 
@@ -67,10 +67,10 @@ int	get_input_fd(char *input, int nb, int count)
 		filename = out_file(input, count + 1);
 		if (check_file_access(filename, R_OK) || check_file_existence(filename))
 			exit(1);
-		if (fd < 0)
-			count = -1;
 	}
-	fd = get_fd_input(filename);
+	fd = get_fd_input(filename, count, input);
+	if (fd < 0)
+		count = -1;
 	if (nb == 1)
 	{
 		free(filename);

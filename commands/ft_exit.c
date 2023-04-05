@@ -12,8 +12,10 @@
 
 #include "minishell.h"
 
-void	ft_exit2(char **input, char *value);
+void	ft_exit2(char **input)
 {
+	char	*value;
+
 	if (input[1][0] == '$' && ft_strlen(input[1]) > 1)
 	{
 		value = print_vars_exit(input);
@@ -26,7 +28,6 @@ void	ft_exit2(char **input, char *value);
 void	ft_exit(char **input)
 {
 	int		i;
-	char	*value;
 
 	i = 0;
 	while (input[i])
@@ -41,7 +42,7 @@ void	ft_exit(char **input)
 			exit_errors(2, input);
 	}
 	else if (i == 2)
-		ft_exit2(input, value);
+		ft_exit2(input);
 	else
 		do_exit(com_info()->exit_value, input);
 }
