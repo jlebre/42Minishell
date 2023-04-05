@@ -41,11 +41,11 @@ int	redirect_output(char *input)
 	return (fd);
 }
 
-int	get_fd(char *filename, int count, char *input)
+int	get_fd(char *filename, int type)
 {
 	int	fd;
 
-	if (input[count + 1] == '>')
+	if (type == 1)
 		fd = open(filename, O_RDWR | O_APPEND | O_CREAT, 0666);
 	else
 		fd = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0666);
@@ -58,13 +58,18 @@ int	get_output_fd(char *input, int nb, int count)
 {
 	int		fd;
 	char	*filename;
+	int		type;
 
+	type = 0;
 	if (input[count + 1] == '>')
+	{
 		count++;
+		type = 1;
+	}
 	filename = out_file(input, count + 1);
 	if (check_file_access(filename, W_OK))
 		exit(1);
-	fd = get_fd(filename, count, input);
+	fd = get_fd(filename, type);
 	if (nb == 1)
 	{
 		free(filename);
