@@ -56,8 +56,8 @@ char	*check_ds_help(char **args, int i)
 	{
 		tmp = change_val2(args[i], 0, 0);
 		args[i] = ft_strdup(tmp);
-		free(tmp);
 	}
+	free(tmp);
 	return (args[i]);
 }
 
