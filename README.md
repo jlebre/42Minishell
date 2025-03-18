@@ -10,6 +10,8 @@ Minishell is a minimalistic shell project designed to mimic the behavior of a Un
 
 It is one of the most complex projects in the 42 curriculum, reinforcing the fundamentals of operating systems and system calls.
 
+📜 To see the project subject, [click here](https://github.com/jlebre/42Minishell/blob/main/minishell.pdf)!
+
 ---
 
 ## 📌 Project Objectives
@@ -36,49 +38,50 @@ It is one of the most complex projects in the 42 curriculum, reinforcing the fun
 
 ## 📂 Important Files
 
-🔹 [Main Shell Execution](https://github.com/jlebre/42Minishell/blob/main/minishell.c)
-
-🔹 [Command Parser](https://github.com/jlebre/42Minishell/blob/main/parser.c)
-
-🔹 [Execution Engine](https://github.com/jlebre/42Minishell/blob/main/execution.c)
-
-🔹 [Built-in Commands](https://github.com/jlebre/42Minishell/blob/main/builtins.c)
-
-🔹 [Pipe and Redirection Handler](https://github.com/jlebre/42Minishell/blob/main/pipes_redirections.c)
-
-🔹 [Signal Handling](https://github.com/jlebre/42Minishell/blob/main/signals.c)
-
-🔹 [Environment Variable Manager](https://github.com/jlebre/42Minishell/blob/main/env.c)
-
-🔹 [Utility Functions](https://github.com/jlebre/42Minishell/blob/main/utils.c)
-
-🔹 [Memory Management](https://github.com/jlebre/42Minishell/blob/main/memory.c)
-
 🔹 [Makefile](https://github.com/jlebre/42Minishell/blob/main/Makefile)
 
 🔹 [.h Header File](https://github.com/jlebre/42Minishell/blob/main/minishell.h)
+
+🔹 [Main Shell Execution](https://github.com/jlebre/42Minishell/blob/main/srcs/main.c)
+
+🔹 [Command Parser](https://github.com/jlebre/42Minishell/blob/main/parser)
+
+🔹 [Execution Engine](https://github.com/jlebre/42Minishell/blob/main/execution.c)
+
+🔹 [Built-in Commands](https://github.com/jlebre/42Minishell/blob/main/commands)
+
+🔹 [Pipe Handler](https://github.com/jlebre/42Minishell/blob/main/pipes)
+
+🔹 [Redirection Handler](https://github.com/jlebre/42Minishell/blob/main/redirections)
+
+🔹 [Signal Handling](https://github.com/jlebre/42Minishell/blob/main/srcs/signals.c)
 
 ---
 
 ## 🚀 How to Use
 
-### 1️⃣ Clone the Repository
+### 1️⃣ Install Readline
+```bash
+sudo apt-get install -y libreadline-dev
+```
+
+### 2️⃣ Clone the Repository
 ```bash
 git clone https://github.com/jlebre/42Minishell.git
 cd 42Minishell
 ```
 
-### 2️⃣ Compile the Shell
+### 3️⃣ Compile the Shell
 ```bash
 make
 ```
 
-### 3️⃣ Run Minishell
+### 4️⃣ Run Minishell
 ```bash
 ./minishell
 ```
 
-### 4️⃣ Built-in Commands
+### Built-in Commands
 
 🔹 `echo` - Print text to the terminal.
 
@@ -94,7 +97,7 @@ make
 
 🔹 `exit` - Exit the shell.
 
-### 5️⃣ Special Key Combinations
+### Special Key Combinations
 
 🔹 `Ctrl+C` - Interrupt the current process.
 
