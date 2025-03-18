@@ -46,8 +46,6 @@ It is one of the most complex projects in the 42 curriculum, reinforcing the fun
 
 🔹 [Command Parser](https://github.com/jlebre/42Minishell/blob/main/parser)
 
-🔹 [Execution Engine](https://github.com/jlebre/42Minishell/blob/main/execution.c)
-
 🔹 [Built-in Commands](https://github.com/jlebre/42Minishell/blob/main/commands)
 
 🔹 [Pipe Handler](https://github.com/jlebre/42Minishell/blob/main/pipes)
